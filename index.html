@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Trips" />
-  <title>Trips — Packing Companion</title>
+  <title>Trips — Smart Packing Companion</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -114,7 +114,7 @@
       <!-- Top Bar -->
       <header class="sticky top-0 z-20 ios-glass hairline-b px-5 pt-4 pb-3 flex items-center justify-between">
         <div>
-          <p class="text-[11px] font-semibold uppercase tracking-wider text-ios-gray">Travel Vault</p>
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-ios-gray">Smart Travel Vault</p>
           <h1 class="text-[28px] font-bold tracking-tight leading-tight">My Trips</h1>
         </div>
         <div class="flex items-center gap-2">
@@ -195,8 +195,16 @@
             </div>
           </div>
 
+          <!-- Smart Context Weather & Duration Pill -->
+          <div id="detail-smart-badge" class="mt-3 pt-3 hairline-t flex items-center justify-between text-[12px] text-ios-gray">
+            <span id="detail-smart-text" class="truncate font-medium">Smart Context Active</span>
+            <button onclick="toggleLaundryMode()" id="detail-laundry-btn" class="shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue active:scale-95 spring-transition">
+              Laundry: Off
+            </button>
+          </div>
+
           <!-- Linear Completion Bar -->
-          <div class="mt-3.5 h-2 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden">
+          <div class="mt-3 h-2 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden">
             <div id="detail-progress-bar" class="h-full bg-ios-blue spring-transition rounded-full" style="width: 0%"></div>
           </div>
         </div>
@@ -246,34 +254,47 @@
     <!-- ================= MODALS & BOTTOM SHEETS ================= -->
     <div id="sheet-backdrop" onclick="closeAllSheets()" class="hidden fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40 transition-opacity"></div>
 
-    <!-- 1. New Trip Sheet -->
+    <!-- 1. New Trip Sheet (Smart Hybrid Engine) -->
     <div id="sheet-new-trip" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20 max-h-[88vh] overflow-y-auto">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <div class="flex items-center justify-between mb-4">
         <button onclick="closeAllSheets()" class="text-ios-blue text-[15px] font-medium">Cancel</button>
-        <h3 class="text-[17px] font-bold">New Trip Checklist</h3>
+        <h3 class="text-[17px] font-bold">New Smart Trip</h3>
         <button onclick="createNewTrip()" class="text-ios-blue text-[15px] font-bold">Create</button>
       </div>
 
       <div class="space-y-4">
         <div>
-          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Destination / Trip Name</label>
-          <input id="new-trip-name" type="text" placeholder="e.g., Swiss Alps Ski '26" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Destination City or Region</label>
+          <input id="new-trip-destination" type="text" placeholder="e.g., Tokyo, Reykjavik, Paris, Bali" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Start Date</label>
+            <input id="new-trip-start" type="date" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none focus:ring-2 focus:ring-ios-blue tabular-nums" />
+          </div>
+          <div>
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">End Date</label>
+            <input id="new-trip-end" type="date" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none focus:ring-2 focus:ring-ios-blue tabular-nums" />
+          </div>
         </div>
 
         <div>
-          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Dates or Subtitle (Optional)</label>
-          <input id="new-trip-dates" type="text" placeholder="e.g., Dec 14 – Dec 21 • 7 Nights" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
-        </div>
-
-        <div>
-          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Icon</label>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Trip Icon</label>
           <div id="new-trip-icons" class="grid grid-cols-6 gap-2"></div>
         </div>
 
         <div>
-          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Starting Template</label>
-          <select id="new-trip-template" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue"></select>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Extra Pack Profile</label>
+          <select id="new-trip-profile" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue">
+            <option value="standard">Standard Holiday / Leisure</option>
+            <option value="business">Business & Conference</option>
+            <option value="photography">Photography & Content Creator</option>
+            <option value="family">Family & Kids</option>
+            <option value="longhaul">International Long-Haul Flight</option>
+            <option value="blank">Blank Checklist (No Presets)</option>
+          </select>
         </div>
       </div>
     </div>
@@ -317,15 +338,15 @@
       <div class="space-y-4">
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Category Title</label>
-          <input id="new-cat-title" type="text" placeholder="e.g., Pet Care, Photography, Baby Gear" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
+          <input id="new-cat-title" type="text" placeholder="e.g., Pet Care, Fitness, Baby Gear" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
         </div>
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Quick Suggestions</label>
           <div class="flex flex-wrap gap-1.5">
             <button onclick="fillCatSuggestion('Pre-Flight Tasks', 'airplane')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Pre-Flight Tasks</button>
-            <button onclick="fillCatSuggestion('Pet & House Sitter', 'paw')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Pet & House Sitter</button>
-            <button onclick="fillCatSuggestion('Camera & Drone Gear', 'camera')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Camera Gear</button>
-            <button onclick="fillCatSuggestion('Roadtrip Safety', 'car')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Roadtrip Safety</button>
+            <button onclick="fillCatSuggestion('Pet & House Sitter', 'paw')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Pet Sitter</button>
+            <button onclick="fillCatSuggestion('Camera & Drone', 'camera')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Camera Gear</button>
+            <button onclick="fillCatSuggestion('Roadtrip Checks', 'car')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Roadtrip Checks</button>
           </div>
         </div>
         <div>
@@ -336,13 +357,13 @@
     </div>
 
     <!-- 4. Quick Presets Sheet -->
-    <div id="sheet-presets" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
+    <div id="sheet-presets" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20 max-h-[85vh] overflow-y-auto">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <div class="flex items-center justify-between mb-3">
-        <h3 class="text-[17px] font-bold">Quick-Add Preset Packs</h3>
+        <h3 class="text-[17px] font-bold">Expanded Preset Packs</h3>
         <button onclick="closeAllSheets()" class="text-ios-blue text-[15px] font-semibold">Done</button>
       </div>
-      <p class="text-[13px] text-ios-gray mb-4">Tap any pack to append its items directly into your current trip checklist.</p>
+      <p class="text-[13px] text-ios-gray mb-4">Tap any specialty pack to append its smart items into your current trip.</p>
       <div id="presets-list" class="space-y-2.5"></div>
     </div>
 
@@ -389,13 +410,44 @@
       mountain: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 20.25h18L14.25 6.75l-3.75 6-2.25-3L3 20.25z"/></svg>`,
       camera: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/></svg>`,
       car: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>`,
-      paw: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 13.5c-2.485 0-4.5 1.79-4.5 4s2.015 4 4.5 4 4.5-1.79 4.5-4-2.015-4-4.5-4zm-5.25-3a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm10.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-7.5-3.75a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm4.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>`
+      paw: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 13.5c-2.485 0-4.5 1.79-4.5 4s2.015 4 4.5 4 4.5-1.79 4.5-4-2.015-4-4.5-4zm-5.25-3a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm10.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-7.5-3.75a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm4.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>`,
+      briefcase: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`,
+      heart: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>`
     };
 
+    // ================= EXPANDED PRESET PACKS =================
     const PRESET_PACKS = [
       {
+        id: 'business',
+        name: 'Business & Conference',
+        icon: 'briefcase',
+        categoryTitle: 'Business Gear',
+        items: ['Tailored Blazer', 'Dress Shirts', 'Laptop & GaN Charger', 'USB-C HDMI Dongle', 'Portable Travel Steamer', 'Business Cards']
+      },
+      {
+        id: 'photography',
+        name: 'Photography & Creator',
+        icon: 'camera',
+        categoryTitle: 'Camera & Tech',
+        items: ['Mirrorless Camera Body', 'Extra SD Cards (128GB)', 'Spare Camera Batteries & Charger', 'Variable ND Filter', 'Compact Travel Tripod', 'SSD Backup Drive']
+      },
+      {
+        id: 'family',
+        name: 'Family & Kids Gear',
+        icon: 'heart',
+        categoryTitle: 'Kids & Family',
+        items: ['Kid Headphones & iPad', 'Wet Wipes & Hand Sanitizer', 'Favourite Snacks & Sippy Cups', 'Children First Aid & Calpol', 'Change of Clothes (Extra)']
+      },
+      {
+        id: 'longhaul',
+        name: 'International Long-Haul',
+        icon: 'airplane',
+        categoryTitle: 'Flight Comfort',
+        items: ['Compression Flight Socks', 'Silk Eye Mask & Earplugs', 'Melatonin / Sleep Aid', 'Inflatable Neck Pillow', 'Pen for Customs Forms']
+      },
+      {
         id: 'beach',
-        name: 'Beach & Sun Gear',
+        name: 'Beach & Resort Getaway',
         icon: 'sun',
         categoryTitle: 'Beach & Pool',
         items: ['Swimsuit / Trunks', 'Polarized Sunglasses', 'Reef-Safe Sunscreen SPF 50', 'Flip-Flops / Sandals', 'Packable Beach Towel']
@@ -405,7 +457,7 @@
         name: 'Winter & Alpine Warmers',
         icon: 'snow',
         categoryTitle: 'Winter Gear',
-        items: ['Thermal Base Layers', 'Insulated Down Jacket', 'Touchscreen Gloves', 'Merino Wool Beanie', 'Lip Balm & Hand Cream']
+        items: ['Thermal Base Layers', 'Insulated Down Jacket', 'Touchscreen Gloves', 'Merino Wool Beanie', 'Lip Balm & Moisturizer']
       },
       {
         id: 'safety',
@@ -413,124 +465,193 @@
         icon: 'shield',
         categoryTitle: 'Home & Safety Checks',
         items: ['Lock all windows & patio doors', 'Unplug non-essential appliances', 'Empty kitchen & bathroom bins', 'Set thermostat to Eco / Away', 'Turn off main water valve']
-      },
-      {
-        id: 'hike',
-        name: 'Outdoor & Day Hike',
-        icon: 'mountain',
-        categoryTitle: 'Outdoor & Hike',
-        items: ['Reusable Water Bottle', 'Daypack / Collapsible Tote', 'Blister Plasters & First Aid', 'Trail Shoes / Hiking Socks']
       }
     ];
 
-    function buildStandardCategories() {
-      return [
-        {
-          id: 'cat-essentials',
-          title: 'Essentials & Documents',
-          icon: 'passport',
-          collapsed: false,
-          items: [
-            { id: 'i-1', name: 'Passport / Government ID', qty: 1, packed: true },
-            { id: 'i-2', name: 'Boarding Passes & Wallet', qty: 1, packed: true },
-            { id: 'i-3', name: 'Travel Insurance Policy', qty: 1, packed: false },
-            { id: 'i-4', name: 'House Keys & AirTag', qty: 1, packed: false }
-          ]
-        },
-        {
-          id: 'cat-clothing',
-          title: 'Clothing & Footwear',
-          icon: 'tshirt',
-          collapsed: false,
-          items: [
-            { id: 'i-5', name: 'T-Shirts & Tops', qty: 5, packed: true },
-            { id: 'i-6', name: 'Underwear & Socks', qty: 6, packed: true },
-            { id: 'i-7', name: 'Trousers / Shorts', qty: 3, packed: false },
-            { id: 'i-8', name: 'Light Jacket / Layer', qty: 1, packed: false },
-            { id: 'i-9', name: 'Comfortable Walking Shoes', qty: 1, packed: false }
-          ]
-        },
-        {
-          id: 'cat-electronics',
-          title: 'Electronics & Cables',
-          icon: 'bolt',
-          collapsed: false,
-          items: [
-            { id: 'i-10', name: 'Phone & USB-C Fast Charger', qty: 1, packed: true },
-            { id: 'i-11', name: 'Universal Travel Adapter', qty: 1, packed: false },
-            { id: 'i-12', name: 'Portable Power Bank', qty: 1, packed: false },
-            { id: 'i-13', name: 'AirPods / Headphones', qty: 1, packed: false }
-          ]
-        },
-        {
-          id: 'cat-toiletries',
-          title: 'Toiletries & Health',
-          icon: 'sparkles',
-          collapsed: false,
-          items: [
-            { id: 'i-14', name: 'Toothbrush & Toothpaste', qty: 1, packed: false },
-            { id: 'i-15', name: 'Deodorant & Skincare', qty: 1, packed: false },
-            { id: 'i-16', name: 'Personal Medications & Painkillers', qty: 1, packed: false }
-          ]
-        },
-        {
-          id: 'cat-safety',
-          title: 'Home & Safety Checks',
-          icon: 'shield',
-          collapsed: false,
-          items: [
-            { id: 'i-17', name: 'Lock all windows & doors', qty: 1, packed: false },
-            { id: 'i-18', name: 'Unplug coffee maker & toaster', qty: 1, packed: false },
-            { id: 'i-19', name: 'Take out perishable trash', qty: 1, packed: false }
-          ]
-        }
+    // ================= SMART DURATION & CLIMATE GENERATOR =================
+    function generateSmartCategories(nights, climate, plugType, profile) {
+      const n = Math.max(1, nights || 3);
+      const isLaundry = false;
+
+      const underwearQty = isLaundry ? Math.min(4, n) : n + 1;
+      const socksQty = isLaundry ? Math.min(4, n) : n + 1;
+      const topsQty = Math.max(2, Math.min(10, Math.ceil(n / 1.5)));
+      const bottomsQty = Math.max(1, Math.min(5, Math.ceil(n / 2.5)));
+
+      let clothingItems = [
+        { id: 'cl-1', name: 'T-Shirts & Casual Tops', qty: topsQty, packed: false },
+        { id: 'cl-2', name: 'Underwear & Socks', qty: underwearQty, packed: false },
+        { id: 'cl-3', name: 'Trousers / Shorts / Skirts', qty: bottomsQty, packed: false },
+        { id: 'cl-4', name: 'Comfortable Walking Shoes', qty: 1, packed: false },
+        { id: 'cl-5', name: 'Sleepwear / Loungewear', qty: Math.max(1, Math.floor(n / 3)), packed: false }
       ];
+
+      if (climate === 'cold') {
+        clothingItems.push(
+          { id: 'cc-1', name: 'Thermal Base Layer Tops & Bottoms', qty: Math.max(2, Math.floor(n / 3)), packed: false },
+          { id: 'cc-2', name: 'Insulated Down Jacket / Parka', qty: 1, packed: false },
+          { id: 'cc-3', name: 'Windproof Gloves & Beanie', qty: 1, packed: false },
+          { id: 'cc-4', name: 'Wool / Thermal Socks', qty: Math.max(2, Math.floor(n / 2)), packed: false }
+        );
+      } else if (climate === 'hot') {
+        clothingItems.push(
+          { id: 'ch-1', name: 'Breathable Linen / Tank Tops', qty: Math.max(2, Math.floor(n / 2)), packed: false },
+          { id: 'ch-2', name: 'Polarized Sunglasses & Hat', qty: 1, packed: false },
+          { id: 'ch-3', name: 'Reef-Safe Sunscreen SPF 50', qty: 1, packed: false }
+        );
+      } else {
+        clothingItems.push(
+          { id: 'cm-1', name: 'Light Weatherproof Jacket / Shell', qty: 1, packed: false },
+          { id: 'cm-2', name: 'Layering Cardigan / Pullover', qty: 1, packed: false }
+        );
+      }
+
+      let essentialsItems = [
+        { id: 'es-1', name: 'Passport & Government ID', qty: 1, packed: true },
+        { id: 'es-2', name: 'Boarding Passes & Wallet', qty: 1, packed: true },
+        { id: 'es-3', name: 'Travel Insurance & Visas', qty: 1, packed: false },
+        { id: 'es-4', name: 'House Keys & AirTag', qty: 1, packed: false }
+      ];
+
+      let adapterName = 'Universal Travel Adapter';
+      if (plugType === 'US') adapterName = 'Type A/B US Plug Adapter';
+      else if (plugType === 'EU') adapterName = 'Type C/E European Plug Adapter';
+      else if (plugType === 'UK') adapterName = 'UK Domestic Plug (No adapter needed)';
+
+      let electronicsItems = [
+        { id: 'el-1', name: 'Phone & USB-C Fast Charger', qty: 1, packed: false },
+        { id: 'el-2', name: adapterName, qty: 1, packed: false },
+        { id: 'el-3', name: 'Portable Power Bank (10,000mAh)', qty: 1, packed: false },
+        { id: 'el-4', name: 'Wireless Earbuds / Headphones', qty: 1, packed: false }
+      ];
+
+      let toiletriesItems = [
+        { id: 'to-1', name: 'Toothbrush & Travel Toothpaste', qty: 1, packed: false },
+        { id: 'to-2', name: 'Deodorant & Skincare', qty: 1, packed: false },
+        { id: 'to-3', name: 'Personal Medications & Painkillers', qty: 1, packed: false }
+      ];
+
+      let safetyItems = [
+        { id: 'sf-1', name: 'Lock all windows & patio doors', qty: 1, packed: false },
+        { id: 'sf-2', name: 'Unplug non-essential appliances', qty: 1, packed: false },
+        { id: 'sf-3', name: 'Take out kitchen & bathroom trash', qty: 1, packed: false }
+      ];
+
+      let cats = [
+        { id: 'cat-ess', title: 'Essentials & Documents', icon: 'passport', collapsed: false, items: essentialsItems },
+        { id: 'cat-clo', title: `Clothing (${n} Nights)`, icon: 'tshirt', collapsed: false, items: clothingItems },
+        { id: 'cat-ele', title: 'Electronics & Power', icon: 'bolt', collapsed: false, items: electronicsItems },
+        { id: 'cat-toi', title: 'Toiletries & Health', icon: 'sparkles', collapsed: false, items: toiletriesItems },
+        { id: 'cat-saf', title: 'Home & Safety Checks', icon: 'shield', collapsed: false, items: safetyItems }
+      ];
+
+      if (profile && profile !== 'standard' && profile !== 'blank') {
+        const p = PRESET_PACKS.find(x => x.id === profile);
+        if (p) {
+          cats.push({ id: 'cat-prof', title: p.categoryTitle, icon: p.icon, collapsed: false, items: p.items.map((name, i) => ({ id: `p-${i}`, name, qty: 1, packed: false })) });
+        }
+      }
+
+      return cats;
+    }
+
+    function getOfflineClimateAndPlug(destination) {
+      const q = (destination || '').toLowerCase();
+      let climate = 'mild';
+      let plug = 'EU';
+
+      if (q.includes('tokyo') || q.includes('japan') || q.includes('usa') || q.includes('america') || q.includes('new york') || q.includes('canada')) {
+        plug = 'US';
+      } else if (q.includes('london') || q.includes('uk') || q.includes('england') || q.includes('scotland')) {
+        plug = 'UK';
+      }
+
+      if (q.includes('iceland') || q.includes('alps') || q.includes('switzerland') || q.includes('oslo') || q.includes('norway') || q.includes('canada')) {
+        climate = 'cold';
+      } else if (q.includes('bali') || q.includes('bangkok') || q.includes('dubai') || q.includes('maldives') || q.includes('hawaii') || q.includes('miami')) {
+        climate = 'hot';
+      }
+
+      return { climate, plugType: plug };
+    }
+
+    async function resolveDestinationWeather(destination, startDateStr, endDateStr) {
+      const fallback = getOfflineClimateAndPlug(destination);
+      let nights = 5;
+      if (startDateStr && endDateStr) {
+        const d1 = new Date(startDateStr);
+        const d2 = new Date(endDateStr);
+        const diff = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+        if (diff > 0) nights = diff;
+      }
+
+      if (!navigator.onLine || !destination.trim()) {
+        return { nights, climate: fallback.climate, plugType: fallback.plugType, summary: `${nights} Nights • Offline Fallback` };
+      }
+
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(destination)}&count=1`, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        const geoData = await geoRes.json();
+
+        if (!geoData.results || geoData.results.length === 0) {
+          return { nights, climate: fallback.climate, plugType: fallback.plugType, summary: `${nights} Nights • ${destination}` };
+        }
+
+        const loc = geoData.results[0];
+        const lat = loc.latitude;
+        const lon = loc.longitude;
+        const countryCode = loc.country_code ? loc.country_code.toUpperCase() : '';
+
+        let plug = fallback.plugType;
+        if (['US', 'CA', 'JP', 'MX', 'TW'].includes(countryCode)) plug = 'US';
+        else if (['GB', 'IE', 'CY', 'MT', 'HK', 'SG'].includes(countryCode)) plug = 'UK';
+        else if (['FR', 'DE', 'ES', 'IT', 'NL', 'PT', 'GR', 'AT', 'BE'].includes(countryCode)) plug = 'EU';
+
+        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max&timezone=auto`);
+        const weatherData = await weatherRes.json();
+
+        let avgTemp = 20;
+        if (weatherData.daily && weatherData.daily.temperature_2m_max && weatherData.daily.temperature_2m_max.length > 0) {
+          const temps = weatherData.daily.temperature_2m_max.filter(t => t != null);
+          if (temps.length > 0) {
+            avgTemp = temps.reduce((a, b) => a + b, 0) / temps.length;
+          }
+        }
+
+        let climate = 'mild';
+        if (avgTemp < 12) climate = 'cold';
+        else if (avgTemp > 24) climate = 'hot';
+
+        return {
+          nights,
+          climate,
+          plugType: plug,
+          summary: `${nights} Nights • ~${Math.round(avgTemp)}°C Live Weather`
+        };
+      } catch (e) {
+        return { nights, climate: fallback.climate, plugType: fallback.plugType, summary: `${nights} Nights • ${destination}` };
+      }
     }
 
     const DEFAULT_TRIPS = [
       {
         id: 'trip-kyoto',
         name: "Kyoto & Tokyo '26",
-        dates: 'Nov 8 – Nov 18 • 10 Nights',
+        dates: '10 Nights • ~14°C Live Weather',
+        destination: 'Kyoto',
+        laundryMode: false,
         icon: 'airplane',
         archived: false,
-        categories: buildStandardCategories()
-      },
-      {
-        id: 'trip-amalfi',
-        name: 'Amalfi Coast Getaway',
-        dates: 'Jul 12 – Jul 19 • Completed',
-        icon: 'sun',
-        archived: true,
-        categories: [
-          {
-            id: 'cat-a1',
-            title: 'Essentials & Documents',
-            icon: 'passport',
-            collapsed: false,
-            items: [
-              { id: 'ia-1', name: 'Passport & EU Passenger Locator', qty: 1, packed: true },
-              { id: 'ia-2', name: 'Credit Cards & Euros', qty: 1, packed: true }
-            ]
-          },
-          {
-            id: 'cat-a2',
-            title: 'Mediterranean Wardrobe',
-            icon: 'sun',
-            collapsed: false,
-            items: [
-              { id: 'ia-3', name: 'Linen Shirts', qty: 4, packed: true },
-              { id: 'ia-4', name: 'Swim Trunks & Sunglasses', qty: 2, packed: true },
-              { id: 'ia-5', name: 'Evening Dinner Loafers', qty: 1, packed: true }
-            ]
-          }
-        ]
+        categories: generateSmartCategories(10, 'cold', 'US', 'standard')
       }
     ];
 
-    // ================= STATE MANAGEMENT =================
-    const STORAGE_KEY = 'apple_trips_vault_v2';
-    const THEME_KEY = 'apple_trips_theme_v2';
+    const STORAGE_KEY = 'apple_trips_vault_v3';
+    const THEME_KEY = 'apple_trips_theme_v3';
 
     let state = {
       trips: [],
@@ -584,7 +705,6 @@
       return { total, packed, pct };
     }
 
-    // ================= THEME =================
     function toggleTheme() {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
@@ -600,7 +720,6 @@
       if (v2) v2.innerHTML = svg;
     }
 
-    // ================= NAVIGATION =================
     function openTrip(tripId) {
       state.currentTripId = tripId;
       state.filter = 'all';
@@ -620,7 +739,6 @@
       renderTripsVault();
     }
 
-    // ================= RENDER SCREEN 1: TRIPS VAULT =================
     function renderTripsVault() {
       const activeList = document.getElementById('active-trips-list');
       const archivedList = document.getElementById('archived-trips-list');
@@ -706,7 +824,6 @@
       }
     }
 
-    // ================= RENDER SCREEN 2: ACTIVE CHECKLIST =================
     function renderChecklistScreen() {
       const trip = getCurrentTrip();
       if (!trip) return showTripsScreen();
@@ -716,12 +833,18 @@
       document.getElementById('detail-trip-dates').textContent = trip.dates || (trip.archived ? 'Archived Trip' : 'Active Checklist');
       document.getElementById('detail-trip-title').textContent = trip.name;
 
+      document.getElementById('detail-smart-text').textContent = trip.dates || 'Smart Hybrid Engine Active';
+      const laundryBtn = document.getElementById('detail-laundry-btn');
+      laundryBtn.textContent = trip.laundryMode ? 'Laundry: On' : 'Laundry: Off';
+      laundryBtn.className = trip.laundryMode
+        ? 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-ios-blue text-white font-semibold text-[12px] active:scale-95 spring-transition'
+        : 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue active:scale-95 spring-transition';
+
       let statusMsg = `${packed} of ${total} packed`;
       if (total > 0 && pct === 100) statusMsg = `All ${total} items packed • Ready for departure`;
       else if (total > 0 && total - packed <= 3) statusMsg = `Almost there • ${total - packed} left`;
       document.getElementById('detail-status-text').textContent = statusMsg;
 
-      // Update Ring & Linear Bar
       const circumference = 163.36;
       const offset = circumference - (pct / 100) * circumference;
       const ringEl = document.getElementById('detail-progress-ring');
@@ -738,7 +861,6 @@
 
       document.getElementById('detail-progress-pct').textContent = `${pct}%`;
 
-      // Update Segmented Filter Pill
       ['all', 'remaining', 'packed'].forEach(f => {
         const btn = document.getElementById(`filter-${f}`);
         if (state.filter === f) {
@@ -748,7 +870,6 @@
         }
       });
 
-      // Render Categories
       const container = document.getElementById('categories-container');
       const query = state.search.trim().toLowerCase();
 
@@ -801,7 +922,6 @@
 
         return `
           <section class="bg-ios-card dark:bg-ios-darkCard rounded-2xl shadow-sm border border-black/[0.04] dark:border-white/[0.06] overflow-hidden">
-            <!-- Category Accordion Header -->
             <div class="px-4 py-3 flex items-center justify-between ${!cat.collapsed ? 'hairline-b' : ''}">
               <button onclick="toggleCategoryCollapse('${cat.id}')" class="flex items-center gap-2.5 flex-1 min-w-0 text-left">
                 <span class="w-7 h-7 rounded-lg ${catDone ? 'bg-ios-green/15 text-ios-green' : 'bg-ios-blue/10 dark:bg-ios-blue/20 text-ios-blue'} flex items-center justify-center shrink-0">
@@ -823,11 +943,8 @@
               </div>
             </div>
 
-            <!-- Category Items Body -->
             <div class="${cat.collapsed ? 'hidden' : 'block'}">
               ${rowsHtml || `<p class="px-4 py-3 text-[13px] text-ios-gray">No items in this category yet.</p>`}
-
-              <!-- Inline Quick Add Row -->
               <form onsubmit="handleInlineAdd(event, '${cat.id}')" class="flex items-center gap-2.5 pl-4 pr-3 py-2 hairline-t bg-black/[0.015] dark:bg-white/[0.02]">
                 <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-ios-blue">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
@@ -848,7 +965,6 @@
       `;
     }
 
-    // ================= ITEM & CATEGORY ACTIONS =================
     function toggleItem(catId, itemId) {
       const trip = getCurrentTrip();
       if (!trip) return;
@@ -939,7 +1055,27 @@
       renderChecklistScreen();
     }
 
-    // ================= SHEETS & TRIP MANAGEMENT =================
+    function toggleLaundryMode() {
+      const trip = getCurrentTrip();
+      if (!trip) return;
+      trip.laundryMode = !trip.laundryMode;
+      const cloCat = trip.categories.find(c => c.id === 'cat-clo' || c.title.toLowerCase().includes('clothing'));
+      if (cloCat) {
+        let nights = 5;
+        const match = trip.dates.match(/(\d+)\s+Nights/);
+        if (match) nights = parseInt(match[1], 10);
+
+        const targetQty = trip.laundryMode ? Math.min(4, nights) : nights + 1;
+        cloCat.items.forEach(item => {
+          if (item.name.includes('Underwear') || item.name.includes('Socks') || item.name.includes('T-Shirts')) {
+            item.qty = targetQty;
+          }
+        });
+      }
+      saveState();
+      renderChecklistScreen();
+    }
+
     function closeAllSheets() {
       document.getElementById('sheet-backdrop').classList.add('hidden');
       ['sheet-new-trip', 'sheet-add-item', 'sheet-new-category', 'sheet-presets', 'sheet-trip-options'].forEach(id => {
@@ -948,25 +1084,16 @@
     }
 
     function openNewTripSheet() {
-      document.getElementById('new-trip-name').value = '';
-      document.getElementById('new-trip-dates').value = '';
+      document.getElementById('new-trip-destination').value = '';
+      const today = new Date();
+      const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+      document.getElementById('new-trip-start').value = today.toISOString().split('T')[0];
+      document.getElementById('new-trip-end').value = nextWeek.toISOString().split('T')[0];
       renderIconPicker('new-trip-icons', state.selectedNewTripIcon, 'selectNewTripIcon');
-
-      const select = document.getElementById('new-trip-template');
-      let optionsHtml = `
-        <option value="standard">Standard Holiday Checklist (20 items)</option>
-        <option value="beach">Beach & Resort Getaway</option>
-        <option value="winter">Winter & Ski Trip</option>
-        <option value="blank">Blank Checklist (Start Fresh)</option>
-      `;
-      state.trips.forEach(t => {
-        optionsHtml += `<option value="copy:${t.id}">Copy from "${escapeHtml(t.name)}"</option>`;
-      });
-      select.innerHTML = optionsHtml;
 
       document.getElementById('sheet-backdrop').classList.remove('hidden');
       document.getElementById('sheet-new-trip').classList.remove('hidden');
-      setTimeout(() => document.getElementById('new-trip-name').focus(), 80);
+      setTimeout(() => document.getElementById('new-trip-destination').focus(), 80);
     }
 
     function selectNewTripIcon(iconKey) {
@@ -974,52 +1101,25 @@
       renderIconPicker('new-trip-icons', iconKey, 'selectNewTripIcon');
     }
 
-    function createNewTrip() {
-      const name = document.getElementById('new-trip-name').value.trim() || 'Upcoming Holiday';
-      const dates = document.getElementById('new-trip-dates').value.trim() || 'Upcoming Trip';
-      const tpl = document.getElementById('new-trip-template').value;
+    async function createNewTrip() {
+      const destInput = document.getElementById('new-trip-destination').value.trim() || 'Holiday';
+      const startStr = document.getElementById('new-trip-start').value;
+      const endStr = document.getElementById('new-trip-end').value;
+      const profile = document.getElementById('new-trip-profile').value;
 
-      let categories = buildStandardCategories();
-      categories.forEach(c => c.items.forEach(i => (i.packed = false)));
+      const resolved = await resolveDestinationWeather(destInput, startStr, endStr);
+      let categories = generateSmartCategories(resolved.nights, resolved.climate, resolved.plugType, profile);
 
-      if (tpl === 'blank') {
-        categories = [
-          { id: 'cat-' + Date.now(), title: 'Essentials', icon: 'passport', collapsed: false, items: [] }
-        ];
-      } else if (tpl === 'beach') {
-        const pack = PRESET_PACKS.find(p => p.id === 'beach');
-        categories.push({
-          id: 'cat-beach-' + Date.now(),
-          title: pack.categoryTitle,
-          icon: pack.icon,
-          collapsed: false,
-          items: pack.items.map((n, idx) => ({ id: `bi-${idx}-${Date.now()}`, name: n, qty: 1, packed: false }))
-        });
-      } else if (tpl === 'winter') {
-        const pack = PRESET_PACKS.find(p => p.id === 'winter');
-        categories.push({
-          id: 'cat-winter-' + Date.now(),
-          title: pack.categoryTitle,
-          icon: pack.icon,
-          collapsed: false,
-          items: pack.items.map((n, idx) => ({ id: `wi-${idx}-${Date.now()}`, name: n, qty: 1, packed: false }))
-        });
-      } else if (tpl.startsWith('copy:')) {
-        const sourceId = tpl.replace('copy:', '');
-        const sourceTrip = state.trips.find(t => t.id === sourceId);
-        if (sourceTrip) {
-          categories = JSON.parse(JSON.stringify(sourceTrip.categories));
-          categories.forEach(c => {
-            c.collapsed = false;
-            c.items.forEach(i => (i.packed = false));
-          });
-        }
+      if (profile === 'blank') {
+        categories = [{ id: 'cat-' + Date.now(), title: 'Essentials', icon: 'passport', collapsed: false, items: [] }];
       }
 
       const newTrip = {
         id: 'trip-' + Date.now(),
-        name,
-        dates,
+        name: `${destInput} Trip`,
+        destination: destInput,
+        dates: resolved.summary,
+        laundryMode: false,
         icon: state.selectedNewTripIcon || 'airplane',
         archived: false,
         categories
@@ -1042,7 +1142,9 @@
       const copyTrip = {
         id: 'trip-' + Date.now(),
         name: `${source.name} (Copy)`,
-        dates: 'New Checklist • Unpacked',
+        destination: source.destination || 'Destination',
+        dates: source.dates,
+        laundryMode: false,
         icon: source.icon,
         archived: false,
         categories: clonedCategories
@@ -1131,7 +1233,7 @@
             </span>
             <div>
               <p class="text-[15px] font-semibold">${escapeHtml(pack.name)}</p>
-              <p class="text-[12px] text-ios-gray">${pack.items.length} essentials</p>
+              <p class="text-[12px] text-ios-gray">${pack.items.length} smart essentials</p>
             </div>
           </div>
           <span class="text-[13px] font-semibold text-ios-blue">+ Add</span>
@@ -1223,7 +1325,7 @@
     }
 
     function renderIconPicker(containerId, selectedKey, handlerName) {
-      const keys = ['airplane', 'sun', 'snow', 'mountain', 'suitcase', 'passport', 'tshirt', 'bolt', 'sparkles', 'shield', 'camera', 'car'];
+      const keys = ['airplane', 'sun', 'snow', 'mountain', 'suitcase', 'passport', 'tshirt', 'bolt', 'sparkles', 'shield', 'camera', 'car', 'briefcase', 'heart'];
       document.getElementById(containerId).innerHTML = keys.map(k => `
         <button type="button" onclick="${handlerName}('${k}')" class="h-10 rounded-xl flex items-center justify-center spring-transition ${
           selectedKey === k
@@ -1243,9 +1345,13 @@
         .replace(/"/g, '&quot;');
     }
 
-    // Boot App
-    loadState();
-    renderTripsVault();
+    // Boot App safely on load
+    try {
+      loadState();
+      renderTripsVault();
+    } catch (e) {
+      console.error('App init error:', e);
+    }
   </script>
 </body>
 </html>
