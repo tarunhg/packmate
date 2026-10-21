@@ -197,4 +197,296 @@
 
           <!-- Smart Context Weather & Duration Pill -->
           <div id="detail-smart-badge" class="mt-3 pt-3 hairline-t flex items-center justify-between text-[12px] text-ios-gray">
-            <span id="detail-smart-text
+            <span id="detail-smart-text" class="truncate font-medium">Smart Context Active</span>
+            <button onclick="toggleLaundryMode()" id="detail-laundry-btn" class="shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue active:scale-95 spring-transition">
+              Laundry: Off
+            </button>
+          </div>
+
+          <!-- Linear Completion Bar -->
+          <div class="mt-3 h-2 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden">
+            <div id="detail-progress-bar" class="h-full bg-ios-blue spring-transition rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Search & Segmented Filter Control -->
+        <div class="space-y-2.5">
+          <div class="relative">
+            <svg class="w-4 h-4 text-ios-gray absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+            <input id="search-input" oninput="handleSearch(this.value)" type="text" placeholder="Search items..." class="w-full h-9 pl-9 pr-8 rounded-xl bg-black/[0.06] dark:bg-ios-darkCard text-[14px] placeholder-ios-gray focus:outline-none focus:ring-2 focus:ring-ios-blue/40" />
+            <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-ios-gray hover:text-gray-900 dark:hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>
+            </button>
+          </div>
+
+          <!-- iOS Segmented Control -->
+          <div class="grid grid-cols-3 p-0.5 rounded-xl bg-black/[0.07] dark:bg-ios-darkCard text-[13px] font-semibold">
+            <button onclick="setFilter('all')" id="filter-all" class="py-1.5 rounded-[10px] spring-transition">All</button>
+            <button onclick="setFilter('remaining')" id="filter-remaining" class="py-1.5 rounded-[10px] spring-transition">To Pack</button>
+            <button onclick="setFilter('packed')" id="filter-packed" class="py-1.5 rounded-[10px] spring-transition">Packed</button>
+          </div>
+        </div>
+
+        <!-- Categories Accordion Container -->
+        <div id="categories-container" class="space-y-3.5 pb-6"></div>
+      </main>
+
+      <!-- Thumb-Zone Bottom Action Toolbar -->
+      <div class="fixed bottom-0 w-full max-w-[460px] z-20 ios-glass hairline-t px-4 py-2.5 flex items-center justify-between">
+        <button onclick="openAddItemSheet()" class="flex items-center gap-1.5 text-ios-blue font-semibold text-[15px] py-1.5 px-2 rounded-lg active:opacity-60">
+          <span class="w-6 h-6 rounded-full bg-ios-blue text-white flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          </span>
+          <span>New Item</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button onclick="openPresetsSheet()" class="text-[13px] font-semibold text-gray-700 dark:text-gray-200 bg-black/[0.06] dark:bg-white/[0.1] px-3 py-1.5 rounded-full active:scale-95 spring-transition">
+            + Presets
+          </button>
+          <button onclick="openNewCategorySheet()" class="text-[13px] font-semibold text-gray-700 dark:text-gray-200 bg-black/[0.06] dark:bg-white/[0.1] px-3 py-1.5 rounded-full active:scale-95 spring-transition">
+            + Category
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= MODALS & BOTTOM SHEETS ================= -->
+    <div id="sheet-backdrop" onclick="closeAllSheets()" class="hidden fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40 transition-opacity"></div>
+
+    <!-- 1. New Trip Sheet (Smart Hybrid Engine) -->
+    <div id="sheet-new-trip" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20 max-h-[88vh] overflow-y-auto">
+      <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
+      <div class="flex items-center justify-between mb-4">
+        <button onclick="closeAllSheets()" class="text-ios-blue text-[15px] font-medium">Cancel</button>
+        <h3 class="text-[17px] font-bold">New Smart Trip</h3>
+        <button onclick="createNewTrip()" class="text-ios-blue text-[15px] font-bold">Create</button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Destination City or Region</label>
+          <input id="new-trip-destination" type="text" placeholder="e.g., Tokyo, Reykjavik, Paris, Bali" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Start Date</label>
+            <input id="new-trip-start" type="date" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none focus:ring-2 focus:ring-ios-blue tabular-nums" />
+          </div>
+          <div>
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">End Date</label>
+            <input id="new-trip-end" type="date" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none focus:ring-2 focus:ring-ios-blue tabular-nums" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Trip Icon</label>
+          <div id="new-trip-icons" class="grid grid-cols-6 gap-2"></div>
+        </div>
+
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Extra Pack Profile</label>
+          <select id="new-trip-profile" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue">
+            <option value="standard">Standard Holiday / Leisure</option>
+            <option value="business">Business & Conference</option>
+            <option value="photography">Photography & Content Creator</option>
+            <option value="family">Family & Kids</option>
+            <option value="longhaul">International Long-Haul Flight</option>
+            <option value="blank">Blank Checklist (No Presets)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Add Item Sheet -->
+    <div id="sheet-add-item" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
+      <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
+      <div class="flex items-center justify-between mb-4">
+        <button onclick="closeAllSheets()" class="text-ios-blue text-[15px] font-medium">Cancel</button>
+        <h3 class="text-[17px] font-bold">Add Packing Item</h3>
+        <button onclick="submitNewItemSheet()" class="text-ios-blue text-[15px] font-bold">Add</button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Item Name</label>
+          <input id="sheet-item-name" type="text" placeholder="e.g., Noise-Canceling Headphones" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="col-span-2">
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Category</label>
+            <select id="sheet-item-category" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none"></select>
+          </div>
+          <div>
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Quantity</label>
+            <input id="sheet-item-qty" type="number" min="1" max="99" value="1" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] text-center font-semibold tabular-nums focus:outline-none" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. New Category Sheet -->
+    <div id="sheet-new-category" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
+      <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
+      <div class="flex items-center justify-between mb-4">
+        <button onclick="closeAllSheets()" class="text-ios-blue text-[15px] font-medium">Cancel</button>
+        <h3 class="text-[17px] font-bold">New Category</h3>
+        <button onclick="submitNewCategory()" class="text-ios-blue text-[15px] font-bold">Save</button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Category Title</label>
+          <input id="new-cat-title" type="text" placeholder="e.g., Pet Care, Fitness, Baby Gear" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-ios-blue" />
+        </div>
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Quick Suggestions</label>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="fillCatSuggestion('Pre-Flight Tasks', 'airplane')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Pre-Flight Tasks</button>
+            <button onclick="fillCatSuggestion('Pet & House Sitter', 'paw')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Pet Sitter</button>
+            <button onclick="fillCatSuggestion('Camera & Drone', 'camera')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Camera Gear</button>
+            <button onclick="fillCatSuggestion('Roadtrip Checks', 'car')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Roadtrip Checks</button>
+          </div>
+        </div>
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Symbol</label>
+          <div id="new-cat-icons" class="grid grid-cols-6 gap-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Quick Presets Sheet -->
+    <div id="sheet-presets" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20 max-h-[85vh] overflow-y-auto">
+      <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-[17px] font-bold">Expanded Preset Packs</h3>
+        <button onclick="closeAllSheets()" class="text-ios-blue text-[15px] font-semibold">Done</button>
+      </div>
+      <p class="text-[13px] text-ios-gray mb-4">Tap any specialty pack to append its smart items into your current trip.</p>
+      <div id="presets-list" class="space-y-2.5"></div>
+    </div>
+
+    <!-- 5. Trip Options Action Sheet -->
+    <div id="sheet-trip-options" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
+      <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
+      <h3 id="options-trip-title" class="text-[15px] font-bold text-center text-ios-gray mb-4 truncate">Trip Options</h3>
+      <div class="space-y-2">
+        <button onclick="uncheckAllCurrentTrip()" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
+          <span>Unpack All Items (Reset Progress)</span>
+          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+        </button>
+        <button onclick="duplicateCurrentTrip()" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
+          <span>Duplicate Checklist for Future Trip</span>
+          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg>
+        </button>
+        <button onclick="toggleArchiveCurrentTrip()" id="btn-toggle-archive" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
+          <span>Archive Trip (Move to Past Trips)</span>
+          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+        </button>
+        <button onclick="deleteCurrentTrip()" class="w-full py-3 px-4 rounded-xl bg-ios-red/10 text-ios-red text-[15px] font-semibold text-left flex items-center justify-between">
+          <span>Delete Trip Permanently</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+        </button>
+      </div>
+      <button onclick="closeAllSheets()" class="w-full mt-3 py-3 rounded-xl bg-black/[0.06] dark:bg-white/[0.1] text-[15px] font-semibold">Cancel</button>
+    </div>
+
+  </div>
+
+  <script>
+    // ================= SF-SYMBOL MONOCHROME VECTOR LIBRARY =================
+    const ICONS = {
+      airplane: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>`,
+      suitcase: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`,
+      passport: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"/></svg>`,
+      tshirt: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3.75L3 6.75l2.25 3 2.25-1.5v11.25h9V8.25l2.25 1.5 2.25-3-3.75-3h-2.25a3 3 0 01-6 0H6.75z"/></svg>`,
+      sparkles: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>`,
+      bolt: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>`,
+      shield: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>`,
+      sun: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>`,
+      moon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>`,
+      snow: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18l-3 3m3-3l3 3m-3 15l-3-3m3 3l3-3M4.2 7.5l15.6 9M4.2 7.5l3.9-.6M4.2 7.5l.6 3.9m15-2.9l-3.9.6m3.9-.6l-.6-3.9M19.8 7.5l-15.6 9"/></svg>`,
+      mountain: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 20.25h18L14.25 6.75l-3.75 6-2.25-3L3 20.25z"/></svg>`,
+      camera: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/></svg>`,
+      car: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>`,
+      paw: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 13.5c-2.485 0-4.5 1.79-4.5 4s2.015 4 4.5 4 4.5-1.79 4.5-4-2.015-4-4.5-4zm-5.25-3a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm10.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-7.5-3.75a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm4.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>`,
+      briefcase: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`,
+      heart: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>`
+    };
+
+    // ================= EXPANDED PRESET PACKS =================
+    const PRESET_PACKS = [
+      {
+        id: 'business',
+        name: 'Business & Conference',
+        icon: 'briefcase',
+        categoryTitle: 'Business Gear',
+        items: ['Tailored Blazer', 'Dress Shirts', 'Laptop & GaN Charger', 'USB-C HDMI Dongle', 'Portable Travel Steamer', 'Business Cards']
+      },
+      {
+        id: 'photography',
+        name: 'Photography & Creator',
+        icon: 'camera',
+        categoryTitle: 'Camera & Tech',
+        items: ['Mirrorless Camera Body', 'Extra SD Cards (128GB)', 'Spare Camera Batteries & Charger', 'Variable ND Filter', 'Compact Travel Tripod', 'SSD Backup Drive']
+      },
+      {
+        id: 'family',
+        name: 'Family & Kids Gear',
+        icon: 'heart',
+        categoryTitle: 'Kids & Family',
+        items: ['Kid Headphones & iPad', 'Wet Wipes & Hand Sanitizer', 'Favourite Snacks & Sippy Cups', 'Children First Aid & Calpol', 'Change of Clothes (Extra)']
+      },
+      {
+        id: 'longhaul',
+        name: 'International Long-Haul',
+        icon: 'airplane',
+        categoryTitle: 'Flight Comfort',
+        items: ['Compression Flight Socks', 'Silk Eye Mask & Earplugs', 'Melatonin / Sleep Aid', 'Inflatable Neck Pillow', 'Pen for Customs Forms']
+      },
+      {
+        id: 'beach',
+        name: 'Beach & Resort Getaway',
+        icon: 'sun',
+        categoryTitle: 'Beach & Pool',
+        items: ['Swimsuit / Trunks', 'Polarized Sunglasses', 'Reef-Safe Sunscreen SPF 50', 'Flip-Flops / Sandals', 'Packable Beach Towel']
+      },
+      {
+        id: 'winter',
+        name: 'Winter & Alpine Warmers',
+        icon: 'snow',
+        categoryTitle: 'Winter Gear',
+        items: ['Thermal Base Layers', 'Insulated Down Jacket', 'Touchscreen Gloves', 'Merino Wool Beanie', 'Lip Balm & Moisturizer']
+      },
+      {
+        id: 'safety',
+        name: 'Home Safety Departure Checks',
+        icon: 'shield',
+        categoryTitle: 'Home & Safety Checks',
+        items: ['Lock all windows & patio doors', 'Unplug non-essential appliances', 'Empty kitchen & bathroom bins', 'Set thermostat to Eco / Away', 'Turn off main water valve']
+      }
+    ];
+
+    // ================= SMART DURATION & CLIMATE GENERATOR =================
+    function generateSmartCategories(nights, climate, plugType, profile) {
+      const n = Math.max(1, nights || 3);
+      const isLaundry = false;
+
+      const underwearQty = isLaundry ? Math.min(4, n) : n + 1;
+      const socksQty = isLaundry ? Math.min(4, n) : n + 1;
+      const topsQty = Math.max(2, Math.min(10, Math.ceil(n / 1.5)));
+      const bottomsQty = Math.max(1, Math.min(5, Math.ceil(n / 2.5)));
+
+      let clothingItems = [
+        { id: 'cl-1', name: 'T-Shirts & Casual Tops', qty: topsQty, packed: false },
+        { id: 'cl-2', name: 'Underwear & Socks', qty: underwearQty, packed: false },
+        { id: 'cl-3', name: 'Trousers / Shorts / Skirts', qty: bottomsQty, packed: false },
+        { id: 'cl-4', name: 'Comfortable Walking Shoes', qty: 1, packed: false },
+        { id: 'cl-5', name: 'Sleepwear / Loungewear', qty: Math.max(1, Math.floor(n / 3)), packed: false }
+      ];
+
+      if (climate === 'cold') {
+        clothingItems.push(
+          { id: 'cc-1', name: 'Thermal Base Layer Tops & Bottoms', qty: Math.max(2, Math.floor(n / 3)), packed: false },
+          { id: 'cc-2', name: 'Insulated Down Jacket / Parka', qty: 1, packed:
