@@ -6,6 +6,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Trips" />
+  
+  <!-- Phase 2: Inline Vector App Icon & Web Manifest (Zero external image files) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='%231C1C1E'/%3E%3Crect x='56' y='88' width='144' height='112' rx='16' fill='none' stroke='%23C8FF00' stroke-width='16'/%3E%3Cpath d='M96 88V56a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v32' fill='none' stroke='%23C8FF00' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='56' y1='144' x2='200' y2='144' stroke='%23C8FF00' stroke-width='16'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='%231C1C1E'/%3E%3Crect x='56' y='88' width='144' height='112' rx='16' fill='none' stroke='%23C8FF00' stroke-width='16'/%3E%3Cpath d='M96 88V56a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v32' fill='none' stroke='%23C8FF00' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='56' y1='144' x2='200' y2='144' stroke='%23C8FF00' stroke-width='16'/%3E%3C/svg%3E">
+  
   <title>Trips — Smart Packing Companion</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -96,6 +101,24 @@
     .flash-glow {
       box-shadow: 0 4px 20px -2px rgba(200, 255, 0, 0.35);
     }
+    
+    /* Toggle Switch Styles */
+    .toggle-checkbox:checked {
+      right: 0;
+      border-color: #C8FF00;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+      background-color: #C8FF00;
+    }
+    
+    /* Hide Scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="bg-[#E5E5EA] dark:bg-[#000000] text-[#000000] dark:text-[#FFFFFF] min-h-screen flex justify-center">
@@ -111,10 +134,11 @@
           <h1 class="text-[28px] font-bold tracking-tight leading-tight">My Trips</h1>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="toggleTheme()" class="w-9 h-9 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-gray-700 dark:text-gray-200 active:scale-95 spring-transition" title="Toggle Dark Mode">
-            <span id="theme-icon-vault"></span>
+          <!-- Phase 2: Vault Settings Button -->
+          <button onclick="openVaultSettings()" class="w-9 h-9 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-gray-700 dark:text-gray-200 active:scale-95 spring-transition" title="Vault Settings">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
           </button>
-          <!-- Flash #C8FF00 Primary Call to Action -->
+          
           <button onclick="openNewTripSheet()" class="h-9 px-3.5 rounded-full bg-flash text-black text-[14px] font-bold flex items-center gap-1.5 flash-glow active:scale-95 spring-transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
             <span>New Trip</span>
@@ -153,9 +177,6 @@
           </button>
 
           <div class="flex items-center gap-1.5">
-            <button onclick="toggleTheme()" class="w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-gray-700 dark:text-gray-200 active:scale-95 spring-transition">
-              <span id="theme-icon-detail"></span>
-            </button>
             <button onclick="openTripOptionsSheet()" class="w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-ios-blue dark:text-flash active:scale-95 spring-transition" title="Trip Options">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
             </button>
@@ -186,7 +207,6 @@
             </div>
           </div>
 
-          <!-- Smart Context Weather & Laundry Toggle -->
           <div class="mt-3 pt-3 hairline-t flex items-center justify-between text-[12px] text-ios-gray">
             <span id="detail-smart-text" class="truncate font-medium">Smart Context Active</span>
             <button onclick="toggleLaundryMode()" id="detail-laundry-btn" class="shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue dark:text-flash active:scale-95 spring-transition">
@@ -194,7 +214,6 @@
             </button>
           </div>
 
-          <!-- Linear Completion Bar -->
           <div class="mt-3 h-2 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden">
             <div id="detail-progress-bar" class="h-full bg-ios-blue dark:bg-flash spring-transition rounded-full" style="width: 0%"></div>
           </div>
@@ -244,7 +263,57 @@
     <!-- ================= MODALS & BOTTOM SHEETS ================= -->
     <div id="sheet-backdrop" onclick="closeAllSheets()" class="hidden fixed inset-0 bg-black/50 backdrop-blur-[2px] z-40 transition-opacity"></div>
 
-    <!-- 1. New Trip Sheet (Fixed Auto-Suggest + Unified Date/Nights Box) -->
+    <!-- Phase 2: Vault Settings & JSON Share/Backup Engine -->
+    <div id="sheet-vault-settings" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
+      <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
+      <h3 class="text-[17px] font-bold text-center mb-6">Vault Settings</h3>
+      
+      <div class="space-y-4">
+        <!-- Dark Mode Toggle -->
+        <div class="bg-black/[0.04] dark:bg-white/[0.07] rounded-2xl p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-black/10 dark:bg-white/20 flex items-center justify-center text-gray-800 dark:text-white">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+            </div>
+            <span class="text-[15px] font-medium">Dark Appearance</span>
+          </div>
+          <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+            <input type="checkbox" id="theme-toggle-switch" onchange="toggleThemeSwitch()" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 dark:border-gray-500 appearance-none cursor-pointer z-10 top-1 left-1 spring-transition"/>
+            <label for="theme-toggle-switch" class="toggle-label block overflow-hidden h-8 rounded-full bg-gray-300 dark:bg-gray-600 cursor-pointer spring-transition"></label>
+          </div>
+        </div>
+
+        <!-- Export Backup -->
+        <button onclick="exportTripsBackup()" class="w-full bg-black/[0.04] dark:bg-white/[0.07] rounded-2xl p-4 flex items-center justify-between active:scale-[0.98] spring-transition">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-ios-blue/10 dark:bg-flash/15 flex items-center justify-center text-ios-blue dark:text-flash">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            </div>
+            <div class="text-left">
+              <span class="block text-[15px] font-medium">Export Checklists</span>
+              <span class="block text-[12px] text-ios-gray">Save or share your vault data (JSON)</span>
+            </div>
+          </div>
+        </button>
+
+        <!-- Import Backup (Hidden File Input) -->
+        <input type="file" id="import-file-input" accept=".json" class="hidden" onchange="handleImportTrips(event)" />
+        <button onclick="document.getElementById('import-file-input').click()" class="w-full bg-black/[0.04] dark:bg-white/[0.07] rounded-2xl p-4 flex items-center justify-between active:scale-[0.98] spring-transition">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-ios-blue/10 dark:bg-flash/15 flex items-center justify-center text-ios-blue dark:text-flash">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+            </div>
+            <div class="text-left">
+              <span class="block text-[15px] font-medium">Import Shared Trips</span>
+              <span class="block text-[12px] text-ios-gray">Merge an exported file into your vault</span>
+            </div>
+          </div>
+        </button>
+      </div>
+      <button onclick="closeAllSheets()" class="w-full mt-4 py-3 rounded-xl bg-black/[0.06] dark:bg-white/[0.1] text-[15px] font-semibold active:scale-95 spring-transition">Close</button>
+    </div>
+
+    <!-- 1. New Trip Sheet -->
     <div id="sheet-new-trip" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20 max-h-[90vh] overflow-y-auto">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <div class="flex items-center justify-between mb-4">
@@ -254,7 +323,6 @@
       </div>
 
       <div class="space-y-4">
-        <!-- Destination Input + Quick Auto-Suggest Chips -->
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Trip Name or Destination</label>
           <input id="new-trip-destination" oninput="updateLiveTripPreview()" type="text" placeholder="e.g., Tokyo Autumn, Swiss Alps, Bali" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-flash" />
@@ -270,7 +338,6 @@
           </div>
         </div>
 
-        <!-- Unified Single-Box Schedule & Duration Card -->
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Trip Schedule & Duration</label>
           <div class="rounded-2xl bg-black/[0.05] dark:bg-white/[0.08] p-3.5 space-y-3">
@@ -293,7 +360,6 @@
           </div>
         </div>
 
-        <!-- Live Smart Engine Detection Preview -->
         <div id="smart-preview-banner" class="rounded-xl bg-flash/15 border border-flash/30 px-3.5 py-2.5 flex items-center justify-between text-[12px]">
           <span id="smart-preview-text" class="font-medium text-gray-800 dark:text-flash">⚡ Smart Engine: 7 Nights • Mild Climate • EU Adapter</span>
         </div>
@@ -434,55 +500,13 @@
     };
 
     const PRESET_PACKS = [
-      {
-        id: 'business',
-        name: 'Business & Conference',
-        icon: 'briefcase',
-        categoryTitle: 'Business Gear',
-        items: ['Tailored Blazer', 'Dress Shirts', 'Laptop & GaN Charger', 'USB-C HDMI Dongle', 'Portable Travel Steamer', 'Business Cards']
-      },
-      {
-        id: 'photography',
-        name: 'Photography & Creator',
-        icon: 'camera',
-        categoryTitle: 'Camera & Tech',
-        items: ['Mirrorless Camera Body', 'Extra SD Cards (128GB)', 'Spare Camera Batteries & Charger', 'Variable ND Filter', 'Compact Travel Tripod', 'SSD Backup Drive']
-      },
-      {
-        id: 'family',
-        name: 'Family & Kids Gear',
-        icon: 'heart',
-        categoryTitle: 'Kids & Family',
-        items: ['Kid Headphones & iPad', 'Wet Wipes & Hand Sanitizer', 'Favourite Snacks & Sippy Cups', 'Children First Aid & Calpol', 'Change of Clothes (Extra)']
-      },
-      {
-        id: 'longhaul',
-        name: 'International Long-Haul',
-        icon: 'airplane',
-        categoryTitle: 'Flight Comfort',
-        items: ['Compression Flight Socks', 'Silk Eye Mask & Earplugs', 'Melatonin / Sleep Aid', 'Inflatable Neck Pillow', 'Pen for Customs Forms']
-      },
-      {
-        id: 'beach',
-        name: 'Beach & Resort Getaway',
-        icon: 'sun',
-        categoryTitle: 'Beach & Pool',
-        items: ['Swimsuit / Trunks', 'Polarized Sunglasses', 'Reef-Safe Sunscreen SPF 50', 'Flip-Flops / Sandals', 'Packable Beach Towel']
-      },
-      {
-        id: 'winter',
-        name: 'Winter & Alpine Warmers',
-        icon: 'snow',
-        categoryTitle: 'Winter Gear',
-        items: ['Thermal Base Layers', 'Insulated Down Jacket', 'Touchscreen Gloves', 'Merino Wool Beanie', 'Lip Balm & Moisturizer']
-      },
-      {
-        id: 'safety',
-        name: 'Home Safety Departure Checks',
-        icon: 'shield',
-        categoryTitle: 'Home & Safety Checks',
-        items: ['Lock all windows & patio doors', 'Unplug non-essential appliances', 'Empty kitchen & bathroom bins', 'Set thermostat to Eco / Away', 'Turn off main water valve']
-      }
+      { id: 'business', name: 'Business & Conference', icon: 'briefcase', categoryTitle: 'Business Gear', items: ['Tailored Blazer', 'Dress Shirts', 'Laptop & GaN Charger', 'USB-C HDMI Dongle', 'Portable Travel Steamer', 'Business Cards'] },
+      { id: 'photography', name: 'Photography & Creator', icon: 'camera', categoryTitle: 'Camera & Tech', items: ['Mirrorless Camera Body', 'Extra SD Cards (128GB)', 'Spare Camera Batteries & Charger', 'Variable ND Filter', 'Compact Travel Tripod', 'SSD Backup Drive'] },
+      { id: 'family', name: 'Family & Kids Gear', icon: 'heart', categoryTitle: 'Kids & Family', items: ['Kid Headphones & iPad', 'Wet Wipes & Hand Sanitizer', 'Favourite Snacks & Sippy Cups', 'Children First Aid & Calpol', 'Change of Clothes (Extra)'] },
+      { id: 'longhaul', name: 'International Long-Haul', icon: 'airplane', categoryTitle: 'Flight Comfort', items: ['Compression Flight Socks', 'Silk Eye Mask & Earplugs', 'Melatonin / Sleep Aid', 'Inflatable Neck Pillow', 'Pen for Customs Forms'] },
+      { id: 'beach', name: 'Beach & Resort Getaway', icon: 'sun', categoryTitle: 'Beach & Pool', items: ['Swimsuit / Trunks', 'Polarized Sunglasses', 'Reef-Safe Sunscreen SPF 50', 'Flip-Flops / Sandals', 'Packable Beach Towel'] },
+      { id: 'winter', name: 'Winter & Alpine Warmers', icon: 'snow', categoryTitle: 'Winter Gear', items: ['Thermal Base Layers', 'Insulated Down Jacket', 'Touchscreen Gloves', 'Merino Wool Beanie', 'Lip Balm & Moisturizer'] },
+      { id: 'safety', name: 'Home Safety Departure Checks', icon: 'shield', categoryTitle: 'Home & Safety Checks', items: ['Lock all windows & patio doors', 'Unplug non-essential appliances', 'Empty kitchen & bathroom bins', 'Set thermostat to Eco / Away', 'Turn off main water valve'] }
     ];
 
     function generateSmartCategories(nights, climate, plugType, profile) {
@@ -519,9 +543,7 @@
         );
       }
 
-      if (n >= 7) {
-        clothingItems.push({ id: 'cl-laundry', name: 'Foldable Laundry Bag & Detergent Sheets', qty: 1, packed: false });
-      }
+      if (n >= 7) clothingItems.push({ id: 'cl-laundry', name: 'Foldable Laundry Bag & Detergent Sheets', qty: 1, packed: false });
 
       let essentialsItems = [
         { id: 'es-1', name: 'Passport / Government ID', qty: 1, packed: true },
@@ -564,15 +586,7 @@
 
       if (profile && profile !== 'standard' && profile !== 'blank') {
         const p = PRESET_PACKS.find(x => x.id === profile);
-        if (p) {
-          cats.push({
-            id: 'cat-prof',
-            title: p.categoryTitle,
-            icon: p.icon,
-            collapsed: false,
-            items: p.items.map((name, i) => ({ id: `p-${i}`, name, qty: 1, packed: false }))
-          });
-        }
+        if (p) cats.push({ id: 'cat-prof', title: p.categoryTitle, icon: p.icon, collapsed: false, items: p.items.map((name, i) => ({ id: `p-${i}`, name, qty: 1, packed: false })) });
       }
 
       return cats;
@@ -583,17 +597,11 @@
       let climate = 'mild';
       let plug = 'EU';
 
-      if (q.includes('tokyo') || q.includes('kyoto') || q.includes('osaka') || q.includes('japan') || q.includes('usa') || q.includes('new york') || q.includes('miami') || q.includes('california') || q.includes('canada') || q.includes('mexico')) {
-        plug = 'US';
-      } else if (q.includes('london') || q.includes('uk') || q.includes('england') || q.includes('scotland') || q.includes('dublin') || q.includes('singapore') || q.includes('dubai')) {
-        plug = 'UK';
-      }
+      if (q.includes('tokyo') || q.includes('kyoto') || q.includes('japan') || q.includes('usa') || q.includes('new york') || q.includes('canada')) plug = 'US';
+      else if (q.includes('london') || q.includes('uk') || q.includes('england') || q.includes('dubai')) plug = 'UK';
 
-      if (q.includes('iceland') || q.includes('reykjavik') || q.includes('alps') || q.includes('switzerland') || q.includes('zermatt') || q.includes('oslo') || q.includes('norway') || q.includes('ski') || q.includes('winter') || q.includes('lapland')) {
-        climate = 'cold';
-      } else if (q.includes('bali') || q.includes('bangkok') || q.includes('thailand') || q.includes('dubai') || q.includes('maldives') || q.includes('hawaii') || q.includes('miami') || q.includes('phuket') || q.includes('amalfi') || q.includes('spain') || q.includes('greece')) {
-        climate = 'hot';
-      }
+      if (q.includes('iceland') || q.includes('reykjavik') || q.includes('alps') || q.includes('switzerland') || q.includes('norway') || q.includes('winter')) climate = 'cold';
+      else if (q.includes('bali') || q.includes('bangkok') || q.includes('thailand') || q.includes('dubai') || q.includes('hawaii') || q.includes('miami')) climate = 'hot';
 
       return { climate, plugType: plug };
     }
@@ -604,18 +612,12 @@
 
       if (!navigator.onLine || !destination.trim()) {
         const cLabel = fallback.climate === 'cold' ? 'Cold' : fallback.climate === 'hot' ? 'Warm' : 'Mild';
-        return {
-          nights: n,
-          climate: fallback.climate,
-          plugType: fallback.plugType,
-          summary: `${n} Nights (${rangeLabel}) • ${cLabel} • ${fallback.plugType} Plug`
-        };
+        return { nights: n, climate: fallback.climate, plugType: fallback.plugType, summary: `${n} Nights (${rangeLabel}) • ${cLabel} • ${fallback.plugType} Plug` };
       }
 
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 2200);
-
         const cleanCity = destination.split(',')[0].trim();
         const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleanCity)}&count=1`, { signal: controller.signal });
         clearTimeout(timeoutId);
@@ -623,12 +625,7 @@
 
         if (!geoData.results || geoData.results.length === 0) {
           const cLabel = fallback.climate === 'cold' ? 'Cold' : fallback.climate === 'hot' ? 'Warm' : 'Mild';
-          return {
-            nights: n,
-            climate: fallback.climate,
-            plugType: fallback.plugType,
-            summary: `${n} Nights (${rangeLabel}) • ${cLabel} • ${fallback.plugType} Plug`
-          };
+          return { nights: n, climate: fallback.climate, plugType: fallback.plugType, summary: `${n} Nights (${rangeLabel}) • ${cLabel} • ${fallback.plugType} Plug` };
         }
 
         const loc = geoData.results[0];
@@ -652,125 +649,61 @@
         if (avgTemp < 12) climate = 'cold';
         else if (avgTemp > 24) climate = 'hot';
 
-        return {
-          nights: n,
-          climate,
-          plugType: plug,
-          summary: `${n} Nights (${rangeLabel}) • ~${Math.round(avgTemp)}°C • ${plug} Plug`
-        };
+        return { nights: n, climate, plugType: plug, summary: `${n} Nights (${rangeLabel}) • ~${Math.round(avgTemp)}°C • ${plug} Plug` };
       } catch (e) {
-        return {
-          nights: n,
-          climate: fallback.climate,
-          plugType: fallback.plugType,
-          summary: `${n} Nights (${rangeLabel}) • ${fallback.plugType} Plug`
-        };
+        return { nights: n, climate: fallback.climate, plugType: fallback.plugType, summary: `${n} Nights (${rangeLabel}) • ${fallback.plugType} Plug` };
       }
     }
 
     const DEFAULT_TRIPS = [
-      {
-        id: 'trip-kyoto',
-        name: "Kyoto & Tokyo '26",
-        dates: '10 Nights (Nov 8 – Nov 18) • ~14°C • US Plug',
-        destination: 'Kyoto',
-        nights: 10,
-        laundryMode: false,
-        icon: 'airplane',
-        archived: false,
-        categories: generateSmartCategories(10, 'mild', 'US', 'standard')
-      },
-      {
-        id: 'trip-amalfi',
-        name: 'Amalfi Coast Summer',
-        dates: '7 Nights (Completed) • Warm • EU Plug',
-        destination: 'Amalfi',
-        nights: 7,
-        laundryMode: false,
-        icon: 'sun',
-        archived: true,
-        categories: generateSmartCategories(7, 'hot', 'EU', 'standard').map(c => ({
-          ...c,
-          items: c.items.map(i => ({ ...i, packed: true }))
-        }))
-      }
+      { id: 'trip-kyoto', name: "Kyoto & Tokyo '26", dates: '10 Nights (Nov 8 – Nov 18) • ~14°C • US Plug', destination: 'Kyoto', nights: 10, laundryMode: false, icon: 'airplane', archived: false, categories: generateSmartCategories(10, 'mild', 'US', 'standard') }
     ];
 
     const STORAGE_KEY = 'apple_trips_vault_v4';
     const THEME_KEY = 'apple_trips_theme_v4';
 
-    let state = {
-      trips: [],
-      currentTripId: null,
-      filter: 'all',
-      search: '',
-      selectedNewTripIcon: 'airplane',
-      selectedNewCatIcon: 'sparkles',
-      newTripNights: 7
-    };
+    let state = { trips: [], currentTripId: null, filter: 'all', search: '', selectedNewTripIcon: 'airplane', selectedNewCatIcon: 'sparkles', newTripNights: 7 };
 
     function loadState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
           const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed.trips) && parsed.trips.length > 0) {
-            state.trips = parsed.trips;
-          } else {
-            state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
-          }
-        } else {
-          state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
-        }
-      } catch (e) {
-        state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
-      }
+          if (Array.isArray(parsed.trips) && parsed.trips.length > 0) state.trips = parsed.trips;
+          else state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
+        } else state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
+      } catch (e) { state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS)); }
 
       const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
       document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-      updateThemeIcons();
+      
+      // Sync toggle switch state if Settings modal exists
+      const toggleSwitch = document.getElementById('theme-toggle-switch');
+      if (toggleSwitch) toggleSwitch.checked = (savedTheme === 'dark');
     }
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ trips: state.trips }));
     }
 
-    function getCurrentTrip() {
-      return state.trips.find(t => t.id === state.currentTripId) || null;
-    }
+    function getCurrentTrip() { return state.trips.find(t => t.id === state.currentTripId) || null; }
 
     function getTripStats(trip) {
-      let total = 0;
-      let packed = 0;
+      let total = 0, packed = 0;
       trip.categories.forEach(c => {
-        c.items.forEach(item => {
-          total += 1;
-          if (item.packed) packed += 1;
-        });
+        c.items.forEach(item => { total += 1; if (item.packed) packed += 1; });
       });
-      const pct = total === 0 ? 0 : Math.round((packed / total) * 100);
-      return { total, packed, pct };
+      return { total, packed, pct: total === 0 ? 0 : Math.round((packed / total) * 100) };
     }
 
-    function toggleTheme() {
-      const isDark = document.documentElement.classList.toggle('dark');
+    function toggleThemeSwitch() {
+      const isDark = document.getElementById('theme-toggle-switch').checked;
+      document.documentElement.classList.toggle('dark', isDark);
       localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
-      updateThemeIcons();
-    }
-
-    function updateThemeIcons() {
-      const isDark = document.documentElement.classList.contains('dark');
-      const svg = isDark ? ICONS.sun : ICONS.moon;
-      const v1 = document.getElementById('theme-icon-vault');
-      const v2 = document.getElementById('theme-icon-detail');
-      if (v1) v1.innerHTML = svg;
-      if (v2) v2.innerHTML = svg;
     }
 
     function openTrip(tripId) {
-      state.currentTripId = tripId;
-      state.filter = 'all';
-      state.search = '';
+      state.currentTripId = tripId; state.filter = 'all'; state.search = '';
       document.getElementById('search-input').value = '';
       document.getElementById('clear-search-btn').classList.add('hidden');
       document.getElementById('screen-trips').classList.add('hidden');
@@ -789,7 +722,6 @@
     function renderTripsVault() {
       const activeList = document.getElementById('active-trips-list');
       const archivedList = document.getElementById('archived-trips-list');
-
       const activeTrips = state.trips.filter(t => !t.archived);
       const archivedTrips = state.trips.filter(t => t.archived);
 
@@ -797,75 +729,39 @@
       document.getElementById('archived-trips-count').textContent = `${archivedTrips.length}`;
 
       if (activeTrips.length === 0) {
-        activeList.innerHTML = `
-          <div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-6 text-center border border-black/[0.04] dark:border-white/[0.06]">
-            <p class="text-[15px] font-semibold">No Active Trips</p>
-            <p class="text-[13px] text-ios-gray mt-1">Tap "+ New Trip" above or reuse a past checklist below to start packing.</p>
-          </div>
-        `;
+        activeList.innerHTML = `<div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-6 text-center border border-black/[0.04] dark:border-white/[0.06]"><p class="text-[15px] font-semibold">No Active Trips</p><p class="text-[13px] text-ios-gray mt-1">Tap "+ New Trip" above to start packing.</p></div>`;
       } else {
         activeList.innerHTML = activeTrips.map(trip => {
           const { total, packed, pct } = getTripStats(trip);
-          const badge = pct === 100
-            ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-flash text-black">Ready</span>`
-            : `<span class="text-[13px] font-bold tabular-nums text-ios-blue dark:text-flash">${pct}%</span>`;
-
+          const badge = pct === 100 ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-flash text-black">Ready</span>` : `<span class="text-[13px] font-bold tabular-nums text-ios-blue dark:text-flash">${pct}%</span>`;
           return `
             <div onclick="openTrip('${trip.id}')" class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-4 shadow-sm border border-black/[0.04] dark:border-white/[0.06] active:scale-[0.99] spring-transition cursor-pointer">
               <div class="flex items-start justify-between gap-3">
                 <div class="flex items-center gap-3 min-w-0">
-                  <div class="w-10 h-10 rounded-xl bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash flex items-center justify-center shrink-0">
-                    ${ICONS[trip.icon] || ICONS.airplane}
-                  </div>
-                  <div class="min-w-0">
-                    <h3 class="text-[17px] font-bold tracking-tight truncate">${escapeHtml(trip.name)}</h3>
-                    <p class="text-[12px] text-ios-gray truncate">${escapeHtml(trip.dates || 'Upcoming Trip')}</p>
-                  </div>
+                  <div class="w-10 h-10 rounded-xl bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash flex items-center justify-center shrink-0">${ICONS[trip.icon] || ICONS.airplane}</div>
+                  <div class="min-w-0"><h3 class="text-[17px] font-bold tracking-tight truncate">${escapeHtml(trip.name)}</h3><p class="text-[12px] text-ios-gray truncate">${escapeHtml(trip.dates || 'Upcoming Trip')}</p></div>
                 </div>
                 ${badge}
               </div>
-
-              <div class="mt-3.5 h-1.5 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden">
-                <div class="h-full bg-ios-blue dark:bg-flash spring-transition rounded-full" style="width: ${pct}%"></div>
-              </div>
-
-              <div class="mt-2.5 flex items-center justify-between text-[12px] text-ios-gray">
-                <span class="tabular-nums">${packed} of ${total} items packed</span>
-                <span class="text-ios-blue dark:text-flash font-semibold flex items-center gap-0.5">
-                  Open
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                </span>
-              </div>
-            </div>
-          `;
+              <div class="mt-3.5 h-1.5 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden"><div class="h-full bg-ios-blue dark:bg-flash spring-transition rounded-full" style="width: ${pct}%"></div></div>
+              <div class="mt-2.5 flex items-center justify-between text-[12px] text-ios-gray"><span class="tabular-nums">${packed} of ${total} items packed</span><span class="text-ios-blue dark:text-flash font-semibold flex items-center gap-0.5">Open<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></span></div>
+            </div>`;
         }).join('');
       }
 
       if (archivedTrips.length === 0) {
-        archivedList.innerHTML = `
-          <div class="rounded-2xl p-4 text-center text-[13px] text-ios-gray border border-dashed border-black/10 dark:border-white/10">
-            Completed trips you archive will appear here for one-tap reuse.
-          </div>
-        `;
+        archivedList.innerHTML = `<div class="rounded-2xl p-4 text-center text-[13px] text-ios-gray border border-dashed border-black/10 dark:border-white/10">Completed trips you archive will appear here for one-tap reuse.</div>`;
       } else {
         archivedList.innerHTML = archivedTrips.map(trip => {
           const { total } = getTripStats(trip);
           return `
             <div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-3.5 border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between gap-3">
               <div onclick="openTrip('${trip.id}')" class="flex items-center gap-3 min-w-0 flex-1 cursor-pointer">
-                <div class="w-9 h-9 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-ios-gray flex items-center justify-center shrink-0">
-                  ${ICONS[trip.icon] || ICONS.suitcase}
-                </div>
-                <div class="min-w-0">
-                  <h4 class="text-[15px] font-semibold truncate">${escapeHtml(trip.name)}</h4>
-                  <p class="text-[12px] text-ios-gray truncate tabular-nums">${total} items • ${escapeHtml(trip.dates || 'Archived')}</p>
-                </div>
+                <div class="w-9 h-9 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-ios-gray flex items-center justify-center shrink-0">${ICONS[trip.icon] || ICONS.suitcase}</div>
+                <div class="min-w-0"><h4 class="text-[15px] font-semibold truncate">${escapeHtml(trip.name)}</h4><p class="text-[12px] text-ios-gray truncate tabular-nums">${total} items • ${escapeHtml(trip.dates || 'Archived')}</p></div>
               </div>
-              <button onclick="duplicateTripById('${trip.id}')" class="shrink-0 px-3 py-1.5 rounded-full bg-flash text-black text-[12px] font-bold active:scale-95 spring-transition">
-                Reuse List
-              </button>
-            </div>
-          `;
+              <button onclick="duplicateTripById('${trip.id}')" class="shrink-0 px-3 py-1.5 rounded-full bg-flash text-black text-[12px] font-bold active:scale-95 spring-transition">Reuse List</button>
+            </div>`;
         }).join('');
       }
     }
@@ -873,37 +769,28 @@
     function renderChecklistScreen() {
       const trip = getCurrentTrip();
       if (!trip) return showTripsScreen();
-
       const { total, packed, pct } = getTripStats(trip);
+      
       document.getElementById('detail-trip-icon').innerHTML = ICONS[trip.icon] || ICONS.airplane;
       document.getElementById('detail-trip-dates').textContent = trip.dates || 'Active Checklist';
       document.getElementById('detail-trip-title').textContent = trip.name;
-
-      document.getElementById('detail-smart-text').textContent = trip.dates || 'Smart Hybrid Engine Active';
+      document.getElementById('detail-smart-text').textContent = trip.dates || 'Smart Engine Active';
+      
       const laundryBtn = document.getElementById('detail-laundry-btn');
       laundryBtn.textContent = trip.laundryMode ? 'Laundry: On' : 'Laundry: Off';
-      laundryBtn.className = trip.laundryMode
-        ? 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-flash text-black font-bold text-[12px] active:scale-95 spring-transition'
-        : 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue dark:text-flash active:scale-95 spring-transition';
+      laundryBtn.className = trip.laundryMode ? 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-flash text-black font-bold text-[12px] active:scale-95 spring-transition' : 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue dark:text-flash active:scale-95 spring-transition';
 
       let statusMsg = `${packed} of ${total} packed`;
       if (total > 0 && pct === 100) statusMsg = `All ${total} items packed • Ready for departure`;
       else if (total > 0 && total - packed <= 3) statusMsg = `Almost there • ${total - packed} left`;
       document.getElementById('detail-status-text').textContent = statusMsg;
 
-      const circumference = 163.36;
-      const offset = circumference - (pct / 100) * circumference;
-      document.getElementById('detail-progress-ring').style.strokeDashoffset = offset;
+      document.getElementById('detail-progress-ring').style.strokeDashoffset = 163.36 - (pct / 100) * 163.36;
       document.getElementById('detail-progress-bar').style.width = `${pct}%`;
       document.getElementById('detail-progress-pct').textContent = `${pct}%`;
 
       ['all', 'remaining', 'packed'].forEach(f => {
-        const btn = document.getElementById(`filter-${f}`);
-        if (state.filter === f) {
-          btn.className = 'py-1.5 rounded-[10px] bg-white dark:bg-ios-darkElevated shadow-sm text-black dark:text-white spring-transition';
-        } else {
-          btn.className = 'py-1.5 rounded-[10px] text-ios-gray spring-transition';
-        }
+        document.getElementById(`filter-${f}`).className = state.filter === f ? 'py-1.5 rounded-[10px] bg-white dark:bg-ios-darkElevated shadow-sm text-black dark:text-white spring-transition' : 'py-1.5 rounded-[10px] text-ios-gray spring-transition';
       });
 
       const container = document.getElementById('categories-container');
@@ -921,209 +808,163 @@
           return true;
         });
 
-        if ((query || state.filter !== 'all') && filteredItems.length === 0) {
-          return '';
-        }
+        if ((query || state.filter !== 'all') && filteredItems.length === 0) return '';
 
         const rowsHtml = filteredItems.map((item, idx) => {
-          const isLast = idx === filteredItems.length - 1;
           return `
-            <div class="flex items-center justify-between pl-4 pr-3 py-2.5 ${!isLast ? 'hairline-b' : ''}">
+            <div class="flex items-center justify-between pl-4 pr-3 py-2.5 ${idx !== filteredItems.length - 1 ? 'hairline-b' : ''}">
               <button onclick="toggleItem('${cat.id}', '${item.id}')" class="flex items-center gap-3 flex-1 min-w-0 text-left py-0.5">
-                <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center shrink-0 spring-transition ${
-                  item.packed
-                    ? 'bg-ios-blue dark:bg-flash text-white dark:text-black border border-ios-blue dark:border-flash'
-                    : 'border-[1.8px] border-gray-300 dark:border-gray-600'
-                }">
+                <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center shrink-0 spring-transition ${item.packed ? 'bg-ios-blue dark:bg-flash text-white dark:text-black border border-ios-blue dark:border-flash' : 'border-[1.8px] border-gray-300 dark:border-gray-600'}">
                   ${item.packed ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>` : ''}
                 </span>
-                <span class="text-[15px] truncate spring-transition ${item.packed ? 'line-through text-ios-gray' : 'font-medium'}">
-                  ${escapeHtml(item.name)}
-                </span>
+                <span class="text-[15px] truncate spring-transition ${item.packed ? 'line-through text-ios-gray' : 'font-medium'}">${escapeHtml(item.name)}</span>
               </button>
-
               <div class="flex items-center gap-1.5 shrink-0 ml-2">
                 <div class="flex items-center bg-black/[0.04] dark:bg-white/[0.07] rounded-full px-1.5 py-0.5">
-                  <button onclick="adjustQty('${cat.id}', '${item.id}', -1)" class="w-5 h-5 text-ios-gray hover:text-black dark:hover:text-white flex items-center justify-center text-[14px] font-bold">−</button>
+                  <button onclick="adjustQty('${cat.id}', '${item.id}', -1)" class="w-5 h-5 text-ios-gray hover:text-black dark:hover:text-white font-bold">−</button>
                   <span class="text-[12px] font-semibold tabular-nums px-1 text-gray-700 dark:text-gray-300">${item.qty}</span>
-                  <button onclick="adjustQty('${cat.id}', '${item.id}', 1)" class="w-5 h-5 text-ios-gray hover:text-black dark:hover:text-white flex items-center justify-center text-[14px] font-bold">+</button>
+                  <button onclick="adjustQty('${cat.id}', '${item.id}', 1)" class="w-5 h-5 text-ios-gray hover:text-black dark:hover:text-white font-bold">+</button>
                 </div>
-                <button onclick="deleteItem('${cat.id}', '${item.id}')" class="w-6 h-6 rounded-full text-gray-300 hover:text-ios-red dark:text-gray-600 dark:hover:text-ios-red flex items-center justify-center" title="Remove item">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
+                <button onclick="deleteItem('${cat.id}', '${item.id}')" class="w-6 h-6 rounded-full text-gray-300 hover:text-ios-red dark:text-gray-600 dark:hover:text-ios-red flex items-center justify-center"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
               </div>
-            </div>
-          `;
+            </div>`;
         }).join('');
 
         return `
           <section class="bg-ios-card dark:bg-ios-darkCard rounded-2xl shadow-sm border border-black/[0.04] dark:border-white/[0.06] overflow-hidden">
             <div class="px-4 py-3 flex items-center justify-between ${!cat.collapsed ? 'hairline-b' : ''}">
               <button onclick="toggleCategoryCollapse('${cat.id}')" class="flex items-center gap-2.5 flex-1 min-w-0 text-left">
-                <span class="w-7 h-7 rounded-lg ${catDone ? 'bg-flash text-black' : 'bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash'} flex items-center justify-center shrink-0">
-                  ${ICONS[cat.icon] || ICONS.suitcase}
-                </span>
+                <span class="w-7 h-7 rounded-lg ${catDone ? 'bg-flash text-black' : 'bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash'} flex items-center justify-center shrink-0">${ICONS[cat.icon] || ICONS.suitcase}</span>
                 <span class="text-[15px] font-bold tracking-tight truncate">${escapeHtml(cat.title)}</span>
-                <span class="text-[12px] font-bold tabular-nums px-2 py-0.5 rounded-full ${catDone ? 'bg-flash text-black' : 'bg-black/[0.05] dark:bg-white/[0.08] text-ios-gray'}">
-                  ${catPacked}/${catTotal}
-                </span>
+                <span class="text-[12px] font-bold tabular-nums px-2 py-0.5 rounded-full ${catDone ? 'bg-flash text-black' : 'bg-black/[0.05] dark:bg-white/[0.08] text-ios-gray'}">${catPacked}/${catTotal}</span>
               </button>
-
               <div class="flex items-center gap-1">
-                <button onclick="togglePackAllCategory('${cat.id}')" class="text-[12px] font-semibold text-ios-blue dark:text-flash px-2 py-1 rounded-lg active:opacity-60">
-                  ${catDone ? 'Unpack' : 'Pack All'}
-                </button>
-                <button onclick="toggleCategoryCollapse('${cat.id}')" class="p-1 text-ios-gray">
-                  <svg class="w-4 h-4 spring-transition ${cat.collapsed ? '-rotate-90' : 'rotate-0'}" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-                </button>
+                <button onclick="togglePackAllCategory('${cat.id}')" class="text-[12px] font-semibold text-ios-blue dark:text-flash px-2 py-1 rounded-lg active:opacity-60">${catDone ? 'Unpack' : 'Pack All'}</button>
+                <button onclick="toggleCategoryCollapse('${cat.id}')" class="p-1 text-ios-gray"><svg class="w-4 h-4 spring-transition ${cat.collapsed ? '-rotate-90' : 'rotate-0'}" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></button>
               </div>
             </div>
-
             <div class="${cat.collapsed ? 'hidden' : 'block'}">
               ${rowsHtml || `<p class="px-4 py-3 text-[13px] text-ios-gray">No items in this category yet.</p>`}
               <form onsubmit="handleInlineAdd(event, '${cat.id}')" class="flex items-center gap-2.5 pl-4 pr-3 py-2 hairline-t bg-black/[0.015] dark:bg-white/[0.02]">
-                <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-ios-blue dark:text-flash">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-                </span>
+                <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-ios-blue dark:text-flash"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg></span>
                 <input type="text" placeholder="Add item to ${escapeHtml(cat.title)}..." class="flex-1 bg-transparent text-[14px] placeholder-ios-gray focus:outline-none py-1" />
                 <button type="submit" class="text-[13px] font-bold text-ios-blue dark:text-flash px-2 py-0.5">Add</button>
               </form>
             </div>
-          </section>
-        `;
+          </section>`;
       }).join('');
 
-      container.innerHTML = cardsHtml || `
-        <div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-8 text-center">
-          <p class="text-[15px] font-semibold">No Matching Items</p>
-          <p class="text-[13px] text-ios-gray mt-1">Try switching your filter or clearing the search bar.</p>
-        </div>
-      `;
+      container.innerHTML = cardsHtml || `<div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-8 text-center"><p class="text-[15px] font-semibold">No Matching Items</p><p class="text-[13px] text-ios-gray mt-1">Try switching your filter or clearing the search bar.</p></div>`;
     }
 
     function toggleItem(catId, itemId) {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      const cat = trip.categories.find(c => c.id === catId);
-      if (!cat) return;
-      const item = cat.items.find(i => i.id === itemId);
-      if (!item) return;
-      item.packed = !item.packed;
-      saveState();
-      renderChecklistScreen();
+      const t = getCurrentTrip(); if (!t) return;
+      const c = t.categories.find(x => x.id === catId); if (!c) return;
+      const i = c.items.find(x => x.id === itemId); if (!i) return;
+      i.packed = !i.packed; saveState(); renderChecklistScreen();
     }
 
     function adjustQty(catId, itemId, delta) {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      const cat = trip.categories.find(c => c.id === catId);
-      if (!cat) return;
-      const item = cat.items.find(i => i.id === itemId);
-      if (!item) return;
-      item.qty = Math.max(1, Math.min(99, item.qty + delta));
-      saveState();
-      renderChecklistScreen();
+      const t = getCurrentTrip(); if (!t) return;
+      const c = t.categories.find(x => x.id === catId); if (!c) return;
+      const i = c.items.find(x => x.id === itemId); if (!i) return;
+      i.qty = Math.max(1, Math.min(99, i.qty + delta)); saveState(); renderChecklistScreen();
     }
 
     function deleteItem(catId, itemId) {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      const cat = trip.categories.find(c => c.id === catId);
-      if (!cat) return;
-      cat.items = cat.items.filter(i => i.id !== itemId);
-      saveState();
-      renderChecklistScreen();
+      const t = getCurrentTrip(); if (!t) return;
+      const c = t.categories.find(x => x.id === catId); if (!c) return;
+      c.items = c.items.filter(x => x.id !== itemId); saveState(); renderChecklistScreen();
     }
 
     function handleInlineAdd(e, catId) {
-      e.preventDefault();
-      const input = e.target.querySelector('input');
-      const name = input.value.trim();
-      if (!name) return;
-      const trip = getCurrentTrip();
-      const cat = trip.categories.find(c => c.id === catId);
-      if (!cat) return;
-      cat.items.push({
-        id: 'item-' + Date.now(),
-        name,
-        qty: 1,
-        packed: false
-      });
-      input.value = '';
-      saveState();
-      renderChecklistScreen();
+      e.preventDefault(); const input = e.target.querySelector('input');
+      const name = input.value.trim(); if (!name) return;
+      const t = getCurrentTrip(); const c = t.categories.find(x => x.id === catId); if (!c) return;
+      c.items.push({ id: 'item-' + Date.now(), name, qty: 1, packed: false });
+      input.value = ''; saveState(); renderChecklistScreen();
     }
 
     function toggleCategoryCollapse(catId) {
-      const trip = getCurrentTrip();
-      const cat = trip.categories.find(c => c.id === catId);
-      if (!cat) return;
-      cat.collapsed = !cat.collapsed;
-      saveState();
-      renderChecklistScreen();
+      const t = getCurrentTrip(); const c = t.categories.find(x => x.id === catId); if (!c) return;
+      c.collapsed = !c.collapsed; saveState(); renderChecklistScreen();
     }
 
     function togglePackAllCategory(catId) {
-      const trip = getCurrentTrip();
-      const cat = trip.categories.find(c => c.id === catId);
-      if (!cat || cat.items.length === 0) return;
-      const allPacked = cat.items.every(i => i.packed);
-      cat.items.forEach(i => (i.packed = !allPacked));
-      saveState();
-      renderChecklistScreen();
+      const t = getCurrentTrip(); const c = t.categories.find(x => x.id === catId); if (!c || c.items.length === 0) return;
+      const allPacked = c.items.every(i => i.packed); c.items.forEach(i => (i.packed = !allPacked)); saveState(); renderChecklistScreen();
     }
 
-    function setFilter(f) {
-      state.filter = f;
-      renderChecklistScreen();
-    }
-
-    function handleSearch(val) {
-      state.search = val;
-      document.getElementById('clear-search-btn').classList.toggle('hidden', !val);
-      renderChecklistScreen();
-    }
-
-    function clearSearch() {
-      state.search = '';
-      document.getElementById('search-input').value = '';
-      document.getElementById('clear-search-btn').classList.add('hidden');
-      renderChecklistScreen();
-    }
+    function setFilter(f) { state.filter = f; renderChecklistScreen(); }
+    function handleSearch(val) { state.search = val; document.getElementById('clear-search-btn').classList.toggle('hidden', !val); renderChecklistScreen(); }
+    function clearSearch() { state.search = ''; document.getElementById('search-input').value = ''; document.getElementById('clear-search-btn').classList.add('hidden'); renderChecklistScreen(); }
 
     function toggleLaundryMode() {
-      const trip = getCurrentTrip();
-      if (!trip) return;
+      const trip = getCurrentTrip(); if (!trip) return;
       trip.laundryMode = !trip.laundryMode;
       const cloCat = trip.categories.find(c => c.id === 'cat-clo' || c.title.toLowerCase().includes('clothing'));
       if (cloCat) {
         let nights = trip.nights || 7;
-        const match = (trip.dates || '').match(/(\d+)\s+Nights/);
-        if (match) nights = parseInt(match[1], 10);
-
         const targetQty = trip.laundryMode ? Math.min(4, nights) : nights + 1;
-        cloCat.items.forEach(item => {
-          if (item.name.includes('Underwear') || item.name.includes('Socks') || item.name.includes('T-Shirts')) {
-            item.qty = targetQty;
-          }
-        });
+        cloCat.items.forEach(item => { if (item.name.includes('Underwear') || item.name.includes('Socks') || item.name.includes('T-Shirts')) item.qty = targetQty; });
       }
-      saveState();
-      renderChecklistScreen();
+      saveState(); renderChecklistScreen();
     }
 
     function closeAllSheets() {
       document.getElementById('sheet-backdrop').classList.add('hidden');
-      ['sheet-new-trip', 'sheet-add-item', 'sheet-new-category', 'sheet-presets', 'sheet-trip-options'].forEach(id => {
+      ['sheet-new-trip', 'sheet-add-item', 'sheet-new-category', 'sheet-presets', 'sheet-trip-options', 'sheet-vault-settings'].forEach(id => {
         document.getElementById(id).classList.add('hidden');
       });
     }
 
-    // ================= NEW TRIP SMART DURATION & AUTO-SUGGEST LOGIC =================
-    function formatShortDate(dateObj) {
-      return dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    /* Phase 2: JSON Export & Import Engine */
+    function openVaultSettings() {
+      document.getElementById('theme-toggle-switch').checked = document.documentElement.classList.contains('dark');
+      document.getElementById('sheet-backdrop').classList.remove('hidden');
+      document.getElementById('sheet-vault-settings').classList.remove('hidden');
     }
 
+    function exportTripsBackup() {
+      const payload = { trips: state.trips };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Trips_Backup_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      closeAllSheets();
+    }
+
+    function handleImportTrips(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data && Array.isArray(data.trips)) {
+            // Assign new unique IDs so we don't conflict with existing trips
+            const importedTrips = data.trips.map(trip => ({
+              ...trip,
+              id: 'trip-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5)
+            }));
+            state.trips = [...importedTrips, ...state.trips];
+            saveState();
+            closeAllSheets();
+            renderTripsVault();
+            alert(`Successfully imported ${importedTrips.length} checklists!`);
+          } else { alert('Invalid backup file format.'); }
+        } catch (err) { alert('Error reading file. Make sure it is a valid Trips JSON backup.'); }
+        event.target.value = ''; // Reset input
+      };
+      reader.readAsText(file);
+    }
+
+    function formatShortDate(dateObj) { return dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
     function getComputedRangeLabel() {
       const startVal = document.getElementById('new-trip-start').value;
       const start = startVal ? new Date(startVal + 'T00:00:00') : new Date();
@@ -1135,305 +976,124 @@
       const dest = document.getElementById('new-trip-destination').value.trim();
       const nights = state.newTripNights;
       document.getElementById('new-trip-nights-label').textContent = `${nights} ${nights === 1 ? 'Night' : 'Nights'}`;
-
-      const rangeLabel = getComputedRangeLabel();
-      document.getElementById('computed-date-range').textContent = rangeLabel;
-
+      document.getElementById('computed-date-range').textContent = getComputedRangeLabel();
       const info = getOfflineClimateAndPlug(dest);
       const climateLabel = info.climate === 'cold' ? 'Cold Climate' : info.climate === 'hot' ? 'Warm / Tropical' : 'Mild Climate';
-      const cityLabel = dest ? dest : 'Any Destination';
-      document.getElementById('smart-preview-text').textContent = `⚡ ${cityLabel}: ${nights} Nights • ${climateLabel} • ${info.plugType} Plug`;
+      document.getElementById('smart-preview-text').textContent = `⚡ ${dest ? dest : 'Any Destination'}: ${nights} Nights • ${climateLabel} • ${info.plugType} Plug`;
     }
 
-    function adjustNewTripNights(delta) {
-      state.newTripNights = Math.max(1, Math.min(60, state.newTripNights + delta));
-      updateLiveTripPreview();
-    }
-
-    function pickQuickDestination(destName, iconKey) {
-      document.getElementById('new-trip-destination').value = destName;
-      selectNewTripIcon(iconKey);
-      updateLiveTripPreview();
-    }
+    function adjustNewTripNights(delta) { state.newTripNights = Math.max(1, Math.min(60, state.newTripNights + delta)); updateLiveTripPreview(); }
+    function pickQuickDestination(destName, iconKey) { document.getElementById('new-trip-destination').value = destName; selectNewTripIcon(iconKey); updateLiveTripPreview(); }
 
     function openNewTripSheet() {
       document.getElementById('new-trip-destination').value = '';
       state.newTripNights = 7;
-      const today = new Date();
-      document.getElementById('new-trip-start').value = today.toISOString().split('T')[0];
+      document.getElementById('new-trip-start').value = new Date().toISOString().split('T')[0];
       renderIconPicker('new-trip-icons', state.selectedNewTripIcon, 'selectNewTripIcon');
       updateLiveTripPreview();
-
       document.getElementById('sheet-backdrop').classList.remove('hidden');
       document.getElementById('sheet-new-trip').classList.remove('hidden');
       setTimeout(() => document.getElementById('new-trip-destination').focus(), 80);
     }
 
-    function selectNewTripIcon(iconKey) {
-      state.selectedNewTripIcon = iconKey;
-      renderIconPicker('new-trip-icons', iconKey, 'selectNewTripIcon');
-    }
+    function selectNewTripIcon(iconKey) { state.selectedNewTripIcon = iconKey; renderIconPicker('new-trip-icons', iconKey, 'selectNewTripIcon'); }
 
     async function createNewTrip() {
       const btn = document.getElementById('create-trip-btn');
-      const rawName = document.getElementById('new-trip-destination').value.trim();
-      // Exact Trip Naming: no forced "Trip" suffix
-      const tripName = rawName || 'Upcoming Holiday';
+      const tripName = document.getElementById('new-trip-destination').value.trim() || 'Upcoming Holiday';
       const profile = document.getElementById('new-trip-profile').value;
-      const rangeLabel = getComputedRangeLabel();
+      
+      btn.textContent = 'Building...'; btn.disabled = true;
+      const resolved = await resolveDestinationWeather(tripName, state.newTripNights, getComputedRangeLabel());
+      
+      let categories = profile === 'blank' 
+        ? [{ id: 'cat-' + Date.now(), title: 'Essentials', icon: 'passport', collapsed: false, items: [] }]
+        : generateSmartCategories(resolved.nights, resolved.climate, resolved.plugType, profile);
 
-      btn.textContent = 'Building...';
-      btn.disabled = true;
-
-      const resolved = await resolveDestinationWeather(tripName, state.newTripNights, rangeLabel);
-      let categories = generateSmartCategories(resolved.nights, resolved.climate, resolved.plugType, profile);
-
-      if (profile === 'blank') {
-        categories = [{ id: 'cat-' + Date.now(), title: 'Essentials', icon: 'passport', collapsed: false, items: [] }];
-      }
-
-      const newTrip = {
-        id: 'trip-' + Date.now(),
-        name: tripName,
-        destination: tripName,
-        nights: resolved.nights,
-        dates: resolved.summary,
-        laundryMode: false,
-        icon: state.selectedNewTripIcon || 'airplane',
-        archived: false,
-        categories
-      };
-
-      state.trips.unshift(newTrip);
-      saveState();
-      btn.textContent = 'Create';
-      btn.disabled = false;
-      closeAllSheets();
-      openTrip(newTrip.id);
+      const newTrip = { id: 'trip-' + Date.now(), name: tripName, destination: tripName, nights: resolved.nights, dates: resolved.summary, laundryMode: false, icon: state.selectedNewTripIcon || 'airplane', archived: false, categories };
+      state.trips.unshift(newTrip); saveState();
+      btn.textContent = 'Create'; btn.disabled = false; closeAllSheets(); openTrip(newTrip.id);
     }
 
     function duplicateTripById(tripId) {
-      const source = state.trips.find(t => t.id === tripId);
-      if (!source) return;
+      const source = state.trips.find(t => t.id === tripId); if (!source) return;
       const clonedCategories = JSON.parse(JSON.stringify(source.categories));
-      clonedCategories.forEach(c => {
-        c.collapsed = false;
-        c.items.forEach(i => (i.packed = false));
-      });
-      const copyTrip = {
-        id: 'trip-' + Date.now(),
-        name: `${source.name} (Copy)`,
-        destination: source.destination || source.name,
-        nights: source.nights || 7,
-        dates: source.dates,
-        laundryMode: false,
-        icon: source.icon,
-        archived: false,
-        categories: clonedCategories
-      };
-      state.trips.unshift(copyTrip);
-      saveState();
-      closeAllSheets();
-      openTrip(copyTrip.id);
+      clonedCategories.forEach(c => { c.collapsed = false; c.items.forEach(i => (i.packed = false)); });
+      state.trips.unshift({ id: 'trip-' + Date.now(), name: `${source.name} (Copy)`, destination: source.destination || source.name, nights: source.nights || 7, dates: source.dates, laundryMode: false, icon: source.icon, archived: false, categories: clonedCategories });
+      saveState(); closeAllSheets(); openTrip(state.trips[0].id);
     }
 
     function openAddItemSheet() {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      document.getElementById('sheet-item-name').value = '';
-      document.getElementById('sheet-item-qty').value = '1';
-      const select = document.getElementById('sheet-item-category');
-      select.innerHTML = trip.categories.map(c => `<option value="${c.id}">${escapeHtml(c.title)}</option>`).join('');
-
-      document.getElementById('sheet-backdrop').classList.remove('hidden');
-      document.getElementById('sheet-add-item').classList.remove('hidden');
+      const trip = getCurrentTrip(); if (!trip) return;
+      document.getElementById('sheet-item-name').value = ''; document.getElementById('sheet-item-qty').value = '1';
+      document.getElementById('sheet-item-category').innerHTML = trip.categories.map(c => `<option value="${c.id}">${escapeHtml(c.title)}</option>`).join('');
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-add-item').classList.remove('hidden');
       setTimeout(() => document.getElementById('sheet-item-name').focus(), 80);
     }
 
     function submitNewItemSheet() {
-      const name = document.getElementById('sheet-item-name').value.trim();
-      if (!name) return;
+      const name = document.getElementById('sheet-item-name').value.trim(); if (!name) return;
       const catId = document.getElementById('sheet-item-category').value;
       const qty = Math.max(1, parseInt(document.getElementById('sheet-item-qty').value, 10) || 1);
-
-      const trip = getCurrentTrip();
-      const cat = trip.categories.find(c => c.id === catId);
-      if (!cat) return;
-      cat.collapsed = false;
-      cat.items.push({
-        id: 'item-' + Date.now(),
-        name,
-        qty,
-        packed: false
-      });
-      saveState();
-      closeAllSheets();
-      renderChecklistScreen();
+      const trip = getCurrentTrip(); const cat = trip.categories.find(c => c.id === catId); if (!cat) return;
+      cat.collapsed = false; cat.items.push({ id: 'item-' + Date.now(), name, qty, packed: false });
+      saveState(); closeAllSheets(); renderChecklistScreen();
     }
 
     function openNewCategorySheet() {
-      document.getElementById('new-cat-title').value = '';
-      renderIconPicker('new-cat-icons', state.selectedNewCatIcon, 'selectNewCatIcon');
-      document.getElementById('sheet-backdrop').classList.remove('hidden');
-      document.getElementById('sheet-new-category').classList.remove('hidden');
+      document.getElementById('new-cat-title').value = ''; renderIconPicker('new-cat-icons', state.selectedNewCatIcon, 'selectNewCatIcon');
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-new-category').classList.remove('hidden');
     }
-
-    function selectNewCatIcon(iconKey) {
-      state.selectedNewCatIcon = iconKey;
-      renderIconPicker('new-cat-icons', iconKey, 'selectNewCatIcon');
-    }
-
-    function fillCatSuggestion(title, iconKey) {
-      document.getElementById('new-cat-title').value = title;
-      selectNewCatIcon(iconKey);
-    }
-
+    function selectNewCatIcon(iconKey) { state.selectedNewCatIcon = iconKey; renderIconPicker('new-cat-icons', iconKey, 'selectNewCatIcon'); }
+    function fillCatSuggestion(title, iconKey) { document.getElementById('new-cat-title').value = title; selectNewCatIcon(iconKey); }
+    
     function submitNewCategory() {
-      const title = document.getElementById('new-cat-title').value.trim();
-      if (!title) return;
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      trip.categories.push({
-        id: 'cat-' + Date.now(),
-        title,
-        icon: state.selectedNewCatIcon || 'suitcase',
-        collapsed: false,
-        items: []
-      });
-      saveState();
-      closeAllSheets();
-      renderChecklistScreen();
+      const title = document.getElementById('new-cat-title').value.trim(); if (!title) return;
+      const trip = getCurrentTrip(); if (!trip) return;
+      trip.categories.push({ id: 'cat-' + Date.now(), title, icon: state.selectedNewCatIcon || 'suitcase', collapsed: false, items: [] });
+      saveState(); closeAllSheets(); renderChecklistScreen();
     }
 
     function openPresetsSheet() {
-      const container = document.getElementById('presets-list');
-      container.innerHTML = PRESET_PACKS.map(pack => `
+      document.getElementById('presets-list').innerHTML = PRESET_PACKS.map(pack => `
         <button onclick="applyPresetPack('${pack.id}')" class="w-full p-3.5 rounded-2xl bg-black/[0.04] dark:bg-white/[0.07] flex items-center justify-between text-left active:scale-[0.99] spring-transition">
-          <div class="flex items-center gap-3">
-            <span class="w-9 h-9 rounded-xl bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash flex items-center justify-center">
-              ${ICONS[pack.icon] || ICONS.suitcase}
-            </span>
-            <div>
-              <p class="text-[15px] font-semibold">${escapeHtml(pack.name)}</p>
-              <p class="text-[12px] text-ios-gray">${pack.items.length} smart essentials</p>
-            </div>
-          </div>
+          <div class="flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash flex items-center justify-center">${ICONS[pack.icon] || ICONS.suitcase}</span>
+          <div><p class="text-[15px] font-semibold">${escapeHtml(pack.name)}</p><p class="text-[12px] text-ios-gray">${pack.items.length} smart essentials</p></div></div>
           <span class="text-[13px] font-bold text-ios-blue dark:text-flash">+ Add</span>
-        </button>
-      `).join('');
-
-      document.getElementById('sheet-backdrop').classList.remove('hidden');
-      document.getElementById('sheet-presets').classList.remove('hidden');
+        </button>`).join('');
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-presets').classList.remove('hidden');
     }
 
     function applyPresetPack(packId) {
-      const pack = PRESET_PACKS.find(p => p.id === packId);
-      const trip = getCurrentTrip();
-      if (!pack || !trip) return;
-
+      const pack = PRESET_PACKS.find(p => p.id === packId); const trip = getCurrentTrip(); if (!pack || !trip) return;
       let cat = trip.categories.find(c => c.title.toLowerCase() === pack.categoryTitle.toLowerCase());
-      if (!cat) {
-        cat = {
-          id: 'cat-' + Date.now(),
-          title: pack.categoryTitle,
-          icon: pack.icon,
-          collapsed: false,
-          items: []
-        };
-        trip.categories.push(cat);
-      }
-      cat.collapsed = false;
-      const existingNames = new Set(cat.items.map(i => i.name.toLowerCase()));
-      pack.items.forEach((itemName, idx) => {
-        if (!existingNames.has(itemName.toLowerCase())) {
-          cat.items.push({
-            id: `preset-${Date.now()}-${idx}`,
-            name: itemName,
-            qty: 1,
-            packed: false
-          });
-        }
-      });
-
-      saveState();
-      closeAllSheets();
-      renderChecklistScreen();
+      if (!cat) { cat = { id: 'cat-' + Date.now(), title: pack.categoryTitle, icon: pack.icon, collapsed: false, items: [] }; trip.categories.push(cat); }
+      cat.collapsed = false; const existingNames = new Set(cat.items.map(i => i.name.toLowerCase()));
+      pack.items.forEach((itemName, idx) => { if (!existingNames.has(itemName.toLowerCase())) cat.items.push({ id: `preset-${Date.now()}-${idx}`, name: itemName, qty: 1, packed: false }); });
+      saveState(); closeAllSheets(); renderChecklistScreen();
     }
 
     function openTripOptionsSheet() {
-      const trip = getCurrentTrip();
-      if (!trip) return;
+      const trip = getCurrentTrip(); if (!trip) return;
       document.getElementById('options-trip-title').textContent = trip.name;
-      const archiveBtn = document.getElementById('btn-toggle-archive');
-      archiveBtn.querySelector('span').textContent = trip.archived
-        ? 'Restore to Active & Upcoming Trips'
-        : 'Archive Trip (Move to Past Trips)';
-
-      document.getElementById('sheet-backdrop').classList.remove('hidden');
-      document.getElementById('sheet-trip-options').classList.remove('hidden');
+      document.getElementById('btn-toggle-archive').querySelector('span').textContent = trip.archived ? 'Restore to Active & Upcoming Trips' : 'Archive Trip (Move to Past Trips)';
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-trip-options').classList.remove('hidden');
     }
 
-    function uncheckAllCurrentTrip() {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      trip.categories.forEach(c => c.items.forEach(i => (i.packed = false)));
-      saveState();
-      closeAllSheets();
-      renderChecklistScreen();
-    }
-
-    function duplicateCurrentTrip() {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      duplicateTripById(trip.id);
-    }
-
-    function toggleArchiveCurrentTrip() {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      trip.archived = !trip.archived;
-      saveState();
-      closeAllSheets();
-      showTripsScreen();
-    }
-
-    function deleteCurrentTrip() {
-      const trip = getCurrentTrip();
-      if (!trip) return;
-      state.trips = state.trips.filter(t => t.id !== trip.id);
-      saveState();
-      closeAllSheets();
-      showTripsScreen();
-    }
-
+    function uncheckAllCurrentTrip() { const trip = getCurrentTrip(); if (!trip) return; trip.categories.forEach(c => c.items.forEach(i => (i.packed = false))); saveState(); closeAllSheets(); renderChecklistScreen(); }
+    function duplicateCurrentTrip() { const trip = getCurrentTrip(); if (trip) duplicateTripById(trip.id); }
+    function toggleArchiveCurrentTrip() { const trip = getCurrentTrip(); if (!trip) return; trip.archived = !trip.archived; saveState(); closeAllSheets(); showTripsScreen(); }
+    function deleteCurrentTrip() { const trip = getCurrentTrip(); if (!trip) return; state.trips = state.trips.filter(t => t.id !== trip.id); saveState(); closeAllSheets(); showTripsScreen(); }
+    
     function renderIconPicker(containerId, selectedKey, handlerName) {
       const keys = ['airplane', 'sun', 'snow', 'mountain', 'suitcase', 'passport', 'tshirt', 'bolt', 'sparkles', 'shield', 'camera', 'car', 'briefcase', 'heart'];
-      document.getElementById(containerId).innerHTML = keys.map(k => `
-        <button type="button" onclick="${handlerName}('${k}')" class="h-10 rounded-xl flex items-center justify-center spring-transition ${
-          selectedKey === k
-            ? 'bg-flash text-black shadow-sm font-bold'
-            : 'bg-black/[0.05] dark:bg-white/[0.08] text-gray-700 dark:text-gray-300'
-        }">
-          ${ICONS[k]}
-        </button>
-      `).join('');
+      document.getElementById(containerId).innerHTML = keys.map(k => `<button type="button" onclick="${handlerName}('${k}')" class="h-10 rounded-xl flex items-center justify-center spring-transition ${selectedKey === k ? 'bg-flash text-black shadow-sm font-bold' : 'bg-black/[0.05] dark:bg-white/[0.08] text-gray-700 dark:text-gray-300'}">${ICONS[k]}</button>`).join('');
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-    }
+    function escapeHtml(str) { return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
     // Boot App
-    try {
-      loadState();
-      renderTripsVault();
-    } catch (e) {
-      console.error('Initialization error:', e);
-    }
+    try { loadState(); renderTripsVault(); } catch (e) { console.error('Initialization error:', e); }
   </script>
 </body>
 </html>
