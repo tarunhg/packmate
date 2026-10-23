@@ -7,9 +7,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Vault" />
 
-  <!-- Inline Vector App Icon (Dark Card + Flash Suitcase) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='56' fill='%231C1C1E'/%3E%3Crect x='56' y='88' width='144' height='112' rx='18' fill='none' stroke='%23C8FF00' stroke-width='16'/%3E%3Cpath d='M96 88V58a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v30' fill='none' stroke='%23C8FF00' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='56' y1='144' x2='200' y2='144' stroke='%23C8FF00' stroke-width='16'/%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='%231C1C1E'/%3E%3Crect x='56' y='88' width='144' height='112' rx='18' fill='none' stroke='%23C8FF00' stroke-width='16'/%3E%3Cpath d='M96 88V58a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v30' fill='none' stroke='%23C8FF00' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='56' y1='144' x2='200' y2='144' stroke='%23C8FF00' stroke-width='16'/%3E%3C/svg%3E">
+  <!-- Inline Vector App Icon (Zero external files) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='56' fill='%231C1C1E'/%3E%3Crect x='56' y='88' width='144' height='112' rx='18' fill='none' stroke='%23C8FF00' stroke-width='16'/%3E%3Cpath d='M96 88V56a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v32' fill='none' stroke='%23C8FF00' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='56' y1='144' x2='200' y2='144' stroke='%23C8FF00' stroke-width='16'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='%231C1C1E'/%3E%3Crect x='56' y='88' width='144' height='112' rx='18' fill='none' stroke='%23C8FF00' stroke-width='16'/%3E%3Cpath d='M96 88V56a16 16 0 0 1 16-16h32a16 16 0 0 1 16 16v32' fill='none' stroke='%23C8FF00' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='56' y1='144' x2='200' y2='144' stroke='%23C8FF00' stroke-width='16'/%3E%3C/svg%3E">
 
   <title>Trips & Routines — Smart Vault</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -55,24 +55,24 @@
 
     /* Translucent iOS Glass Material */
     .ios-glass {
-      background: rgba(242, 242, 247, 0.84);
+      background: rgba(242, 242, 247, 0.82);
       backdrop-filter: blur(24px) saturate(180%);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
     }
     .dark .ios-glass {
-      background: rgba(20, 20, 22, 0.84);
+      background: rgba(20, 20, 22, 0.82);
     }
 
-    /* Floating Dynamic Island Dock Glass */
+    /* Floating Dynamic Island Glass Dock */
     .ios-dock-glass {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.86);
       backdrop-filter: blur(28px) saturate(200%);
       -webkit-backdrop-filter: blur(28px) saturate(200%);
-      box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.16), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.16), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
     }
     .dark .ios-dock-glass {
-      background: rgba(32, 32, 36, 0.88);
-      box-shadow: 0 12px 34px -4px rgba(0, 0, 0, 0.65), 0 0 0 0.5px rgba(255, 255, 255, 0.14);
+      background: rgba(34, 34, 38, 0.86);
+      box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.65), 0 0 0 0.5px rgba(255, 255, 255, 0.14);
     }
 
     .ios-sheet-glass {
@@ -136,7 +136,7 @@
 
     <!-- ================= SCREEN 1: HOME VAULT (TRIPS & ROUTINES) ================= -->
     <div id="screen-vault" class="flex-1 flex flex-col pb-32">
-      <!-- Top Sticky Header -->
+      <!-- Sticky Top Header -->
       <header class="sticky top-0 z-20 ios-glass hairline-b px-5 pt-4 pb-3 flex items-center justify-between">
         <div>
           <p id="vault-eyebrow" class="text-[11px] font-semibold uppercase tracking-wider text-ios-gray">Smart Travel Vault</p>
@@ -147,76 +147,120 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
           </button>
 
-          <button id="primary-create-btn" onclick="handlePrimaryCreateClick()" class="h-9 px-3.5 rounded-full bg-flash text-black text-[14px] font-bold flex items-center gap-1.5 flash-glow active:scale-95 spring-transition">
+          <button id="vault-primary-cta" onclick="handlePrimaryCreate()" class="h-9 px-3.5 rounded-full bg-flash text-black text-[14px] font-bold flex items-center gap-1.5 flash-glow active:scale-95 spring-transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            <span id="primary-create-label">New Trip</span>
+            <span id="vault-primary-cta-text">New Trip</span>
           </button>
         </div>
       </header>
 
-      <!-- Global Search Active Banner (when searching from detached orb) -->
-      <div id="vault-search-banner" class="hidden px-4 pt-3">
+      <!-- Active Global Search Filter Banner (when searching from Detached Orb) -->
+      <div id="global-search-banner" class="hidden px-4 pt-3">
         <div class="rounded-xl bg-flash/15 border border-flash/30 px-3.5 py-2 flex items-center justify-between text-[12px]">
-          <span id="vault-search-status" class="font-semibold text-black dark:text-flash truncate">Filtering vault...</span>
+          <span id="global-search-status" class="font-semibold text-gray-800 dark:text-flash truncate">Filtering vault...</span>
           <button onclick="closeGlobalSearch()" class="text-ios-gray hover:text-black dark:hover:text-white font-bold ml-2">Clear</button>
         </div>
       </div>
 
-      <!-- Vault Content -->
-      <main class="px-4 pt-5 space-y-6 flex-1">
-        <!-- Active Section -->
+      <!-- TAB 1 BODY: TRIPS VAULT -->
+      <main id="tab-trips-body" class="px-4 pt-5 space-y-6 flex-1">
         <section>
           <div class="flex items-center justify-between px-1 mb-2.5">
-            <h2 id="active-section-heading" class="text-[13px] font-semibold uppercase tracking-wider text-ios-gray">Active & Upcoming</h2>
+            <h2 class="text-[13px] font-semibold uppercase tracking-wider text-ios-gray">Active & Upcoming</h2>
             <span id="active-trips-count" class="text-[12px] font-medium text-ios-gray tabular-nums"></span>
           </div>
           <div id="active-trips-list" class="space-y-3"></div>
         </section>
 
-        <!-- Archived Section -->
         <section>
           <div class="flex items-center justify-between px-1 mb-2.5">
-            <h2 id="archived-section-heading" class="text-[13px] font-semibold uppercase tracking-wider text-ios-gray">Past & Archived Checklists</h2>
+            <h2 class="text-[13px] font-semibold uppercase tracking-wider text-ios-gray">Past & Archived Checklists</h2>
             <span id="archived-trips-count" class="text-[12px] font-medium text-ios-gray tabular-nums"></span>
           </div>
           <div id="archived-trips-list" class="space-y-2.5"></div>
         </section>
       </main>
 
-      <!-- ================= FLOATING GLASS PILL + DETACHED SEARCH ORB DOCK ================= -->
-      <div id="floating-dock-wrapper" class="fixed bottom-5 w-full max-w-[460px] z-30 px-4 flex items-center justify-center pointer-events-none">
-        <!-- Normal State: Pill + Aloof Search Orb -->
-        <div id="dock-normal-state" class="flex items-center gap-2.5 pointer-events-auto spring-transition">
-          <!-- Workspace Switcher Pill -->
-          <div class="ios-dock-glass rounded-full p-1 flex items-center gap-1">
-            <button onclick="switchWorkspace('trips')" id="dock-tab-trips" class="h-10 px-4 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+      <!-- TAB 2 BODY: ROUTINES, ERRANDS & PROJECTS -->
+      <main id="tab-routines-body" class="hidden px-4 pt-5 space-y-6 flex-1">
+        <!-- Quick Starter Templates Bar -->
+        <section>
+          <div class="flex items-center justify-between px-1 mb-2">
+            <h2 class="text-[12px] font-semibold uppercase tracking-wider text-ios-gray">Instant Templates</h2>
+          </div>
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            <button onclick="quickCreateRoutineTemplate('gym')" class="shrink-0 px-3 py-2 rounded-2xl bg-ios-card dark:bg-ios-darkCard border border-black/[0.05] dark:border-white/[0.07] flex items-center gap-2 text-[13px] font-semibold active:scale-95 spring-transition">
+              <span class="text-ios-blue dark:text-flash">⚡</span>
+              <span>+ Gym Bag</span>
+            </button>
+            <button onclick="quickCreateRoutineTemplate('groceries')" class="shrink-0 px-3 py-2 rounded-2xl bg-ios-card dark:bg-ios-darkCard border border-black/[0.05] dark:border-white/[0.07] flex items-center gap-2 text-[13px] font-semibold active:scale-95 spring-transition">
+              <span class="text-ios-blue dark:text-flash">🛒</span>
+              <span>+ Shopping List</span>
+            </button>
+            <button onclick="quickCreateRoutineTemplate('party')" class="shrink-0 px-3 py-2 rounded-2xl bg-ios-card dark:bg-ios-darkCard border border-black/[0.05] dark:border-white/[0.07] flex items-center gap-2 text-[13px] font-semibold active:scale-95 spring-transition">
+              <span class="text-ios-blue dark:text-flash">🎉</span>
+              <span>+ Birthday Party</span>
+            </button>
+            <button onclick="quickCreateRoutineTemplate('decor')" class="shrink-0 px-3 py-2 rounded-2xl bg-ios-card dark:bg-ios-darkCard border border-black/[0.05] dark:border-white/[0.07] flex items-center gap-2 text-[13px] font-semibold active:scale-95 spring-transition">
+              <span class="text-ios-blue dark:text-flash">✨</span>
+              <span>+ Room Decor</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Active Routines & Timebound Projects -->
+        <section>
+          <div class="flex items-center justify-between px-1 mb-2.5">
+            <h2 class="text-[13px] font-semibold uppercase tracking-wider text-ios-gray">Active Routines & Errands</h2>
+            <span id="active-routines-count" class="text-[12px] font-medium text-ios-gray tabular-nums"></span>
+          </div>
+          <div id="active-routines-list" class="space-y-3"></div>
+        </section>
+
+        <!-- Completed / Archived Projects -->
+        <section>
+          <div class="flex items-center justify-between px-1 mb-2.5">
+            <h2 class="text-[13px] font-semibold uppercase tracking-wider text-ios-gray">Completed Projects</h2>
+            <span id="archived-routines-count" class="text-[12px] font-medium text-ios-gray tabular-nums"></span>
+          </div>
+          <div id="archived-routines-list" class="space-y-2.5"></div>
+        </section>
+      </main>
+
+      <!-- ================= FLIGHTY-STYLE FLOATING GLASS PILL + DETACHED SEARCH ORB ================= -->
+      <div class="fixed bottom-5 w-full max-w-[460px] z-30 px-5 pointer-events-none flex items-center justify-center">
+        <!-- State A: Main Pill + Aloof Search Orb -->
+        <div id="dock-default-state" class="flex items-center gap-2.5 pointer-events-auto spring-transition">
+          <!-- Floating Capsule Pill -->
+          <div class="ios-dock-glass p-1.5 rounded-full flex items-center gap-1">
+            <button onclick="switchWorkspaceTab('trips')" id="dock-tab-trips" class="px-4 py-2 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition bg-flash text-black shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
               <span>Trips</span>
             </button>
-            <button onclick="switchWorkspace('routines')" id="dock-tab-routines" class="h-10 px-4 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+            <button onclick="switchWorkspaceTab('routines')" id="dock-tab-routines" class="px-4 py-2 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition text-gray-600 dark:text-gray-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
               <span>Routines</span>
             </button>
           </div>
 
-          <!-- Detached Aloof Search Orb (Flighty / iOS 18 style) -->
-          <button onclick="openGlobalSearch()" class="w-12 h-12 rounded-full ios-dock-glass flex items-center justify-center text-gray-800 dark:text-white active:scale-90 spring-transition" title="Search Checklists & Items">
+          <!-- Detached Circular Search Orb (Aloof like Flighty / iOS 18) -->
+          <button onclick="openGlobalSearch()" class="w-12 h-12 rounded-full ios-dock-glass flex items-center justify-center text-gray-800 dark:text-white active:scale-90 spring-transition" title="Search Vault">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
           </button>
         </div>
 
-        <!-- Expanded Dynamic Island Global Search Bar -->
-        <div id="dock-search-state" class="hidden w-full ios-dock-glass rounded-full p-1.5 pl-4 flex items-center gap-2 pointer-events-auto spring-transition">
-          <svg class="w-4 h-4 text-ios-gray shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-          <input id="global-search-input" oninput="handleGlobalSearch(this.value)" type="text" placeholder="Search trips, routines, or items..." class="flex-1 bg-transparent text-[14px] placeholder-ios-gray focus:outline-none" />
-          <button onclick="closeGlobalSearch()" class="w-8 h-8 rounded-full bg-black/[0.08] dark:bg-white/[0.12] flex items-center justify-center text-ios-gray hover:text-black dark:hover:text-white shrink-0">
+        <!-- State B: Expanded Morphing Search Bar -->
+        <div id="dock-search-state" class="hidden w-full pointer-events-auto ios-dock-glass rounded-full px-4 py-2 flex items-center gap-2.5 spring-transition">
+          <svg class="w-4 h-4 text-ios-blue dark:text-flash shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          <input id="global-search-input" oninput="handleGlobalSearch(this.value)" type="text" placeholder="Search trips, routines, or items..." class="flex-1 bg-transparent text-[14px] font-medium placeholder-ios-gray focus:outline-none" />
+          <button onclick="closeGlobalSearch()" class="w-7 h-7 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center text-ios-gray hover:text-black dark:hover:text-white">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- ================= SCREEN 2: ACTIVE CHECKLIST DETAIL ================= -->
+    <!-- ================= SCREEN 2: ACTIVE CHECKLIST VIEW (SHARED BY TRIPS & ROUTINES) ================= -->
     <div id="screen-checklist" class="hidden flex-1 flex flex-col pb-28">
       <header class="sticky top-0 z-20 ios-glass hairline-b px-3 pt-3 pb-2.5">
         <div class="flex items-center justify-between">
@@ -226,13 +270,13 @@
           </button>
 
           <div class="flex items-center gap-1.5">
-            <!-- Quick Reminder / Google Cal Trigger -->
-            <button onclick="openReminderSheet()" class="h-8 px-2.5 rounded-full bg-black/5 dark:bg-white/10 flex items-center gap-1 text-[12px] font-semibold text-gray-700 dark:text-gray-200 active:scale-95 spring-transition" title="Set Reminder & Google Calendar">
-              <svg class="w-3.5 h-3.5 text-ios-blue dark:text-flash" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
-              <span id="detail-header-reminder-label">Remind</span>
+            <!-- Quick Export Single Checklist Button -->
+            <button onclick="exportCurrentChecklist()" class="h-8 px-2.5 rounded-full bg-black/5 dark:bg-white/10 flex items-center gap-1 text-[12px] font-semibold text-gray-700 dark:text-gray-200 active:scale-95 spring-transition" title="Export This Checklist">
+              <svg class="w-3.5 h-3.5 text-ios-blue dark:text-flash" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              <span>Export</span>
             </button>
 
-            <button onclick="openTripOptionsSheet()" class="w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-ios-blue dark:text-flash active:scale-95 spring-transition" title="Checklist Options & Export">
+            <button onclick="openTripOptionsSheet()" class="w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-ios-blue dark:text-flash active:scale-95 spring-transition" title="Checklist Options">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
             </button>
           </div>
@@ -262,15 +306,27 @@
             </div>
           </div>
 
-          <!-- Context Bar: Travel Laundry Toggle OR Routine Reset / Google Cal -->
-          <div class="mt-3 pt-3 hairline-t flex items-center justify-between gap-2 text-[12px] text-ios-gray">
+          <!-- Context Bar: Travel Laundry Toggle OR Routine Google Calendar Reminder Bar -->
+          <div id="detail-trip-context-bar" class="mt-3 pt-3 hairline-t flex items-center justify-between text-[12px] text-ios-gray">
             <span id="detail-smart-text" class="truncate font-medium">Smart Context Active</span>
+            <button onclick="toggleLaundryMode()" id="detail-laundry-btn" class="shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue dark:text-flash active:scale-95 spring-transition">
+              Laundry: Off
+            </button>
+          </div>
+
+          <div id="detail-routine-context-bar" class="hidden mt-3 pt-3 hairline-t flex items-center justify-between gap-2 text-[12px]">
+            <button onclick="openReminderModal()" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-gray-800 dark:text-gray-200 font-semibold active:scale-95 spring-transition truncate">
+              <span>⏰</span>
+              <span id="detail-reminder-label" class="truncate">Set Reminder</span>
+            </button>
+
             <div class="flex items-center gap-1.5 shrink-0">
-              <button onclick="openGoogleCalForCurrent()" id="detail-gcal-btn" class="hidden px-2.5 py-1 rounded-full bg-flash/15 text-black dark:text-flash border border-flash/40 font-semibold active:scale-95 spring-transition">
-                + Google Cal
+              <button onclick="syncCurrentRoutineToGoogleCal()" class="px-2.5 py-1.5 rounded-xl bg-flash text-black font-bold flex items-center gap-1 active:scale-95 spring-transition" title="Open in Google Calendar">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                <span>Google Cal</span>
               </button>
-              <button onclick="handleContextActionBtn()" id="detail-context-btn" class="px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue dark:text-flash active:scale-95 spring-transition">
-                Laundry: Off
+              <button onclick="uncheckAllCurrentTrip()" class="px-2.5 py-1.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-ios-blue dark:text-flash font-semibold active:scale-95 spring-transition" title="Reset Iterative List">
+                Reset
               </button>
             </div>
           </div>
@@ -284,7 +340,7 @@
         <div class="space-y-2.5">
           <div class="relative">
             <svg class="w-4 h-4 text-ios-gray absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-            <input id="search-input" oninput="handleSearch(this.value)" type="text" placeholder="Search items in this list..." class="w-full h-9 pl-9 pr-8 rounded-xl bg-black/[0.06] dark:bg-ios-darkCard text-[14px] placeholder-ios-gray focus:outline-none focus:ring-2 focus:ring-ios-blue/40 dark:focus:ring-flash/40" />
+            <input id="search-input" oninput="handleSearch(this.value)" type="text" placeholder="Filter items in this list..." class="w-full h-9 pl-9 pr-8 rounded-xl bg-black/[0.06] dark:bg-ios-darkCard text-[14px] placeholder-ios-gray focus:outline-none focus:ring-2 focus:ring-ios-blue/40 dark:focus:ring-flash/40" />
             <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-ios-gray hover:text-gray-900 dark:hover:text-white">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>
             </button>
@@ -293,7 +349,7 @@
           <div class="grid grid-cols-3 p-0.5 rounded-xl bg-black/[0.07] dark:bg-ios-darkCard text-[13px] font-semibold">
             <button onclick="setFilter('all')" id="filter-all" class="py-1.5 rounded-[10px] spring-transition">All</button>
             <button onclick="setFilter('remaining')" id="filter-remaining" class="py-1.5 rounded-[10px] spring-transition">Remaining</button>
-            <button onclick="setFilter('packed')" id="filter-packed" class="py-1.5 rounded-[10px] spring-transition">Completed</button>
+            <button onclick="setFilter('packed')" id="filter-packed" class="py-1.5 rounded-[10px] spring-transition">Done</button>
           </div>
         </div>
 
@@ -324,12 +380,12 @@
     <!-- ================= MODALS & BOTTOM SHEETS ================= -->
     <div id="sheet-backdrop" onclick="closeAllSheets()" class="hidden fixed inset-0 bg-black/50 backdrop-blur-[2px] z-40 transition-opacity"></div>
 
-    <!-- Vault Settings & Full Backup Sheet -->
+    <!-- Vault Settings & Full JSON Backup/Import Sheet -->
     <div id="sheet-vault-settings" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <h3 class="text-[17px] font-bold text-center mb-5">Vault Settings & Backup</h3>
 
-      <div class="space-y-3">
+      <div class="space-y-3.5">
         <div class="bg-black/[0.04] dark:bg-white/[0.07] rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 rounded-full bg-black/10 dark:bg-white/20 flex items-center justify-center text-gray-800 dark:text-white">
@@ -343,7 +399,7 @@
           </div>
         </div>
 
-        <button onclick="exportFullVaultBackup()" class="w-full bg-black/[0.04] dark:bg-white/[0.07] rounded-2xl p-4 flex items-center justify-between active:scale-[0.98] spring-transition">
+        <button onclick="exportTripsBackup()" class="w-full bg-black/[0.04] dark:bg-white/[0.07] rounded-2xl p-4 flex items-center justify-between active:scale-[0.98] spring-transition">
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 rounded-full bg-ios-blue/10 dark:bg-flash/15 flex items-center justify-center text-ios-blue dark:text-flash">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
@@ -355,15 +411,15 @@
           </div>
         </button>
 
-        <input type="file" id="import-file-input" accept=".json" class="hidden" onchange="handleImportJson(event)" />
+        <input type="file" id="import-file-input" accept=".json" class="hidden" onchange="handleImportTrips(event)" />
         <button onclick="document.getElementById('import-file-input').click()" class="w-full bg-black/[0.04] dark:bg-white/[0.07] rounded-2xl p-4 flex items-center justify-between active:scale-[0.98] spring-transition">
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 rounded-full bg-ios-blue/10 dark:bg-flash/15 flex items-center justify-center text-ios-blue dark:text-flash">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
             </div>
             <div class="text-left">
-              <span class="block text-[15px] font-medium">Import Checklist or Vault File</span>
-              <span class="block text-[12px] text-ios-gray">Works with single-trip shares or full backups</span>
+              <span class="block text-[15px] font-medium">Import Checklist or Backup</span>
+              <span class="block text-[12px] text-ios-gray">Works with single exported lists or full backups</span>
             </div>
           </div>
         </button>
@@ -371,7 +427,7 @@
       <button onclick="closeAllSheets()" class="w-full mt-4 py-3 rounded-xl bg-black/[0.06] dark:bg-white/[0.1] text-[15px] font-semibold">Close</button>
     </div>
 
-    <!-- 1A. New Smart Trip Sheet -->
+    <!-- 1A. New Trip Sheet -->
     <div id="sheet-new-trip" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20 max-h-[90vh] overflow-y-auto">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <div class="flex items-center justify-between mb-4">
@@ -406,7 +462,7 @@
             <div class="hairline-t pt-3 flex items-center justify-between">
               <div>
                 <span class="text-[14px] font-medium text-gray-700 dark:text-gray-200 block">Duration</span>
-                <span id="computed-date-range" class="text-[12px] text-ios-gray tabular-nums">Oct 23 – Oct 30</span>
+                <span id="computed-date-range" class="text-[12px] text-ios-gray tabular-nums"></span>
               </div>
               <div class="flex items-center gap-2 bg-white dark:bg-ios-darkCard px-2 py-1 rounded-xl">
                 <button type="button" onclick="adjustNewTripNights(-1)" class="w-7 h-7 rounded-lg bg-black/[0.05] dark:bg-white/[0.1] font-bold text-[16px] flex items-center justify-center active:scale-90">−</button>
@@ -418,7 +474,7 @@
         </div>
 
         <div class="rounded-xl bg-flash/15 border border-flash/30 px-3.5 py-2.5 flex items-center justify-between text-[12px]">
-          <span id="smart-preview-text" class="font-medium text-gray-800 dark:text-flash">⚡ Smart Engine: 7 Nights • Mild Climate • EU Plug</span>
+          <span id="smart-preview-text" class="font-medium text-gray-800 dark:text-flash">⚡ Smart Engine Ready</span>
         </div>
 
         <div>
@@ -452,44 +508,35 @@
       <div class="space-y-4">
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Title</label>
-          <input id="new-routine-title" type="text" placeholder="e.g., Gym Bag, Weekly Groceries, Birthday Party" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-flash" />
-
-          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2">
-            <span class="text-[11px] font-semibold text-ios-gray shrink-0 mr-1">Templates:</span>
-            <button type="button" onclick="pickRoutineTemplate('Gym & Workout Bag', 'gym', 'Iterative • Daily/Gym')" class="shrink-0 text-[12px] font-medium px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] hover:bg-flash hover:text-black transition">🏋️ Gym Bag</button>
-            <button type="button" onclick="pickRoutineTemplate('Weekly Grocery Run', 'shopping', 'Iterative • Weekly')" class="shrink-0 text-[12px] font-medium px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] hover:bg-flash hover:text-black transition">🛒 Groceries</button>
-            <button type="button" onclick="pickRoutineTemplate('Birthday Party Prep', 'party', 'Timebound Event')" class="shrink-0 text-[12px] font-medium px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] hover:bg-flash hover:text-black transition">🎉 Birthday Party</button>
-            <button type="button" onclick="pickRoutineTemplate('Room Decor & Setup', 'decor', 'Project Checklist')" class="shrink-0 text-[12px] font-medium px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1] hover:bg-flash hover:text-black transition">✨ Room Decor</button>
-          </div>
+          <input id="new-routine-name" type="text" placeholder="e.g., Gym Bag, Weekly Groceries, Birthday Party" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none focus:ring-2 focus:ring-flash" />
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Starter Template</label>
             <select id="new-routine-template" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none">
-              <option value="gym">Gym & Fitness Bag</option>
-              <option value="shopping">Grocery & Mall Run</option>
-              <option value="party">Birthday / Event Prep</option>
-              <option value="decor">Room Decor & DIY</option>
+              <option value="gym">Gym & Workout Bag</option>
+              <option value="groceries">Shopping & Groceries</option>
+              <option value="party">Birthday Party Prep</option>
+              <option value="decor">Room Decor Project</option>
+              <option value="errands">Daily Errands Run</option>
               <option value="blank">Blank List</option>
             </select>
           </div>
           <div>
-            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Cadence / Tag</label>
-            <input id="new-routine-cadence" type="text" value="Iterative Routine" placeholder="e.g., Every Mon/Wed" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none" />
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Cadence / Type</label>
+            <select id="new-routine-cadence" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none">
+              <option value="Iterative Routine">Iterative Routine</option>
+              <option value="Weekly Errand">Weekly Errand</option>
+              <option value="Timebound Project">Timebound Event</option>
+              <option value="Shopping List">Shopping List</option>
+            </select>
           </div>
         </div>
 
-        <!-- Optional Reminder & Google Calendar Sync -->
         <div>
-          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Optional Target Date & Reminder</label>
-          <div class="rounded-2xl bg-black/[0.05] dark:bg-white/[0.08] p-3.5 flex items-center justify-between gap-2">
-            <div>
-              <span class="text-[14px] font-medium block">Due / Alert Time</span>
-              <span class="text-[11px] text-ios-gray">Enables live badge & 1-tap Google Cal</span>
-            </div>
-            <input id="new-routine-reminder" type="datetime-local" class="h-9 px-2.5 rounded-lg bg-white dark:bg-ios-darkCard text-[13px] font-semibold tabular-nums focus:outline-none" />
-          </div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Optional Reminder / Target Time (Google Cal Ready)</label>
+          <input id="new-routine-reminder" type="datetime-local" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] tabular-nums focus:outline-none focus:ring-2 focus:ring-flash" />
         </div>
 
         <div>
@@ -499,7 +546,7 @@
       </div>
     </div>
 
-    <!-- Reminder & Google Calendar Deep-Link Sheet -->
+    <!-- 1C. Edit Reminder & Google Calendar Sync Sheet -->
     <div id="sheet-reminder" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <div class="flex items-center justify-between mb-4">
@@ -509,18 +556,18 @@
       </div>
 
       <div class="space-y-4">
-        <div class="rounded-2xl bg-black/[0.05] dark:bg-white/[0.08] p-4 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-[14px] font-semibold">Target Date & Time</span>
-            <button onclick="clearReminderTime()" class="text-[12px] text-ios-red font-semibold">Clear</button>
-          </div>
-          <input id="edit-reminder-input" type="datetime-local" class="w-full h-11 px-3 rounded-xl bg-white dark:bg-ios-darkCard text-[15px] font-semibold tabular-nums focus:outline-none" />
-          <p class="text-[12px] text-ios-gray">Displays a live countdown pill on your card and formats your remaining items for Google Calendar.</p>
+        <div>
+          <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Target Date & Time</label>
+          <input id="edit-reminder-input" type="datetime-local" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] tabular-nums focus:outline-none focus:ring-2 focus:ring-flash" />
         </div>
 
-        <button onclick="saveAndOpenGoogleCal()" class="w-full py-3.5 px-4 rounded-2xl bg-flash text-black font-bold text-[15px] flex items-center justify-center gap-2 flash-glow active:scale-[0.99] spring-transition">
+        <button onclick="saveAndSyncGoogleCal()" class="w-full py-3.5 px-4 rounded-2xl bg-flash text-black font-bold text-[15px] flex items-center justify-center gap-2 flash-glow active:scale-95 spring-transition">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
-          <span>Open in Google Calendar App</span>
+          <span>Save & Open in Google Calendar</span>
+        </button>
+
+        <button onclick="clearReminderTime()" class="w-full py-2.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] font-semibold text-ios-red">
+          Clear Reminder
         </button>
       </div>
     </div>
@@ -537,7 +584,7 @@
       <div class="space-y-4">
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Item Name</label>
-          <input id="sheet-item-name" type="text" placeholder="e.g., Protein Shaker, Balloons, Chargers" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none" />
+          <input id="sheet-item-name" type="text" placeholder="e.g., Protein Shaker, Balloons, Adapter" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none" />
         </div>
         <div class="grid grid-cols-3 gap-3">
           <div class="col-span-2">
@@ -545,14 +592,14 @@
             <select id="sheet-item-category" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[14px] focus:outline-none"></select>
           </div>
           <div>
-            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Quantity</label>
+            <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Qty</label>
             <input id="sheet-item-qty" type="number" min="1" max="99" value="1" class="w-full h-11 px-3 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] text-center font-semibold tabular-nums focus:outline-none" />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 3. New Section / Category Sheet -->
+    <!-- 3. New Category / Section Sheet -->
     <div id="sheet-new-category" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <div class="flex items-center justify-between mb-4">
@@ -564,15 +611,15 @@
       <div class="space-y-4">
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Section Title</label>
-          <input id="new-cat-title" type="text" placeholder="e.g., Gym Locker, Produce, Party Decor" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none" />
+          <input id="new-cat-title" type="text" placeholder="e.g., Produce, Gym Gear, Pre-Flight" class="w-full h-11 px-3.5 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] focus:outline-none" />
         </div>
         <div>
           <label class="block text-[12px] font-semibold uppercase tracking-wider text-ios-gray mb-1.5">Quick Suggestions</label>
           <div class="flex flex-wrap gap-1.5">
             <button type="button" onclick="fillCatSuggestion('Pre-Flight Tasks', 'airplane')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Pre-Flight Tasks</button>
-            <button type="button" onclick="fillCatSuggestion('Produce & Fresh', 'cart')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Produce & Fresh</button>
-            <button type="button" onclick="fillCatSuggestion('Decor & Lighting', 'sparkles')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Decor & Lighting</button>
-            <button type="button" onclick="fillCatSuggestion('Gym Essentials', 'dumbbell')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Gym Essentials</button>
+            <button type="button" onclick="fillCatSuggestion('Workout Gear', 'bolt')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Workout Gear</button>
+            <button type="button" onclick="fillCatSuggestion('Party Supplies', 'sparkles')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Party Supplies</button>
+            <button type="button" onclick="fillCatSuggestion('Fresh Produce', 'heart')" class="text-[12px] px-2.5 py-1 rounded-full bg-black/[0.06] dark:bg-white/[0.1]">Fresh Produce</button>
           </div>
         </div>
         <div>
@@ -586,34 +633,1187 @@
     <div id="sheet-presets" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20 max-h-[85vh] overflow-y-auto">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <div class="flex items-center justify-between mb-3">
-        <h3 class="text-[17px] font-bold">Preset Packs</h3>
+        <h3 class="text-[17px] font-bold">Specialty Preset Packs</h3>
         <button onclick="closeAllSheets()" class="text-ios-blue dark:text-flash text-[15px] font-semibold">Done</button>
       </div>
-      <p class="text-[13px] text-ios-gray mb-4">Tap any pack to append its items into your active checklist.</p>
+      <p class="text-[13px] text-ios-gray mb-4">Tap any pack to append its items directly into this checklist.</p>
       <div id="presets-list" class="space-y-2.5"></div>
     </div>
 
-    <!-- 5. Checklist Options Action Sheet (With Individual Export!) -->
+    <!-- 5. Checklist Options Action Sheet (Includes Individual JSON Export) -->
     <div id="sheet-trip-options" class="hidden fixed bottom-0 w-full max-w-[460px] z-50 ios-sheet-glass rounded-t-3xl p-5 shadow-2xl border-t border-white/20">
       <div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
       <h3 id="options-trip-title" class="text-[15px] font-bold text-center text-ios-gray mb-4 truncate">Checklist Options</h3>
       <div class="space-y-2">
-        <!-- Individual Trip/Routine JSON Export -->
-        <button onclick="exportCurrentChecklist()" class="w-full py-3 px-4 rounded-xl bg-flash/15 text-black dark:text-flash border border-flash/30 text-[15px] font-bold text-left flex items-center justify-between">
+        <!-- Individual Trip / Routine JSON Export -->
+        <button onclick="exportCurrentChecklist()" class="w-full py-3 px-4 rounded-xl bg-flash/15 text-black dark:text-flash text-[15px] font-bold text-left flex items-center justify-between border border-flash/30">
           <span>Export This Checklist (.json)</span>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
         </button>
 
-        <button onclick="openReminderSheet()" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
-          <span>Set Reminder / Sync to Google Cal</span>
-          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
+        <button onclick="syncCurrentRoutineToGoogleCal()" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
+          <span>Add Remaining Items to Google Calendar</span>
+          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75"/></svg>
         </button>
 
         <button onclick="uncheckAllCurrentTrip()" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
-          <span>Uncheck All Items (Reset Progress)</span>
+          <span>Reset All Items (Uncheck All)</span>
           <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
         </button>
 
         <button onclick="duplicateCurrentTrip()" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
           <span>Duplicate Checklist</span>
-          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.
+          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg>
+        </button>
+
+        <button onclick="toggleArchiveCurrentTrip()" id="btn-toggle-archive" class="w-full py-3 px-4 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-[15px] font-medium text-left flex items-center justify-between">
+          <span>Archive Checklist</span>
+          <svg class="w-5 h-5 text-ios-gray" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+        </button>
+
+        <button onclick="deleteCurrentTrip()" class="w-full py-3 px-4 rounded-xl bg-ios-red/10 text-ios-red text-[15px] font-semibold text-left flex items-center justify-between">
+          <span>Delete Permanently</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+        </button>
+      </div>
+      <button onclick="closeAllSheets()" class="w-full mt-3 py-3 rounded-xl bg-black/[0.06] dark:bg-white/[0.1] text-[15px] font-semibold">Cancel</button>
+    </div>
+
+  </div>
+
+  <script>
+    // ================= SF-SYMBOL MONOCHROME VECTOR LIBRARY =================
+    const ICONS = {
+      airplane: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>`,
+      suitcase: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`,
+      passport: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"/></svg>`,
+      tshirt: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3.75L3 6.75l2.25 3 2.25-1.5v11.25h9V8.25l2.25 1.5 2.25-3-3.75-3h-2.25a3 3 0 01-6 0H6.75z"/></svg>`,
+      sparkles: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>`,
+      bolt: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>`,
+      shield: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>`,
+      sun: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>`,
+      moon: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>`,
+      snow: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18l-3 3m3-3l3 3m-3 15l-3-3m3 3l3-3M4.2 7.5l15.6 9M4.2 7.5l3.9-.6M4.2 7.5l.6 3.9m15-2.9l-3.9.6m3.9-.6l-.6-3.9M19.8 7.5l-15.6 9"/></svg>`,
+      mountain: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 20.25h18L14.25 6.75l-3.75 6-2.25-3L3 20.25z"/></svg>`,
+      camera: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/></svg>`,
+      car: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>`,
+      paw: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 13.5c-2.485 0-4.5 1.79-4.5 4s2.015 4 4.5 4 4.5-1.79 4.5-4-2.015-4-4.5-4zm-5.25-3a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm10.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-7.5-3.75a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm4.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>`,
+      briefcase: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>`,
+      heart: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>`
+    };
+
+    const PRESET_PACKS = [
+      { id: 'business', name: 'Business & Conference', icon: 'briefcase', categoryTitle: 'Business Gear', items: ['Tailored Blazer', 'Dress Shirts', 'Laptop & GaN Charger', 'USB-C HDMI Dongle', 'Portable Travel Steamer', 'Business Cards'] },
+      { id: 'photography', name: 'Photography & Creator', icon: 'camera', categoryTitle: 'Camera & Tech', items: ['Mirrorless Camera Body', 'Extra SD Cards (128GB)', 'Spare Camera Batteries & Charger', 'Variable ND Filter', 'Compact Travel Tripod', 'SSD Backup Drive'] },
+      { id: 'family', name: 'Family & Kids Gear', icon: 'heart', categoryTitle: 'Kids & Family', items: ['Kid Headphones & iPad', 'Wet Wipes & Hand Sanitizer', 'Favourite Snacks & Sippy Cups', 'Children First Aid & Calpol', 'Change of Clothes (Extra)'] },
+      { id: 'longhaul', name: 'International Long-Haul', icon: 'airplane', categoryTitle: 'Flight Comfort', items: ['Compression Flight Socks', 'Silk Eye Mask & Earplugs', 'Melatonin / Sleep Aid', 'Inflatable Neck Pillow', 'Pen for Customs Forms'] },
+      { id: 'beach', name: 'Beach & Resort Getaway', icon: 'sun', categoryTitle: 'Beach & Pool', items: ['Swimsuit / Trunks', 'Polarized Sunglasses', 'Reef-Safe Sunscreen SPF 50', 'Flip-Flops / Sandals', 'Packable Beach Towel'] },
+      { id: 'winter', name: 'Winter & Alpine Warmers', icon: 'snow', categoryTitle: 'Winter Gear', items: ['Thermal Base Layers', 'Insulated Down Jacket', 'Touchscreen Gloves', 'Merino Wool Beanie', 'Lip Balm & Moisturizer'] },
+      { id: 'safety', name: 'Home Safety Departure Checks', icon: 'shield', categoryTitle: 'Home & Safety Checks', items: ['Lock all windows & patio doors', 'Unplug non-essential appliances', 'Empty kitchen & bathroom bins', 'Set thermostat to Eco / Away', 'Turn off main water valve'] }
+    ];
+
+    // ================= ROUTINE & PROJECT TEMPLATES =================
+    function generateRoutineCategories(templateKey) {
+      if (templateKey === 'gym') {
+        return [
+          {
+            id: 'rc-gym-1', title: 'Workout Essentials', icon: 'bolt', collapsed: false,
+            items: [
+              { id: 'rg-1', name: 'Training Shoes & Athletic Socks', qty: 1, packed: false },
+              { id: 'rg-2', name: 'Workout Shorts / Leggings & Top', qty: 1, packed: false },
+              { id: 'rg-3', name: 'Microfiber Gym Towel', qty: 1, packed: false },
+              { id: 'rg-4', name: 'Insulated Water Bottle / Shaker', qty: 1, packed: false },
+              { id: 'rg-5', name: 'Wireless Earbuds & Gym Lock', qty: 1, packed: false }
+            ]
+          },
+          {
+            id: 'rc-gym-2', title: 'Post-Workout & Shower', icon: 'sparkles', collapsed: false,
+            items: [
+              { id: 'rg-6', name: 'Deodorant & Body Wash', qty: 1, packed: false },
+              { id: 'rg-7', name: 'Clean Change of Underwear', qty: 1, packed: false },
+              { id: 'rg-8', name: 'Post-Workout Protein / Electrolytes', qty: 1, packed: false }
+            ]
+          }
+        ];
+      }
+      if (templateKey === 'groceries') {
+        return [
+          {
+            id: 'rc-gro-1', title: 'Fresh Produce & Dairy', icon: 'heart', collapsed: false,
+            items: [
+              { id: 'rgr-1', name: 'Avocados, Spinach & Berries', qty: 1, packed: false },
+              { id: 'rgr-2', name: 'Free-Range Eggs & Milk / Oat Milk', qty: 1, packed: false },
+              { id: 'rgr-3', name: 'Greek Yogurt & Cheese', qty: 1, packed: false }
+            ]
+          },
+          {
+            id: 'rc-gro-2', title: 'Pantry & Household', icon: 'suitcase', collapsed: false,
+            items: [
+              { id: 'rgr-4', name: 'Sourdough Bread & Olive Oil', qty: 1, packed: false },
+              { id: 'rgr-5', name: 'Coffee Beans & Sparkling Water', qty: 1, packed: false },
+              { id: 'rgr-6', name: 'Reusable Shopping Bags in Car', qty: 2, packed: true }
+            ]
+          }
+        ];
+      }
+      if (templateKey === 'party') {
+        return [
+          {
+            id: 'rc-par-1', title: 'Decorations & Setup', icon: 'sparkles', collapsed: false,
+            items: [
+              { id: 'rp-1', name: 'Helium Balloons & Number Banner', qty: 1, packed: false },
+              { id: 'rp-2', name: 'Birthday Candles & Lighter', qty: 1, packed: false },
+              { id: 'rp-3', name: 'Tablecloth, Plates & Napkins', qty: 1, packed: false },
+              { id: 'rp-4', name: 'Bluetooth Speaker & Party Playlist', qty: 1, packed: false }
+            ]
+          },
+          {
+            id: 'rc-par-2', title: 'Food, Cake & Drinks', icon: 'heart', collapsed: false,
+            items: [
+              { id: 'rp-5', name: 'Pick up Birthday Cake', qty: 1, packed: false },
+              { id: 'rp-6', name: 'Chilled Drinks, Ice & Glasses', qty: 2, packed: false },
+              { id: 'rp-7', name: 'Finger Food & Savoury Platters', qty: 1, packed: false }
+            ]
+          }
+        ];
+      }
+      if (templateKey === 'decor') {
+        return [
+          {
+            id: 'rc-dec-1', title: 'Measurements & Prep', icon: 'briefcase', collapsed: false,
+            items: [
+              { id: 'rd-1', name: 'Measure wall width & window drop', qty: 1, packed: false },
+              { id: 'rd-2', name: 'Painter Tape, Spirit Level & Drill', qty: 1, packed: false },
+              { id: 'rd-3', name: 'Test paint swatches in daylight', qty: 1, packed: false }
+            ]
+          },
+          {
+            id: 'rc-dec-2', title: 'Furnishings & Lighting', icon: 'sun', collapsed: false,
+            items: [
+              { id: 'rd-4', name: 'Warm 2700K Smart Bulbs & Floor Lamp', qty: 2, packed: false },
+              { id: 'rd-5', name: 'Area Rug, Cushions & Throw Blanket', qty: 1, packed: false },
+              { id: 'rd-6', name: 'Wall Frames & Command Strips', qty: 4, packed: false }
+            ]
+          }
+        ];
+      }
+      if (templateKey === 'errands') {
+        return [
+          {
+            id: 'rc-err-1', title: 'Town & Mall Run', icon: 'car', collapsed: false,
+            items: [
+              { id: 're-1', name: 'Drop off dry cleaning / parcels', qty: 1, packed: false },
+              { id: 're-2', name: 'Pick up pharmacy prescription', qty: 1, packed: false },
+              { id: 're-3', name: 'Return online shopping package', qty: 1, packed: false }
+            ]
+          }
+        ];
+      }
+      return [{ id: 'rc-blank-' + Date.now(), title: 'Checklist Items', icon: 'bolt', collapsed: false, items: [] }];
+    }
+
+    // ================= TRAVEL SMART ENGINE =================
+    function generateSmartCategories(nights, climate, plugType, profile) {
+      const n = Math.max(1, nights || 5);
+      const underwearQty = n + 1;
+      const topsQty = Math.max(2, Math.min(10, Math.ceil(n / 1.5)));
+      const bottomsQty = Math.max(1, Math.min(5, Math.ceil(n / 2.5)));
+
+      let clothingItems = [
+        { id: 'cl-1', name: 'T-Shirts & Casual Tops', qty: topsQty, packed: false },
+        { id: 'cl-2', name: 'Underwear & Socks', qty: underwearQty, packed: false },
+        { id: 'cl-3', name: 'Trousers / Shorts / Skirts', qty: bottomsQty, packed: false },
+        { id: 'cl-4', name: 'Comfortable Walking Shoes', qty: 1, packed: false },
+        { id: 'cl-5', name: 'Sleepwear / Loungewear', qty: Math.max(1, Math.floor(n / 3)), packed: false }
+      ];
+
+      if (climate === 'cold') {
+        clothingItems.push(
+          { id: 'cc-1', name: 'Thermal Base Layer Tops & Bottoms', qty: Math.max(2, Math.floor(n / 3)), packed: false },
+          { id: 'cc-2', name: 'Insulated Down Jacket / Parka', qty: 1, packed: false },
+          { id: 'cc-3', name: 'Windproof Gloves & Beanie', qty: 1, packed: false },
+          { id: 'cc-4', name: 'Wool / Thermal Socks', qty: Math.max(2, Math.floor(n / 2)), packed: false }
+        );
+      } else if (climate === 'hot') {
+        clothingItems.push(
+          { id: 'ch-1', name: 'Breathable Linen / Summer Tops', qty: Math.max(2, Math.floor(n / 2)), packed: false },
+          { id: 'ch-2', name: 'Polarized Sunglasses & Sun Hat', qty: 1, packed: false },
+          { id: 'ch-3', name: 'Sunscreen SPF 50 & Aftersun', qty: 1, packed: false }
+        );
+      } else {
+        clothingItems.push(
+          { id: 'cm-1', name: 'Light Weatherproof Jacket / Shell', qty: 1, packed: false },
+          { id: 'cm-2', name: 'Layering Sweater / Cardigan', qty: 1, packed: false }
+        );
+      }
+
+      if (n >= 7) clothingItems.push({ id: 'cl-laundry', name: 'Foldable Laundry Bag & Detergent Sheets', qty: 1, packed: false });
+
+      let essentialsItems = [
+        { id: 'es-1', name: 'Passport / Government ID', qty: 1, packed: true },
+        { id: 'es-2', name: 'Boarding Passes & Wallet', qty: 1, packed: true },
+        { id: 'es-3', name: 'Travel Insurance & Bookings', qty: 1, packed: false },
+        { id: 'es-4', name: 'House Keys & AirTag', qty: 1, packed: false }
+      ];
+
+      let adapterName = 'Universal Travel Adapter';
+      if (plugType === 'US') adapterName = 'Type A/B Plug Adapter (US / Japan)';
+      else if (plugType === 'EU') adapterName = 'Type C/E European Plug Adapter';
+      else if (plugType === 'UK') adapterName = 'Type G UK Plug (Domestic)';
+
+      let electronicsItems = [
+        { id: 'el-1', name: 'Phone & USB-C Fast Charger', qty: 1, packed: false },
+        { id: 'el-2', name: adapterName, qty: 1, packed: false },
+        { id: 'el-3', name: 'Portable Power Bank', qty: 1, packed: false },
+        { id: 'el-4', name: 'Wireless Earbuds / Headphones', qty: 1, packed: false }
+      ];
+
+      let toiletriesItems = [
+        { id: 'to-1', name: 'Toothbrush & Toothpaste', qty: 1, packed: false },
+        { id: 'to-2', name: 'Deodorant & Skincare', qty: 1, packed: false },
+        { id: 'to-3', name: 'Personal Medications & First Aid', qty: 1, packed: false }
+      ];
+
+      let safetyItems = [
+        { id: 'sf-1', name: 'Lock all windows & patio doors', qty: 1, packed: false },
+        { id: 'sf-2', name: 'Unplug non-essential appliances', qty: 1, packed: false },
+        { id: 'sf-3', name: 'Empty kitchen & bathroom trash', qty: 1, packed: false }
+      ];
+
+      let cats = [
+        { id: 'cat-ess', title: 'Essentials & Documents', icon: 'passport', collapsed: false, items: essentialsItems },
+        { id: 'cat-clo', title: `Clothing (${n} Nights)`, icon: 'tshirt', collapsed: false, items: clothingItems },
+        { id: 'cat-ele', title: 'Electronics & Power', icon: 'bolt', collapsed: false, items: electronicsItems },
+        { id: 'cat-toi', title: 'Toiletries & Health', icon: 'sparkles', collapsed: false, items: toiletriesItems },
+        { id: 'cat-saf', title: 'Home & Safety Checks', icon: 'shield', collapsed: false, items: safetyItems }
+      ];
+
+      if (profile && profile !== 'standard' && profile !== 'blank') {
+        const p = PRESET_PACKS.find(x => x.id === profile);
+        if (p) cats.push({ id: 'cat-prof', title: p.categoryTitle, icon: p.icon, collapsed: false, items: p.items.map((name, i) => ({ id: `p-${i}`, name, qty: 1, packed: false })) });
+      }
+
+      return cats;
+    }
+
+    function getOfflineClimateAndPlug(destination) {
+      const q = (destination || '').toLowerCase();
+      let climate = 'mild';
+      let plug = 'EU';
+
+      if (q.includes('tokyo') || q.includes('kyoto') || q.includes('japan') || q.includes('usa') || q.includes('new york') || q.includes('canada')) plug = 'US';
+      else if (q.includes('london') || q.includes('uk') || q.includes('england') || q.includes('dubai')) plug = 'UK';
+
+      if (q.includes('iceland') || q.includes('reykjavik') || q.includes('alps') || q.includes('switzerland') || q.includes('norway') || q.includes('winter')) climate = 'cold';
+      else if (q.includes('bali') || q.includes('bangkok') || q.includes('thailand') || q.includes('dubai') || q.includes('hawaii') || q.includes('miami')) climate = 'hot';
+
+      return { climate, plugType: plug };
+    }
+
+    async function resolveDestinationWeather(destination, nights, rangeLabel) {
+      const fallback = getOfflineClimateAndPlug(destination);
+      const n = Math.max(1, nights || 7);
+
+      if (!navigator.onLine || !destination.trim()) {
+        const cLabel = fallback.climate === 'cold' ? 'Cold' : fallback.climate === 'hot' ? 'Warm' : 'Mild';
+        return { nights: n, climate: fallback.climate, plugType: fallback.plugType, summary: `${n} Nights (${rangeLabel}) • ${cLabel} • ${fallback.plugType} Plug` };
+      }
+
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2200);
+        const cleanCity = destination.split(',')[0].trim();
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleanCity)}&count=1`, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        const geoData = await geoRes.json();
+
+        if (!geoData.results || geoData.results.length === 0) {
+          const cLabel = fallback.climate === 'cold' ? 'Cold' : fallback.climate === 'hot' ? 'Warm' : 'Mild';
+          return { nights: n, climate: fallback.climate, plugType: fallback.plugType, summary: `${n} Nights (${rangeLabel}) • ${cLabel} • ${fallback.plugType} Plug` };
+        }
+
+        const loc = geoData.results[0];
+        const countryCode = loc.country_code ? loc.country_code.toUpperCase() : '';
+
+        let plug = fallback.plugType;
+        if (['US', 'CA', 'JP', 'MX', 'TW', 'TH'].includes(countryCode)) plug = 'US';
+        else if (['GB', 'IE', 'CY', 'MT', 'HK', 'SG', 'AE', 'MY'].includes(countryCode)) plug = 'UK';
+        else plug = 'EU';
+
+        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&daily=temperature_2m_max&timezone=auto`);
+        const weatherData = await weatherRes.json();
+
+        let avgTemp = 19;
+        if (weatherData.daily && Array.isArray(weatherData.daily.temperature_2m_max)) {
+          const temps = weatherData.daily.temperature_2m_max.filter(t => t != null);
+          if (temps.length > 0) avgTemp = temps.reduce((a, b) => a + b, 0) / temps.length;
+        }
+
+        let climate = 'mild';
+        if (avgTemp < 12) climate = 'cold';
+        else if (avgTemp > 24) climate = 'hot';
+
+        return { nights: n, climate, plugType: plug, summary: `${n} Nights (${rangeLabel}) • ~${Math.round(avgTemp)}°C • ${plug} Plug` };
+      } catch (e) {
+        return { nights: n, climate: fallback.climate, plugType: fallback.plugType, summary: `${n} Nights (${rangeLabel}) • ${fallback.plugType} Plug` };
+      }
+    }
+
+    // ================= INITIAL DEFAULT DATA =================
+    const DEFAULT_TRIPS = [
+      {
+        id: 'trip-kyoto',
+        type: 'trip',
+        name: "Kyoto & Tokyo '26",
+        dates: '10 Nights (Nov 8 – Nov 18) • ~14°C • US Plug',
+        destination: 'Kyoto',
+        nights: 10,
+        laundryMode: false,
+        icon: 'airplane',
+        archived: false,
+        categories: generateSmartCategories(10, 'mild', 'US', 'standard')
+      },
+      {
+        id: 'routine-gym',
+        type: 'routine',
+        name: 'Gym & Strength Session',
+        dates: 'Iterative Routine • Quick Reset',
+        reminderAt: '',
+        icon: 'bolt',
+        archived: false,
+        categories: generateRoutineCategories('gym')
+      },
+      {
+        id: 'routine-party',
+        type: 'routine',
+        name: 'Birthday Party Planning',
+        dates: 'Timebound Event',
+        reminderAt: new Date(Date.now() + 86400000 * 2).toISOString().slice(0, 16),
+        icon: 'sparkles',
+        archived: false,
+        categories: generateRoutineCategories('party')
+      }
+    ];
+
+    const STORAGE_KEY = 'apple_trips_vault_v5';
+    const THEME_KEY = 'apple_trips_theme_v5';
+
+    let state = {
+      trips: [],
+      activeWorkspace: 'trips', // 'trips' | 'routines'
+      currentTripId: null,
+      filter: 'all',
+      search: '',
+      globalSearch: '',
+      selectedNewTripIcon: 'airplane',
+      selectedNewRoutineIcon: 'bolt',
+      selectedNewCatIcon: 'sparkles',
+      newTripNights: 7
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('apple_trips_vault_v4');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed.trips) && parsed.trips.length > 0) {
+            state.trips = parsed.trips.map(t => ({ ...t, type: t.type || 'trip' }));
+            // Seed default routines if upgrading from v4
+            if (!state.trips.some(t => t.type === 'routine')) {
+              state.trips.push(...JSON.parse(JSON.stringify(DEFAULT_TRIPS.filter(d => d.type === 'routine'))));
+            }
+          } else {
+            state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
+          }
+        } else {
+          state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
+        }
+      } catch (e) {
+        state.trips = JSON.parse(JSON.stringify(DEFAULT_TRIPS));
+      }
+
+      const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      const toggleSwitch = document.getElementById('theme-toggle-switch');
+      if (toggleSwitch) toggleSwitch.checked = (savedTheme === 'dark');
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ trips: state.trips }));
+    }
+
+    function getCurrentTrip() {
+      return state.trips.find(t => t.id === state.currentTripId) || null;
+    }
+
+    function getTripStats(trip) {
+      let total = 0, packed = 0;
+      trip.categories.forEach(c => {
+        c.items.forEach(item => { total += 1; if (item.packed) packed += 1; });
+      });
+      return { total, packed, pct: total === 0 ? 0 : Math.round((packed / total) * 100) };
+    }
+
+    function toggleThemeSwitch() {
+      const isDark = document.getElementById('theme-toggle-switch').checked;
+      document.documentElement.classList.toggle('dark', isDark);
+      localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+    }
+
+    // ================= FLOATING DOCK & WORKSPACE SWITCHER =================
+    function switchWorkspaceTab(tab) {
+      state.activeWorkspace = tab;
+      const isTrips = tab === 'trips';
+
+      document.getElementById('vault-eyebrow').textContent = isTrips ? 'Smart Travel Vault' : 'Iterative Lists & Events';
+      document.getElementById('vault-title').textContent = isTrips ? 'My Trips' : 'Routines';
+      document.getElementById('vault-primary-cta-text').textContent = isTrips ? 'New Trip' : 'New Routine';
+
+      document.getElementById('tab-trips-body').classList.toggle('hidden', !isTrips);
+      document.getElementById('tab-routines-body').classList.toggle('hidden', isTrips);
+
+      const btnTrips = document.getElementById('dock-tab-trips');
+      const btnRoutines = document.getElementById('dock-tab-routines');
+
+      if (isTrips) {
+        btnTrips.className = 'px-4 py-2 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition bg-flash text-black shadow-sm';
+        btnRoutines.className = 'px-4 py-2 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition text-gray-600 dark:text-gray-300';
+      } else {
+        btnRoutines.className = 'px-4 py-2 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition bg-flash text-black shadow-sm';
+        btnTrips.className = 'px-4 py-2 rounded-full text-[14px] font-bold flex items-center gap-1.5 spring-transition text-gray-600 dark:text-gray-300';
+      }
+
+      renderVault();
+    }
+
+    function handlePrimaryCreate() {
+      if (state.activeWorkspace === 'trips') openNewTripSheet();
+      else openNewRoutineSheet();
+    }
+
+    // ================= DETACHED SEARCH ORB MORPH LOGIC =================
+    function openGlobalSearch() {
+      document.getElementById('dock-default-state').classList.add('hidden');
+      document.getElementById('dock-search-state').classList.remove('hidden');
+      setTimeout(() => document.getElementById('global-search-input').focus(), 60);
+    }
+
+    function closeGlobalSearch() {
+      state.globalSearch = '';
+      document.getElementById('global-search-input').value = '';
+      document.getElementById('global-search-banner').classList.add('hidden');
+      document.getElementById('dock-search-state').classList.add('hidden');
+      document.getElementById('dock-default-state').classList.remove('hidden');
+      renderVault();
+    }
+
+    function handleGlobalSearch(val) {
+      state.globalSearch = val.trim();
+      const banner = document.getElementById('global-search-banner');
+      if (state.globalSearch) {
+        banner.classList.remove('hidden');
+        document.getElementById('global-search-status').textContent = `Searching vault for "${state.globalSearch}"`;
+      } else {
+        banner.classList.add('hidden');
+      }
+      renderVault();
+    }
+
+    function matchesGlobalSearch(trip, q) {
+      if (!q) return true;
+      const lower = q.toLowerCase();
+      if ((trip.name || '').toLowerCase().includes(lower)) return true;
+      if ((trip.dates || '').toLowerCase().includes(lower)) return true;
+      return trip.categories.some(c =>
+        c.title.toLowerCase().includes(lower) ||
+        c.items.some(i => i.name.toLowerCase().includes(lower))
+      );
+    }
+
+    // ================= REMINDER FORMATTER & GOOGLE CALENDAR DEEP LINK =================
+    function formatReminderBadge(reminderAt) {
+      if (!reminderAt) return null;
+      const dt = new Date(reminderAt);
+      if (isNaN(dt.getTime())) return null;
+      const now = new Date();
+      const diffHours = (dt - now) / (1000 * 60 * 60);
+      const formatted = dt.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      const isUrgent = diffHours >= -2 && diffHours <= 24;
+      return { formatted, isUrgent };
+    }
+
+    function buildGoogleCalendarUrl(trip) {
+      const start = trip.reminderAt ? new Date(trip.reminderAt) : new Date(Date.now() + 3600000);
+      const validStart = isNaN(start.getTime()) ? new Date(Date.now() + 3600000) : start;
+      const end = new Date(validStart.getTime() + 60 * 60 * 1000);
+
+      const toGCalDate = (d) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+      const remainingLines = [];
+      trip.categories.forEach(c => {
+        const unchecked = c.items.filter(i => !i.packed);
+        if (unchecked.length > 0) {
+          remainingLines.push(`[${c.title}]`);
+          unchecked.forEach(i => remainingLines.push(`☐ ${i.name}${i.qty > 1 ? ' (x' + i.qty + ')' : ''}`));
+          remainingLines.push('');
+        }
+      });
+
+      const details = remainingLines.length > 0
+        ? `Checklist Items Remaining:\n\n${remainingLines.join('\n')}`
+        : `All items packed and ready!`;
+
+      const params = new URLSearchParams({
+        action: 'TEMPLATE',
+        text: `⚡ ${trip.name}`,
+        dates: `${toGCalDate(validStart)}/${toGCalDate(end)}`,
+        details
+      });
+
+      return `https://calendar.google.com/calendar/render?${params.toString()}`;
+    }
+
+    function syncCurrentRoutineToGoogleCal() {
+      const trip = getCurrentTrip();
+      if (!trip) return;
+      const url = buildGoogleCalendarUrl(trip);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      closeAllSheets();
+    }
+
+    function syncRoutineByIdToGoogleCal(event, tripId) {
+      event.stopPropagation();
+      const trip = state.trips.find(t => t.id === tripId);
+      if (!trip) return;
+      window.open(buildGoogleCalendarUrl(trip), '_blank', 'noopener,noreferrer');
+    }
+
+    function resetRoutineById(event, tripId) {
+      event.stopPropagation();
+      const trip = state.trips.find(t => t.id === tripId);
+      if (!trip) return;
+      trip.categories.forEach(c => c.items.forEach(i => (i.packed = false)));
+      saveState();
+      renderVault();
+    }
+
+    function openReminderModal() {
+      const trip = getCurrentTrip();
+      if (!trip) return;
+      const defaultTime = new Date(Date.now() + 3600000 * 3).toISOString().slice(0, 16);
+      document.getElementById('edit-reminder-input').value = trip.reminderAt || defaultTime;
+      document.getElementById('sheet-backdrop').classList.remove('hidden');
+      document.getElementById('sheet-reminder').classList.remove('hidden');
+    }
+
+    function saveReminderTime() {
+      const trip = getCurrentTrip();
+      if (!trip) return;
+      trip.reminderAt = document.getElementById('edit-reminder-input').value;
+      saveState();
+      closeAllSheets();
+      renderChecklistScreen();
+    }
+
+    function saveAndSyncGoogleCal() {
+      const trip = getCurrentTrip();
+      if (!trip) return;
+      trip.reminderAt = document.getElementById('edit-reminder-input').value;
+      saveState();
+      syncCurrentRoutineToGoogleCal();
+      renderChecklistScreen();
+    }
+
+    function clearReminderTime() {
+      const trip = getCurrentTrip();
+      if (!trip) return;
+      trip.reminderAt = '';
+      saveState();
+      closeAllSheets();
+      renderChecklistScreen();
+    }
+
+    // ================= NAVIGATION & RENDER VAULT =================
+    function openTrip(tripId) {
+      state.currentTripId = tripId;
+      state.filter = 'all';
+      state.search = '';
+      document.getElementById('search-input').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      document.getElementById('screen-vault').classList.add('hidden');
+      document.getElementById('screen-checklist').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      renderChecklistScreen();
+    }
+
+    function showVaultScreen() {
+      state.currentTripId = null;
+      document.getElementById('screen-checklist').classList.add('hidden');
+      document.getElementById('screen-vault').classList.remove('hidden');
+      renderVault();
+    }
+
+    function renderVault() {
+      renderTripsVault();
+      renderRoutinesVault();
+    }
+
+    function renderTripsVault() {
+      const activeList = document.getElementById('active-trips-list');
+      const archivedList = document.getElementById('archived-trips-list');
+      const q = state.globalSearch;
+
+      const allTrips = state.trips.filter(t => (t.type || 'trip') === 'trip' && matchesGlobalSearch(t, q));
+      const activeTrips = allTrips.filter(t => !t.archived);
+      const archivedTrips = allTrips.filter(t => t.archived);
+
+      document.getElementById('active-trips-count').textContent = `${activeTrips.length}`;
+      document.getElementById('archived-trips-count').textContent = `${archivedTrips.length}`;
+
+      if (activeTrips.length === 0) {
+        activeList.innerHTML = `<div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-6 text-center border border-black/[0.04] dark:border-white/[0.06]"><p class="text-[15px] font-semibold">No Matching Trips</p><p class="text-[13px] text-ios-gray mt-1">Tap "+ New Trip" in the top bar to build a smart packing list.</p></div>`;
+      } else {
+        activeList.innerHTML = activeTrips.map(trip => {
+          const { total, packed, pct } = getTripStats(trip);
+          const badge = pct === 100
+            ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-flash text-black">Ready</span>`
+            : `<span class="text-[13px] font-bold tabular-nums text-ios-blue dark:text-flash">${pct}%</span>`;
+          return `
+            <div onclick="openTrip('${trip.id}')" class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-4 shadow-sm border border-black/[0.04] dark:border-white/[0.06] active:scale-[0.99] spring-transition cursor-pointer">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-xl bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash flex items-center justify-center shrink-0">${ICONS[trip.icon] || ICONS.airplane}</div>
+                  <div class="min-w-0"><h3 class="text-[17px] font-bold tracking-tight truncate">${escapeHtml(trip.name)}</h3><p class="text-[12px] text-ios-gray truncate">${escapeHtml(trip.dates || 'Upcoming Trip')}</p></div>
+                </div>
+                ${badge}
+              </div>
+              <div class="mt-3.5 h-1.5 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden"><div class="h-full bg-ios-blue dark:bg-flash spring-transition rounded-full" style="width: ${pct}%"></div></div>
+              <div class="mt-2.5 flex items-center justify-between text-[12px] text-ios-gray"><span class="tabular-nums">${packed} of ${total} items packed</span><span class="text-ios-blue dark:text-flash font-semibold flex items-center gap-0.5">Open<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></span></div>
+            </div>`;
+        }).join('');
+      }
+
+      if (archivedTrips.length === 0) {
+        archivedList.innerHTML = `<div class="rounded-2xl p-4 text-center text-[13px] text-ios-gray border border-dashed border-black/10 dark:border-white/10">Completed trips you archive will appear here for one-tap reuse.</div>`;
+      } else {
+        archivedList.innerHTML = archivedTrips.map(trip => {
+          const { total } = getTripStats(trip);
+          return `
+            <div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-3.5 border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between gap-3">
+              <div onclick="openTrip('${trip.id}')" class="flex items-center gap-3 min-w-0 flex-1 cursor-pointer">
+                <div class="w-9 h-9 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-ios-gray flex items-center justify-center shrink-0">${ICONS[trip.icon] || ICONS.suitcase}</div>
+                <div class="min-w-0"><h4 class="text-[15px] font-semibold truncate">${escapeHtml(trip.name)}</h4><p class="text-[12px] text-ios-gray truncate tabular-nums">${total} items • ${escapeHtml(trip.dates || 'Archived')}</p></div>
+              </div>
+              <button onclick="duplicateTripById('${trip.id}')" class="shrink-0 px-3 py-1.5 rounded-full bg-flash text-black text-[12px] font-bold active:scale-95 spring-transition">Reuse</button>
+            </div>`;
+        }).join('');
+      }
+    }
+
+    function renderRoutinesVault() {
+      const activeList = document.getElementById('active-routines-list');
+      const archivedList = document.getElementById('archived-routines-list');
+      const q = state.globalSearch;
+
+      const allRoutines = state.trips.filter(t => t.type === 'routine' && matchesGlobalSearch(t, q));
+      const activeRoutines = allRoutines.filter(t => !t.archived);
+      const archivedRoutines = allRoutines.filter(t => t.archived);
+
+      document.getElementById('active-routines-count').textContent = `${activeRoutines.length}`;
+      document.getElementById('archived-routines-count').textContent = `${archivedRoutines.length}`;
+
+      if (activeRoutines.length === 0) {
+        activeList.innerHTML = `<div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-6 text-center border border-black/[0.04] dark:border-white/[0.06]"><p class="text-[15px] font-semibold">No Active Routines</p><p class="text-[13px] text-ios-gray mt-1">Tap a template chip above or "+ New Routine" to create a recurring checklist.</p></div>`;
+      } else {
+        activeList.innerHTML = activeRoutines.map(routine => {
+          const { total, packed, pct } = getTripStats(routine);
+          const rem = formatReminderBadge(routine.reminderAt);
+          const remBadge = rem
+            ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${rem.isUrgent ? 'bg-flash text-black' : 'bg-black/[0.06] dark:bg-white/[0.1] text-gray-700 dark:text-gray-200'}">⏰ ${escapeHtml(rem.formatted)}</span>`
+            : '';
+
+          return `
+            <div onclick="openTrip('${routine.id}')" class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-4 shadow-sm border border-black/[0.04] dark:border-white/[0.06] active:scale-[0.99] spring-transition cursor-pointer">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-xl bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash flex items-center justify-center shrink-0">${ICONS[routine.icon] || ICONS.bolt}</div>
+                  <div class="min-w-0">
+                    <h3 class="text-[17px] font-bold tracking-tight truncate">${escapeHtml(routine.name)}</h3>
+                    <p class="text-[12px] text-ios-gray truncate">${escapeHtml(routine.dates || 'Iterative Routine')}</p>
+                  </div>
+                </div>
+                <span class="text-[13px] font-bold tabular-nums text-ios-blue dark:text-flash">${pct}%</span>
+              </div>
+
+              <div class="mt-3.5 h-1.5 w-full bg-black/[0.06] dark:bg-white/[0.08] rounded-full overflow-hidden">
+                <div class="h-full bg-ios-blue dark:bg-flash spring-transition rounded-full" style="width: ${pct}%"></div>
+              </div>
+
+              <div class="mt-3 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5 min-w-0 truncate">
+                  <span class="text-[12px] text-ios-gray tabular-nums">${packed}/${total} done</span>
+                  ${remBadge}
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button onclick="resetRoutineById(event, '${routine.id}')" class="px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] text-[11px] font-semibold text-gray-700 dark:text-gray-200 active:scale-95">Reset</button>
+                  <button onclick="syncRoutineByIdToGoogleCal(event, '${routine.id}')" class="px-2.5 py-1 rounded-full bg-flash text-black text-[11px] font-bold active:scale-95">Google Cal</button>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+      }
+
+      if (archivedRoutines.length === 0) {
+        archivedList.innerHTML = `<div class="rounded-2xl p-4 text-center text-[13px] text-ios-gray border border-dashed border-black/10 dark:border-white/10">Completed one-off projects (like parties or decor) appear here when archived.</div>`;
+      } else {
+        archivedRoutines.innerHTML = archivedRoutines.map(routine => {
+          const { total } = getTripStats(routine);
+          return `
+            <div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-3.5 border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between gap-3">
+              <div onclick="openTrip('${routine.id}')" class="flex items-center gap-3 min-w-0 flex-1 cursor-pointer">
+                <div class="w-9 h-9 rounded-xl bg-black/[0.05] dark:bg-white/[0.08] text-ios-gray flex items-center justify-center shrink-0">${ICONS[routine.icon] || ICONS.bolt}</div>
+                <div class="min-w-0"><h4 class="text-[15px] font-semibold truncate">${escapeHtml(routine.name)}</h4><p class="text-[12px] text-ios-gray truncate tabular-nums">${total} items</p></div>
+              </div>
+              <button onclick="duplicateTripById('${routine.id}')" class="shrink-0 px-3 py-1.5 rounded-full bg-flash text-black text-[12px] font-bold">Reuse</button>
+            </div>`;
+        }).join('');
+      }
+    }
+
+    // ================= RENDER ACTIVE CHECKLIST SCREEN =================
+    function renderChecklistScreen() {
+      const trip = getCurrentTrip();
+      if (!trip) return showVaultScreen();
+      const { total, packed, pct } = getTripStats(trip);
+      const isRoutine = trip.type === 'routine';
+
+      document.getElementById('detail-back-label').textContent = isRoutine ? 'Routines' : 'My Trips';
+      document.getElementById('detail-trip-icon').innerHTML = ICONS[trip.icon] || ICONS.airplane;
+      document.getElementById('detail-trip-dates').textContent = trip.dates || (isRoutine ? 'Iterative Routine' : 'Active Checklist');
+      document.getElementById('detail-trip-title').textContent = trip.name;
+
+      // Toggle Trip vs Routine Context Bar
+      document.getElementById('detail-trip-context-bar').classList.toggle('hidden', isRoutine);
+      document.getElementById('detail-routine-context-bar').classList.toggle('hidden', !isRoutine);
+
+      if (!isRoutine) {
+        document.getElementById('detail-smart-text').textContent = trip.dates || 'Smart Engine Active';
+        const laundryBtn = document.getElementById('detail-laundry-btn');
+        laundryBtn.textContent = trip.laundryMode ? 'Laundry: On' : 'Laundry: Off';
+        laundryBtn.className = trip.laundryMode
+          ? 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-flash text-black font-bold text-[12px] active:scale-95 spring-transition'
+          : 'shrink-0 ml-2 px-2.5 py-1 rounded-full bg-black/[0.05] dark:bg-white/[0.08] font-semibold text-ios-blue dark:text-flash active:scale-95 spring-transition';
+      } else {
+        const rem = formatReminderBadge(trip.reminderAt);
+        document.getElementById('detail-reminder-label').textContent = rem ? rem.formatted : 'Set Reminder Time';
+      }
+
+      let statusMsg = `${packed} of ${total} completed`;
+      if (total > 0 && pct === 100) statusMsg = `All ${total} items completed • Ready to go!`;
+      else if (total > 0 && total - packed <= 3) statusMsg = `Almost done • ${total - packed} left`;
+      document.getElementById('detail-status-text').textContent = statusMsg;
+
+      document.getElementById('detail-progress-ring').style.strokeDashoffset = 163.36 - (pct / 100) * 163.36;
+      document.getElementById('detail-progress-bar').style.width = `${pct}%`;
+      document.getElementById('detail-progress-pct').textContent = `${pct}%`;
+
+      ['all', 'remaining', 'packed'].forEach(f => {
+        document.getElementById(`filter-${f}`).className = state.filter === f
+          ? 'py-1.5 rounded-[10px] bg-white dark:bg-ios-darkElevated shadow-sm text-black dark:text-white spring-transition'
+          : 'py-1.5 rounded-[10px] text-ios-gray spring-transition';
+      });
+
+      const container = document.getElementById('categories-container');
+      const query = state.search.trim().toLowerCase();
+
+      const cardsHtml = trip.categories.map(cat => {
+        const catTotal = cat.items.length;
+        const catPacked = cat.items.filter(i => i.packed).length;
+        const catDone = catTotal > 0 && catPacked === catTotal;
+
+        const filteredItems = cat.items.filter(item => {
+          if (state.filter === 'remaining' && item.packed) return false;
+          if (state.filter === 'packed' && !item.packed) return false;
+          if (query && !item.name.toLowerCase().includes(query)) return false;
+          return true;
+        });
+
+        if ((query || state.filter !== 'all') && filteredItems.length === 0) return '';
+
+        const rowsHtml = filteredItems.map((item, idx) => `
+          <div class="flex items-center justify-between pl-4 pr-3 py-2.5 ${idx !== filteredItems.length - 1 ? 'hairline-b' : ''}">
+            <button onclick="toggleItem('${cat.id}', '${item.id}')" class="flex items-center gap-3 flex-1 min-w-0 text-left py-0.5">
+              <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center shrink-0 spring-transition ${item.packed ? 'bg-ios-blue dark:bg-flash text-white dark:text-black border border-ios-blue dark:border-flash' : 'border-[1.8px] border-gray-300 dark:border-gray-600'}">
+                ${item.packed ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>` : ''}
+              </span>
+              <span class="text-[15px] truncate spring-transition ${item.packed ? 'line-through text-ios-gray' : 'font-medium'}">${escapeHtml(item.name)}</span>
+            </button>
+            <div class="flex items-center gap-1.5 shrink-0 ml-2">
+              <div class="flex items-center bg-black/[0.04] dark:bg-white/[0.07] rounded-full px-1.5 py-0.5">
+                <button onclick="adjustQty('${cat.id}', '${item.id}', -1)" class="w-5 h-5 text-ios-gray hover:text-black dark:hover:text-white font-bold">−</button>
+                <span class="text-[12px] font-semibold tabular-nums px-1 text-gray-700 dark:text-gray-300">${item.qty}</span>
+                <button onclick="adjustQty('${cat.id}', '${item.id}', 1)" class="w-5 h-5 text-ios-gray hover:text-black dark:hover:text-white font-bold">+</button>
+              </div>
+              <button onclick="deleteItem('${cat.id}', '${item.id}')" class="w-6 h-6 rounded-full text-gray-300 hover:text-ios-red dark:text-gray-600 dark:hover:text-ios-red flex items-center justify-center"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+          </div>`).join('');
+
+        return `
+          <section class="bg-ios-card dark:bg-ios-darkCard rounded-2xl shadow-sm border border-black/[0.04] dark:border-white/[0.06] overflow-hidden">
+            <div class="px-4 py-3 flex items-center justify-between ${!cat.collapsed ? 'hairline-b' : ''}">
+              <button onclick="toggleCategoryCollapse('${cat.id}')" class="flex items-center gap-2.5 flex-1 min-w-0 text-left">
+                <span class="w-7 h-7 rounded-lg ${catDone ? 'bg-flash text-black' : 'bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash'} flex items-center justify-center shrink-0">${ICONS[cat.icon] || ICONS.suitcase}</span>
+                <span class="text-[15px] font-bold tracking-tight truncate">${escapeHtml(cat.title)}</span>
+                <span class="text-[12px] font-bold tabular-nums px-2 py-0.5 rounded-full ${catDone ? 'bg-flash text-black' : 'bg-black/[0.05] dark:bg-white/[0.08] text-ios-gray'}">${catPacked}/${catTotal}</span>
+              </button>
+              <div class="flex items-center gap-1">
+                <button onclick="togglePackAllCategory('${cat.id}')" class="text-[12px] font-semibold text-ios-blue dark:text-flash px-2 py-1 rounded-lg active:opacity-60">${catDone ? 'Reset' : 'Check All'}</button>
+                <button onclick="toggleCategoryCollapse('${cat.id}')" class="p-1 text-ios-gray"><svg class="w-4 h-4 spring-transition ${cat.collapsed ? '-rotate-90' : 'rotate-0'}" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></button>
+              </div>
+            </div>
+            <div class="${cat.collapsed ? 'hidden' : 'block'}">
+              ${rowsHtml || `<p class="px-4 py-3 text-[13px] text-ios-gray">No items in this section yet.</p>`}
+              <form onsubmit="handleInlineAdd(event, '${cat.id}')" class="flex items-center gap-2.5 pl-4 pr-3 py-2 hairline-t bg-black/[0.015] dark:bg-white/[0.02]">
+                <span class="w-[22px] h-[22px] rounded-full flex items-center justify-center text-ios-blue dark:text-flash"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg></span>
+                <input type="text" placeholder="Add item to ${escapeHtml(cat.title)}..." class="flex-1 bg-transparent text-[14px] placeholder-ios-gray focus:outline-none py-1" />
+                <button type="submit" class="text-[13px] font-bold text-ios-blue dark:text-flash px-2 py-0.5">Add</button>
+              </form>
+            </div>
+          </section>`;
+      }).join('');
+
+      container.innerHTML = cardsHtml || `<div class="bg-ios-card dark:bg-ios-darkCard rounded-2xl p-8 text-center"><p class="text-[15px] font-semibold">No Matching Items</p><p class="text-[13px] text-ios-gray mt-1">Try switching your filter or clearing the search bar.</p></div>`;
+    }
+
+    // ================= ITEM & CATEGORY MUTATIONS =================
+    function toggleItem(catId, itemId) {
+      const t = getCurrentTrip(); if (!t) return;
+      const c = t.categories.find(x => x.id === catId); if (!c) return;
+      const i = c.items.find(x => x.id === itemId); if (!i) return;
+      i.packed = !i.packed; saveState(); renderChecklistScreen();
+    }
+
+    function adjustQty(catId, itemId, delta) {
+      const t = getCurrentTrip(); if (!t) return;
+      const c = t.categories.find(x => x.id === catId); if (!c) return;
+      const i = c.items.find(x => x.id === itemId); if (!i) return;
+      i.qty = Math.max(1, Math.min(99, i.qty + delta)); saveState(); renderChecklistScreen();
+    }
+
+    function deleteItem(catId, itemId) {
+      const t = getCurrentTrip(); if (!t) return;
+      const c = t.categories.find(x => x.id === catId); if (!c) return;
+      c.items = c.items.filter(x => x.id !== itemId); saveState(); renderChecklistScreen();
+    }
+
+    function handleInlineAdd(e, catId) {
+      e.preventDefault(); const input = e.target.querySelector('input');
+      const name = input.value.trim(); if (!name) return;
+      const t = getCurrentTrip(); const c = t.categories.find(x => x.id === catId); if (!c) return;
+      c.items.push({ id: 'item-' + Date.now(), name, qty: 1, packed: false });
+      input.value = ''; saveState(); renderChecklistScreen();
+    }
+
+    function toggleCategoryCollapse(catId) {
+      const t = getCurrentTrip(); const c = t.categories.find(x => x.id === catId); if (!c) return;
+      c.collapsed = !c.collapsed; saveState(); renderChecklistScreen();
+    }
+
+    function togglePackAllCategory(catId) {
+      const t = getCurrentTrip(); const c = t.categories.find(x => x.id === catId); if (!c || c.items.length === 0) return;
+      const allPacked = c.items.every(i => i.packed); c.items.forEach(i => (i.packed = !allPacked)); saveState(); renderChecklistScreen();
+    }
+
+    function setFilter(f) { state.filter = f; renderChecklistScreen(); }
+    function handleSearch(val) { state.search = val; document.getElementById('clear-search-btn').classList.toggle('hidden', !val); renderChecklistScreen(); }
+    function clearSearch() { state.search = ''; document.getElementById('search-input').value = ''; document.getElementById('clear-search-btn').classList.add('hidden'); renderChecklistScreen(); }
+
+    function toggleLaundryMode() {
+      const trip = getCurrentTrip(); if (!trip) return;
+      trip.laundryMode = !trip.laundryMode;
+      const cloCat = trip.categories.find(c => c.id === 'cat-clo' || c.title.toLowerCase().includes('clothing'));
+      if (cloCat) {
+        let nights = trip.nights || 7;
+        const targetQty = trip.laundryMode ? Math.min(4, nights) : nights + 1;
+        cloCat.items.forEach(item => { if (item.name.includes('Underwear') || item.name.includes('Socks') || item.name.includes('T-Shirts')) item.qty = targetQty; });
+      }
+      saveState(); renderChecklistScreen();
+    }
+
+    function closeAllSheets() {
+      document.getElementById('sheet-backdrop').classList.add('hidden');
+      ['sheet-new-trip', 'sheet-new-routine', 'sheet-reminder', 'sheet-add-item', 'sheet-new-category', 'sheet-presets', 'sheet-trip-options', 'sheet-vault-settings'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
+    }
+
+    // ================= JSON EXPORT (SINGLE CHECKLIST & FULL VAULT) + IMPORT =================
+    function openVaultSettings() {
+      document.getElementById('theme-toggle-switch').checked = document.documentElement.classList.contains('dark');
+      document.getElementById('sheet-backdrop').classList.remove('hidden');
+      document.getElementById('sheet-vault-settings').classList.remove('hidden');
+    }
+
+    function triggerJsonDownload(payloadObj, filename) {
+      const blob = new Blob([JSON.stringify(payloadObj, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function exportTripsBackup() {
+      triggerJsonDownload({ trips: state.trips }, `Vault_Full_Backup_${new Date().toISOString().split('T')[0]}.json`);
+      closeAllSheets();
+    }
+
+    function exportCurrentChecklist() {
+      const trip = getCurrentTrip();
+      if (!trip) return;
+      const safeName = trip.name.replace(/[^a-z0-9]/gi, '_').replace(/_+/g, '_');
+      triggerJsonDownload({ trips: [trip] }, `${safeName}_Checklist.json`);
+      closeAllSheets();
+    }
+
+    function handleImportTrips(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          const incoming = Array.isArray(data.trips) ? data.trips : (data.name && Array.isArray(data.categories) ? [data] : null);
+          if (incoming) {
+            const imported = incoming.map(trip => ({
+              ...trip,
+              type: trip.type || 'trip',
+              id: 'trip-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5)
+            }));
+            state.trips = [...imported, ...state.trips];
+            saveState();
+            closeAllSheets();
+            renderVault();
+            alert(`Imported ${imported.length} checklist(s) into your vault!`);
+          } else {
+            alert('Invalid JSON checklist file.');
+          }
+        } catch (err) {
+          alert('Could not parse file. Ensure it is a valid exported JSON file.');
+        }
+        event.target.value = '';
+      };
+      reader.readAsText(file);
+    }
+
+    // ================= CREATE NEW TRIP OR ROUTINE =================
+    function formatShortDate(dateObj) { return dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
+    function getComputedRangeLabel() {
+      const startVal = document.getElementById('new-trip-start').value;
+      const start = startVal ? new Date(startVal + 'T00:00:00') : new Date();
+      const end = new Date(start.getTime() + state.newTripNights * 24 * 60 * 60 * 1000);
+      return `${formatShortDate(start)} – ${formatShortDate(end)}`;
+    }
+
+    function updateLiveTripPreview() {
+      const dest = document.getElementById('new-trip-destination').value.trim();
+      const nights = state.newTripNights;
+      document.getElementById('new-trip-nights-label').textContent = `${nights} ${nights === 1 ? 'Night' : 'Nights'}`;
+      document.getElementById('computed-date-range').textContent = getComputedRangeLabel();
+      const info = getOfflineClimateAndPlug(dest);
+      const climateLabel = info.climate === 'cold' ? 'Cold Climate' : info.climate === 'hot' ? 'Warm / Tropical' : 'Mild Climate';
+      document.getElementById('smart-preview-text').textContent = `⚡ ${dest ? dest : 'Any Destination'}: ${nights} Nights • ${climateLabel} • ${info.plugType} Plug`;
+    }
+
+    function adjustNewTripNights(delta) { state.newTripNights = Math.max(1, Math.min(60, state.newTripNights + delta)); updateLiveTripPreview(); }
+    function pickQuickDestination(destName, iconKey) { document.getElementById('new-trip-destination').value = destName; selectNewTripIcon(iconKey); updateLiveTripPreview(); }
+
+    function openNewTripSheet() {
+      document.getElementById('new-trip-destination').value = '';
+      state.newTripNights = 7;
+      document.getElementById('new-trip-start').value = new Date().toISOString().split('T')[0];
+      renderIconPicker('new-trip-icons', state.selectedNewTripIcon, 'selectNewTripIcon');
+      updateLiveTripPreview();
+      document.getElementById('sheet-backdrop').classList.remove('hidden');
+      document.getElementById('sheet-new-trip').classList.remove('hidden');
+      setTimeout(() => document.getElementById('new-trip-destination').focus(), 80);
+    }
+
+    function selectNewTripIcon(iconKey) { state.selectedNewTripIcon = iconKey; renderIconPicker('new-trip-icons', iconKey, 'selectNewTripIcon'); }
+
+    async function createNewTrip() {
+      const btn = document.getElementById('create-trip-btn');
+      const tripName = document.getElementById('new-trip-destination').value.trim() || 'Upcoming Holiday';
+      const profile = document.getElementById('new-trip-profile').value;
+
+      btn.textContent = 'Building...'; btn.disabled = true;
+      const resolved = await resolveDestinationWeather(tripName, state.newTripNights, getComputedRangeLabel());
+
+      let categories = profile === 'blank'
+        ? [{ id: 'cat-' + Date.now(), title: 'Essentials', icon: 'passport', collapsed: false, items: [] }]
+        : generateSmartCategories(resolved.nights, resolved.climate, resolved.plugType, profile);
+
+      const newTrip = { id: 'trip-' + Date.now(), type: 'trip', name: tripName, destination: tripName, nights: resolved.nights, dates: resolved.summary, laundryMode: false, icon: state.selectedNewTripIcon || 'airplane', archived: false, categories };
+      state.trips.unshift(newTrip); saveState();
+      btn.textContent = 'Create'; btn.disabled = false; closeAllSheets(); openTrip(newTrip.id);
+    }
+
+    function openNewRoutineSheet() {
+      document.getElementById('new-routine-name').value = '';
+      document.getElementById('new-routine-reminder').value = '';
+      renderIconPicker('new-routine-icons', state.selectedNewRoutineIcon, 'selectNewRoutineIcon');
+      document.getElementById('sheet-backdrop').classList.remove('hidden');
+      document.getElementById('sheet-new-routine').classList.remove('hidden');
+      setTimeout(() => document.getElementById('new-routine-name').focus(), 80);
+    }
+
+    function selectNewRoutineIcon(iconKey) { state.selectedNewRoutineIcon = iconKey; renderIconPicker('new-routine-icons', iconKey, 'selectNewRoutineIcon'); }
+
+    function createNewRoutine() {
+      const rawName = document.getElementById('new-routine-name').value.trim();
+      const template = document.getElementById('new-routine-template').value;
+      const cadence = document.getElementById('new-routine-cadence').value;
+      const reminderAt = document.getElementById('new-routine-reminder').value;
+
+      const defaultNames = { gym: 'Gym & Workout Bag', groceries: 'Weekly Shopping List', party: 'Birthday Party Prep', decor: 'Room Decor Project', errands: 'Daily Errands Run', blank: 'Custom Routine' };
+      const routineName = rawName || defaultNames[template] || 'New Routine';
+
+      const newRoutine = {
+        id: 'routine-' + Date.now(),
+        type: 'routine',
+        name: routineName,
+        dates: cadence,
+        reminderAt: reminderAt || '',
+        icon: state.selectedNewRoutineIcon || 'bolt',
+        archived: false,
+        categories: generateRoutineCategories(template)
+      };
+
+      state.trips.unshift(newRoutine);
+      saveState();
+      closeAllSheets();
+      openTrip(newRoutine.id);
+    }
+
+    function quickCreateRoutineTemplate(templateKey) {
+      const meta = {
+        gym: { name: 'Gym & Workout Bag', cadence: 'Iterative Routine', icon: 'bolt' },
+        groceries: { name: 'Weekly Shopping List', cadence: 'Shopping List', icon: 'heart' },
+        party: { name: 'Birthday Party Prep', cadence: 'Timebound Event', icon: 'sparkles' },
+        decor: { name: 'Room Decor Project', cadence: 'Timebound Project', icon: 'sun' }
+      }[templateKey];
+      if (!meta) return;
+
+      const newRoutine = {
+        id: 'routine-' + Date.now(),
+        type: 'routine',
+        name: meta.name,
+        dates: meta.cadence,
+        reminderAt: '',
+        icon: meta.icon,
+        archived: false,
+        categories: generateRoutineCategories(templateKey)
+      };
+      state.trips.unshift(newRoutine);
+      saveState();
+      openTrip(newRoutine.id);
+    }
+
+    function duplicateTripById(tripId) {
+      const source = state.trips.find(t => t.id === tripId); if (!source) return;
+      const clonedCategories = JSON.parse(JSON.stringify(source.categories));
+      clonedCategories.forEach(c => { c.collapsed = false; c.items.forEach(i => (i.packed = false)); });
+      state.trips.unshift({
+        id: 'trip-' + Date.now(),
+        type: source.type || 'trip',
+        name: `${source.name} (Copy)`,
+        destination: source.destination || source.name,
+        nights: source.nights || 7,
+        dates: source.dates,
+        reminderAt: source.reminderAt || '',
+        laundryMode: false,
+        icon: source.icon,
+        archived: false,
+        categories: clonedCategories
+      });
+      saveState(); closeAllSheets(); openTrip(state.trips[0].id);
+    }
+
+    function openAddItemSheet() {
+      const trip = getCurrentTrip(); if (!trip) return;
+      document.getElementById('sheet-item-name').value = ''; document.getElementById('sheet-item-qty').value = '1';
+      document.getElementById('sheet-item-category').innerHTML = trip.categories.map(c => `<option value="${c.id}">${escapeHtml(c.title)}</option>`).join('');
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-add-item').classList.remove('hidden');
+      setTimeout(() => document.getElementById('sheet-item-name').focus(), 80);
+    }
+
+    function submitNewItemSheet() {
+      const name = document.getElementById('sheet-item-name').value.trim(); if (!name) return;
+      const catId = document.getElementById('sheet-item-category').value;
+      const qty = Math.max(1, parseInt(document.getElementById('sheet-item-qty').value, 10) || 1);
+      const trip = getCurrentTrip(); const cat = trip.categories.find(c => c.id === catId); if (!cat) return;
+      cat.collapsed = false; cat.items.push({ id: 'item-' + Date.now(), name, qty, packed: false });
+      saveState(); closeAllSheets(); renderChecklistScreen();
+    }
+
+    function openNewCategorySheet() {
+      document.getElementById('new-cat-title').value = ''; renderIconPicker('new-cat-icons', state.selectedNewCatIcon, 'selectNewCatIcon');
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-new-category').classList.remove('hidden');
+    }
+    function selectNewCatIcon(iconKey) { state.selectedNewCatIcon = iconKey; renderIconPicker('new-cat-icons', iconKey, 'selectNewCatIcon'); }
+    function fillCatSuggestion(title, iconKey) { document.getElementById('new-cat-title').value = title; selectNewCatIcon(iconKey); }
+
+    function submitNewCategory() {
+      const title = document.getElementById('new-cat-title').value.trim(); if (!title) return;
+      const trip = getCurrentTrip(); if (!trip) return;
+      trip.categories.push({ id: 'cat-' + Date.now(), title, icon: state.selectedNewCatIcon || 'suitcase', collapsed: false, items: [] });
+      saveState(); closeAllSheets(); renderChecklistScreen();
+    }
+
+    function openPresetsSheet() {
+      document.getElementById('presets-list').innerHTML = PRESET_PACKS.map(pack => `
+        <button onclick="applyPresetPack('${pack.id}')" class="w-full p-3.5 rounded-2xl bg-black/[0.04] dark:bg-white/[0.07] flex items-center justify-between text-left active:scale-[0.99] spring-transition">
+          <div class="flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-ios-blue/10 dark:bg-flash/15 text-ios-blue dark:text-flash flex items-center justify-center">${ICONS[pack.icon] || ICONS.suitcase}</span>
+          <div><p class="text-[15px] font-semibold">${escapeHtml(pack.name)}</p><p class="text-[12px] text-ios-gray">${pack.items.length} smart essentials</p></div></div>
+          <span class="text-[13px] font-bold text-ios-blue dark:text-flash">+ Add</span>
+        </button>`).join('');
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-presets').classList.remove('hidden');
+    }
+
+    function applyPresetPack(packId) {
+      const pack = PRESET_PACKS.find(p => p.id === packId); const trip = getCurrentTrip(); if (!pack || !trip) return;
+      let cat = trip.categories.find(c => c.title.toLowerCase() === pack.categoryTitle.toLowerCase());
+      if (!cat) { cat = { id: 'cat-' + Date.now(), title: pack.categoryTitle, icon: pack.icon, collapsed: false, items: [] }; trip.categories.push(cat); }
+      cat.collapsed = false; const existingNames = new Set(cat.items.map(i => i.name.toLowerCase()));
+      pack.items.forEach((itemName, idx) => { if (!existingNames.has(itemName.toLowerCase())) cat.items.push({ id: `preset-${Date.now()}-${idx}`, name: itemName, qty: 1, packed: false }); });
+      saveState(); closeAllSheets(); renderChecklistScreen();
+    }
+
+    function openTripOptionsSheet() {
+      const trip = getCurrentTrip(); if (!trip) return;
+      document.getElementById('options-trip-title').textContent = trip.name;
+      document.getElementById('btn-toggle-archive').querySelector('span').textContent = trip.archived ? 'Restore to Active List' : 'Archive Checklist';
+      document.getElementById('sheet-backdrop').classList.remove('hidden'); document.getElementById('sheet-trip-options').classList.remove('hidden');
+    }
+
+    function uncheckAllCurrentTrip() { const trip = getCurrentTrip(); if (!trip) return; trip.categories.forEach(c => c.items.forEach(i => (i.packed = false))); saveState(); closeAllSheets(); renderChecklistScreen(); }
+    function duplicateCurrentTrip() { const trip = getCurrentTrip(); if (trip) duplicateTripById(trip.id); }
+    function toggleArchiveCurrentTrip() { const trip = getCurrentTrip(); if (!trip) return; trip.archived = !trip.archived; saveState(); closeAllSheets(); showVaultScreen(); }
+    function deleteCurrentTrip() { const trip = getCurrentTrip(); if (!trip) return; state.trips = state.trips.filter(t => t.id !== trip.id); saveState(); closeAllSheets(); showVaultScreen(); }
+
+    function renderIconPicker(containerId, selectedKey, handlerName) {
+      const keys = ['airplane', 'sun', 'snow', 'mountain', 'suitcase', 'passport', 'tshirt', 'bolt', 'sparkles', 'shield', 'camera', 'car', 'briefcase', 'heart'];
+      document.getElementById(containerId).innerHTML = keys.map(k => `<button type="button" onclick="${handlerName}('${k}')" class="h-10 rounded-xl flex items-center justify-center spring-transition ${selectedKey === k ? 'bg-flash text-black shadow-sm font-bold' : 'bg-black/[0.05] dark:bg-white/[0.08] text-gray-700 dark:text-gray-300'}">${ICONS[k]}</button>`).join('');
+    }
+
+    function escapeHtml(str) { return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+    // Boot App
+    try { loadState(); renderVault(); } catch (e) { console.error('Initialization error:', e); }
+  </script>
+</body>
+</html>
